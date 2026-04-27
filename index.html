@@ -2857,6 +2857,33 @@ body[data-theme="light"] .new-btn{
 </style>
 </head>
 <body>
+<div id="bootCover" aria-hidden="true" style="position:fixed;inset:0;background:#3d1a22;z-index:2147483647;display:flex;align-items:center;justify-content:center;transition:opacity .35s ease;will-change:opacity;pointer-events:none">
+  <svg width="96" height="96" viewBox="0 0 100 100" style="border-radius:22px;background:#F2E8DC" aria-hidden="true">
+    <text x="10" y="68" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#3d1a22">[</text>
+    <text x="30" y="68" font-family="Georgia,serif" font-size="48" font-style="italic" fill="#3d1a22">l</text>
+    <circle cx="56" cy="62" r="9" fill="#ECB398"/>
+    <text x="59" y="68" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#3d1a22">]</text>
+  </svg>
+</div>
+<script>
+(function(){
+  try{
+    if((localStorage.getItem('logged_theme')||'dark')==='light'){
+      var c=document.getElementById('bootCover');
+      if(c) c.style.background='#fff5ec';
+    }
+  }catch(e){}
+  function hideBoot(){
+    var c=document.getElementById('bootCover');
+    if(!c) return;
+    c.style.opacity='0';
+    setTimeout(function(){ if(c&&c.parentNode) c.parentNode.removeChild(c); }, 400);
+  }
+  if(document.readyState==='complete') setTimeout(hideBoot, 120);
+  else window.addEventListener('load', function(){ setTimeout(hideBoot, 120); });
+  setTimeout(hideBoot, 4000);
+})();
+</script>
 <style>
 .ic{display:inline-block;width:1em;height:1em;vertical-align:-0.15em;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .ic-fill{fill:currentColor;stroke:none}

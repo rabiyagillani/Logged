@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#3d1a22">
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="manifest.webmanifest?v=5">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
 
@@ -121,7 +121,7 @@
   // We can re-introduce a real PWA service worker once the app has stabilized.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=cleanup2').catch(() => {});
+      navigator.serviceWorker.register('sw.js?v=cleanup5').catch(() => {});
     });
   }
 
@@ -2857,13 +2857,14 @@ body[data-theme="light"] .new-btn{
 </style>
 </head>
 <body>
-<div id="bootCover" aria-hidden="true" style="position:fixed;inset:0;background:#3d1a22;z-index:2147483647;display:flex;align-items:center;justify-content:center;transition:opacity .35s ease;will-change:opacity;pointer-events:none">
+<div id="bootCover" aria-hidden="true" style="position:fixed;inset:0;background:#3d1a22;z-index:2147483647;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .35s ease;will-change:opacity;pointer-events:none">
   <svg width="96" height="96" viewBox="0 0 100 100" style="border-radius:22px;background:#F2E8DC" aria-hidden="true">
     <text x="10" y="68" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#3d1a22">[</text>
     <text x="30" y="68" font-family="Georgia,serif" font-size="48" font-style="italic" fill="#3d1a22">l</text>
     <circle cx="56" cy="62" r="9" fill="#ECB398"/>
     <text x="59" y="68" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#3d1a22">]</text>
   </svg>
+  <div id="bootWordmark" style="font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:700;letter-spacing:.2px;color:#F2E8DC;opacity:0;transform:translateY(4px);transition:opacity .6s ease .15s, transform .6s ease .15s">Logged.</div>
 </div>
 <script>
 (function(){
@@ -2871,8 +2872,14 @@ body[data-theme="light"] .new-btn{
     if((localStorage.getItem('logged_theme')||'dark')==='light'){
       var c=document.getElementById('bootCover');
       if(c) c.style.background='#fff5ec';
+      var w=document.getElementById('bootWordmark');
+      if(w) w.style.color='#3d1a22';
     }
   }catch(e){}
+  requestAnimationFrame(function(){
+    var w=document.getElementById('bootWordmark');
+    if(w){ w.style.opacity='1'; w.style.transform='translateY(0)'; }
+  });
   function hideBoot(){
     var c=document.getElementById('bootCover');
     if(!c) return;

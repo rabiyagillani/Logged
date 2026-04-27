@@ -1312,17 +1312,8 @@ body{
 .screen.active{display:block}
 #splashScreen.active{display:flex!important;align-items:center;justify-content:center;flex-direction:column}
 .screen-inner{min-height:100%;padding-bottom:32px}
-/* When the floating glass nav is visible, push content above it so nothing is hidden.
-   Use ::after instead of padding-bottom — Safari/WebKit silently drops padding-bottom
-   on dynamically-filled scroll content, but ::after is real DOM and always respected. */
-.shell:has(.bottom-nav.visible) .screen-inner{padding-bottom:0}
-.shell:has(.bottom-nav.visible) .screen-inner::after{
-  content:'';
-  display:block;
-  height:calc(env(safe-area-inset-bottom,0px) + 108px);
-  min-height:calc(env(safe-area-inset-bottom,0px) + 108px);
-  flex-shrink:0;
-}
+/* When the floating glass nav is visible, push content above it so nothing is hidden */
+.shell:has(.bottom-nav.visible) .screen-inner{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 96px)}
 
 /* ── Single shared bottom nav — Liquid Glass (iOS 26 style) ── */
 .bottom-nav{
@@ -1330,15 +1321,15 @@ body{
   position:absolute;
   left:8px;
   right:8px;
-  bottom:0;
+  bottom:calc(env(safe-area-inset-bottom,0px) + 4px);
   width:auto;
   background:linear-gradient(180deg,rgba(60,28,36,0.42) 0%,rgba(42,18,24,0.32) 100%);
   border:1px solid rgba(255,255,255,0.12);
-  border-radius:30px 30px 0 0;
+  border-radius:30px;
   display:none; /* JS shows/hides per screen */
   align-items:center;
   justify-content:space-around;
-  padding:8px 10px calc(env(safe-area-inset-bottom,0px) + 8px);
+  padding:8px 10px;
   backdrop-filter:blur(30px) saturate(180%);
   -webkit-backdrop-filter:blur(30px) saturate(180%);
   box-shadow:

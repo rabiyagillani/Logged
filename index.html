@@ -1453,7 +1453,17 @@ body[data-theme="light"] .bottom-nav::after{
 .sync-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:999px;font-family:inherit;font-size:11px;font-weight:600;color:var(--sub-on-dark);cursor:pointer;transition:background 0.15s;flex-shrink:0;max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ── Implicit consent footer microcopy (Task #4) ── */
-.ob-consent-footer{margin-top:18px;text-align:center;font-family:var(--font-sans);font-size:11.5px;line-height:1.55;color:var(--faint-on-navy,rgba(245,241,232,0.55))}
+.ob-consent-footer{margin-top:18px;text-align:center;font-family:var(--font-sans);font-size:11.5px;line-height:1.55;color:rgba(245,241,232,0.80)}
+.ob-features{display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:26px}
+.ob-feature{display:flex;align-items:center;gap:5px;font-family:var(--font-sans);font-size:12px;color:rgba(245,241,232,0.72);letter-spacing:.01em}
+.ob-feature svg{flex-shrink:0;opacity:.85}
+.oauth-privacy-note{display:flex;align-items:center;gap:5px;font-family:var(--font-sans);font-size:11px;color:rgba(245,241,232,0.58);margin-top:7px;justify-content:center}
+.ob-session-note{margin-top:10px;text-align:center;font-family:var(--font-sans);font-size:11.5px;color:rgba(245,241,232,0.62);line-height:1.5}
+.ob-skip-hint{display:block;font-size:11px;color:rgba(245,241,232,0.45);margin-top:3px}
+body[data-theme="light"] .ob-features .ob-feature{color:rgba(61,26,34,0.65)}
+body[data-theme="light"] .oauth-privacy-note{color:rgba(61,26,34,0.48)}
+body[data-theme="light"] .ob-session-note{color:rgba(61,26,34,0.52)}
+body[data-theme="light"] .ob-consent-footer{color:rgba(61,26,34,0.72)}
 .ob-consent-footer .ob-link{color:var(--peach);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
 
 /* ── OAuth quick-sign-in buttons (Task #2) ── */
@@ -3216,29 +3226,49 @@ body[data-theme="light"] .new-btn{
     <!-- ── STEP 1: profile + consent ── -->
     <div id="obStep1">
       <div class="ob-title" data-i18n="onboard.title">Remember everything<br>that matters.</div>
-      <div class="ob-sub" data-i18n="onboard.sub">Sign in to back up your records and access them on any device.</div>
+      <div class="ob-sub" data-i18n="onboard.sub" style="margin-bottom:20px">Sign in to back up your records and access them on any device.</div>
 
-      <!-- ── OAuth quick-sign-in (Task #2) ── one tap, biometric, no email typing ── -->
+      <!-- Value proposition bullets -->
+      <div class="ob-features">
+        <span class="ob-feature">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7L12 2z" fill="currentColor"/></svg>
+          SHA-256 tamper-proof
+        </span>
+        <span class="ob-feature">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.56 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M12 20a16.01 16.01 0 0 0 0-16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+          Works fully offline
+        </span>
+        <span class="ob-feature">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zM13 16.5h-3v-2h3v2zm0-4h-3c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H6c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z" fill="currentColor"/></svg>
+          Bitcoin timestamping
+        </span>
+      </div>
+
+      <!-- OAuth quick-sign-in -->
       <div class="oauth-stack">
         <button type="button" class="oauth-btn oauth-google" onclick="sbOAuthSignIn('google')" aria-label="Continue with Google">
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
           <span>Continue with Google</span>
         </button>
+        <div class="oauth-privacy-note">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7L12 2z" fill="currentColor"/></svg>
+          Sign-in only enables backup — your journal data stays encrypted on your device.
+        </div>
         <div class="oauth-divider"><span>or use email</span></div>
       </div>
 
       <div class="form-field" style="margin-bottom:24px">
         <label class="form-label" for="obEmail" data-i18n="onboard.email">Email Address</label>
-        <input class="fi" id="obEmail" type="email" placeholder="e.g. sarah@email.com" data-i18n-placeholder="onboard.emailPh" autocomplete="email" style="background:rgba(245,241,232,0.12);color:var(--text-on-navy);border-color:rgba(245,241,232,0.15)">
+        <input class="fi" id="obEmail" type="email" placeholder="name@example.com" data-i18n-placeholder="onboard.emailPh" autocomplete="email" style="background:rgba(245,241,232,0.12);color:var(--text-on-navy);border-color:rgba(245,241,232,0.15)">
         <div class="err-msg" id="obEmailErr" style="display:none"><svg class="ic"><use href="#ic-alert"/></svg> <span data-i18n="onboard.emailErr">Please enter a valid email address</span></div>
       </div>
 
       <button class="btn btn-amber" id="obContinueBtn" onclick="startApp()" data-i18n="onboard.continue">Continue →</button>
-      <button class="btn btn-outline btn-sm" type="button" onclick="obSkipOTPFromStep1()" style="margin-top:10px" data-i18n="onboard.skipOffline">Skip &amp; continue offline</button>
+      <button class="btn btn-outline btn-sm" type="button" onclick="obSkipOTPFromStep1()" style="margin-top:10px">
+        No account needed — use offline
+        <span class="ob-skip-hint">You can enable cloud backup anytime later</span>
+      </button>
 
-      <!-- ── Implicit consent footer microcopy (Task #4) ── replaces the
-           two checkboxes. Standard pattern used by Apple, Google, Stripe,
-           Notion, etc. — links remain tappable to open the full modals. -->
       <div class="ob-consent-footer">
         <span data-i18n="onboard.consentPre">By continuing you agree to our</span>
         <span class="ob-link" onclick="openFullModal('termsModal')" data-i18n="onboard.terms">Terms</span>
@@ -3264,12 +3294,17 @@ body[data-theme="light"] .new-btn{
 
       <button class="btn btn-amber" id="obVerifyBtn" onclick="sbVerifyOnboard()" disabled style="margin-top:20px;opacity:.55"><span data-i18n="onboard.signIn">Sign in</span></button>
 
-      <button type="button" onclick="obSkipOTP()" style="background:none;border:none;color:var(--sub-on-navy);cursor:pointer;padding:10px 0;font-size:13px;width:100%;margin-top:8px;font-family:inherit" data-i18n="onboard.skip">Skip — use this device only</button>
+      <p class="ob-session-note">You'll stay signed in on this device — no need to re-verify each time.</p>
 
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px">
         <button type="button" onclick="obResendCode()" style="background:none;border:none;color:var(--amber);text-decoration:underline;cursor:pointer;padding:6px 0;font-size:12px" data-i18n="onboard.resend">Resend code</button>
         <button type="button" onclick="obBackToStep1()" style="background:none;border:none;color:var(--sub-on-navy);cursor:pointer;padding:6px 0;font-size:12px" data-i18n="onboard.editEmail">← Edit email</button>
       </div>
+      <div style="text-align:center;margin-top:4px;font-size:11px;color:rgba(245,241,232,0.45)">No code? Check your spam folder first.</div>
+
+      <button type="button" onclick="obSkipOTP()" style="background:none;border:none;color:var(--sub-on-navy);cursor:pointer;padding:8px 0 2px;font-size:12px;width:100%;margin-top:6px;font-family:inherit">
+        Skip verification — stay offline only
+      </button>
     </div>
   </div>
 </div>
@@ -3281,16 +3316,26 @@ body[data-theme="light"] .new-btn{
     <div style="font-family:var(--font-serif);font-size:18px;font-weight:700;color:var(--cream);margin-bottom:6px"><svg class="ic"><use href="#ic-cloud"/></svg> Cloud Sync</div>
     <div style="font-size:12px;color:var(--sub-on-dark);margin-bottom:18px;line-height:1.5">Sign in to back up and sync your entries across devices.</div>
     <div id="sbSignInStep1">
-      <input class="fi" id="sbSignInEmail" type="email" placeholder="Your email address"
-        style="margin-bottom:10px;background:var(--wine-2);color:var(--cream);border-color:rgba(245,241,232,0.15)">
+      <input class="fi" id="sbSignInEmail" type="email" placeholder="name@example.com"
+        style="margin-bottom:10px;background:var(--wine-2);color:var(--cream);border-color:rgba(245,241,232,0.15)" autocomplete="email">
       <button class="btn btn-amber" onclick="sbSheetSendOTP()">Send Code →</button>
     </div>
     <div id="sbSignInStep2" style="display:none">
-      <div style="font-size:12px;color:var(--sub-on-dark);margin-bottom:10px">Enter the 6-digit code sent to your email</div>
-      <input class="fi" id="sbSheetOtpInput" type="number" inputmode="numeric" placeholder="000000"
-        style="text-align:center;font-size:22px;letter-spacing:8px;background:var(--wine-2);color:var(--cream);border-color:rgba(245,241,232,0.15);margin-bottom:10px">
-      <div class="err-msg" id="sbSheetOtpErr" style="display:none"><svg class="ic"><use href="#ic-alert"/></svg> Invalid code — try again</div>
-      <button class="btn btn-amber" onclick="sbSheetVerify()">Verify →</button>
+      <div style="font-size:12px;color:var(--sub-on-dark);margin-bottom:12px">Enter the 6-digit code sent to your email.<br><span style="font-size:11px;opacity:.7">No code? Check spam or resend below.</span></div>
+      <div class="otp-wrap" onclick="document.getElementById('sbSheetOtpHidden').focus()" style="justify-content:center">
+        <div class="otp-cells" id="sbSheetOtpCells">
+          <div class="otp-cell"></div><div class="otp-cell"></div><div class="otp-cell"></div>
+          <div class="otp-cell"></div><div class="otp-cell"></div><div class="otp-cell"></div>
+        </div>
+        <input class="otp-hidden" id="sbSheetOtpHidden" type="tel" inputmode="numeric" autocomplete="one-time-code" maxlength="6"
+          oninput="onSheetOtpInput(this)" onfocus="onSheetOtpInput(this)" onblur="document.querySelectorAll('#sbSheetOtpCells .otp-cell').forEach(c=>c.classList.remove('active'))">
+      </div>
+      <div class="err-msg" id="sbSheetOtpErr" style="display:none;justify-content:center;margin:8px 0"><svg class="ic"><use href="#ic-alert"/></svg> Invalid code — try again</div>
+      <button class="btn btn-amber" id="sbSheetVerifyBtn" onclick="sbSheetVerify()" style="margin-top:14px" disabled>Verify →</button>
+      <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px">
+        <button type="button" onclick="sbSheetResend()" style="background:none;border:none;color:var(--amber);text-decoration:underline;cursor:pointer;padding:4px 0;font-size:12px;font-family:inherit">Resend code</button>
+        <button type="button" onclick="sbSheetBackToStep1()" style="background:none;border:none;color:var(--sub-on-navy);cursor:pointer;padding:4px 0;font-size:12px;font-family:inherit">← Edit email</button>
+      </div>
     </div>
     <button class="btn btn-outline btn-sm" onclick="document.getElementById('sbSignInSheet').classList.remove('open')" style="margin-top:10px">Cancel</button>
   </div>
@@ -6572,6 +6617,35 @@ function _renderCoachStep(){
 }
 
 // ── Settings sheet handlers ──
+function onSheetOtpInput(el){
+  let v = (el.value||'').replace(/\D/g,'').slice(0,6);
+  el.value = v;
+  const cells = document.querySelectorAll('#sbSheetOtpCells .otp-cell');
+  cells.forEach((c,i) => {
+    c.textContent = v[i] || '';
+    c.classList.toggle('filled', !!v[i]);
+    c.classList.toggle('active', i === Math.min(v.length, 5) && document.activeElement === el);
+  });
+  const btn = document.getElementById('sbSheetVerifyBtn');
+  if(btn){ btn.disabled = v.length < 6; }
+  document.getElementById('sbSheetOtpErr').style.display='none';
+  if(v.length === 6) sbSheetVerify();
+}
+function sbSheetBackToStep1(){
+  document.getElementById('sbSignInStep2').style.display='none';
+  document.getElementById('sbSignInStep1').style.display='block';
+  const h = document.getElementById('sbSheetOtpHidden');
+  if(h) h.value = '';
+  document.querySelectorAll('#sbSheetOtpCells .otp-cell').forEach(c=>{ c.textContent=''; c.classList.remove('filled','active'); });
+  document.getElementById('sbSheetOtpErr').style.display='none';
+}
+async function sbSheetResend(){
+  const email = (document.getElementById('sbSignInEmail')?.value||'').trim();
+  showToast('Resending code…','',2000);
+  const r = await sbSendOTP(email);
+  if(r && r.ok){ showToast('New code sent — check your email','success',3000); }
+  else { showToast((r && r.msg) || 'Could not resend — check your connection','error',5000); }
+}
 async function sbSheetSendOTP() {
   const email = (document.getElementById('sbSignInEmail')?.value||'').trim();
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showToast('Enter a valid email','error'); return; }
@@ -6582,18 +6656,24 @@ async function sbSheetSendOTP() {
 }
 async function sbSheetVerify() {
   const email = (document.getElementById('sbSignInEmail')?.value||'').trim();
-  const token = (document.getElementById('sbSheetOtpInput')?.value||'').trim();
+  const token = (document.getElementById('sbSheetOtpHidden')?.value||'').trim();
   if(token.length < 6){ document.getElementById('sbSheetOtpErr').style.display='flex'; return; }
+  const btn = document.getElementById('sbSheetVerifyBtn');
+  if(btn){ btn.disabled = true; btn.textContent = 'Verifying…'; }
   const ok = await sbVerifyOTP(email, token);
   if(ok){
     document.getElementById('sbSignInSheet').classList.remove('open');
     document.getElementById('sbSignInStep1').style.display='block';
     document.getElementById('sbSignInStep2').style.display='none';
+    const h = document.getElementById('sbSheetOtpHidden');
+    if(h) h.value = '';
+    document.querySelectorAll('#sbSheetOtpCells .otp-cell').forEach(c=>{ c.textContent=''; c.classList.remove('filled','active'); });
     showToast('<svg class="ic"><use href="#ic-cloud"/></svg> Cloud sync enabled!','success',3000);
     setTimeout(()=>{ sbPullAll(); sbSyncAllLocal(); }, 500);
     renderSettings();
   } else {
     document.getElementById('sbSheetOtpErr').style.display='flex';
+    if(btn){ btn.disabled = false; btn.textContent = 'Verify →'; }
   }
 }
 

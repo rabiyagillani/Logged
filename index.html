@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#2e3052">
+<meta name="theme-color" content="#3d1a22">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
@@ -7105,7 +7105,7 @@ function applyTheme(){
   if(t === 'light') document.body.setAttribute('data-theme','light');
   else document.body.removeAttribute('data-theme');
   const meta = document.querySelector('meta[name="theme-color"]');
-  if(meta) meta.setAttribute('content', t === 'light' ? '#fff5ec' : '#2e3052');
+  if(meta) meta.setAttribute('content', t === 'light' ? '#fff5ec' : '#3d1a22');
   const tog = document.getElementById('togTheme');
   const status = document.getElementById('themeStatus');
   if(tog){

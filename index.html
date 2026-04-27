@@ -3126,32 +3126,168 @@ body[data-theme="light"] .new-btn{
     <div class="screen-title">Privacy Policy</div>
   </div>
   <div class="full-modal-body">
-    <p class="eff-date">Effective Date: April 2026 · Last Updated: April 2026</p>
-    <h2>1. Introduction</h2>
-    <p>Logged ("the App") is a personal record-keeping application. We are committed to protecting your privacy. This Privacy Policy explains what information the App collects, how it is used, and your rights.</p>
-    <h2>2. Data We Collect</h2>
-    <p>The App is designed with privacy at its core. <strong style="color:var(--cream)">All data you enter — including text notes, photos, and location data — is stored exclusively on your device.</strong> We do not transmit, upload, or share your personal records with any server, third party, or cloud service.</p>
+    <p class="eff-date">Effective Date: 27 April 2026 · Last Updated: 27 April 2026 · Version 2.0</p>
+
+    <div style="background:rgba(212,133,42,0.12);border:1px solid rgba(212,133,42,0.35);border-radius:14px;padding:14px 16px;margin-bottom:22px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--amber);margin-bottom:6px">Important Notice</div>
+      <div style="font-size:12px;color:var(--sub-on-navy);line-height:1.7">This document is a legally binding agreement. It is provided for informational purposes only and is not personalised legal advice. If you need advice for your specific situation, consult a qualified lawyer in your jurisdiction.</div>
+    </div>
+
+    <h2>1. Who We Are</h2>
+    <p>This Privacy Policy describes how the operators of the <strong style="color:var(--cream)">Logged</strong> application (collectively "<strong style="color:var(--cream)">Logged</strong>", "we", "us" or "our") collect, use, store, share and protect personal information when you use the Logged mobile, web, progressive-web (PWA) and desktop application and any associated services (together, the "<strong style="color:var(--cream)">Service</strong>").</p>
+    <p>Contact for privacy and data-protection matters: <strong style="color:var(--amber)">privacy@loggedapp.io</strong></p>
+
+    <h2>2. Scope</h2>
+    <p>This Policy applies to all individuals worldwide who download, install, access or otherwise use the Service. By using the Service you consent to the collection and use of information in accordance with this Policy. If you do not agree, you must stop using the Service.</p>
+
+    <h2>3. Local-First Architecture (Plain English)</h2>
+    <p>Logged is designed to keep your data on <em>your</em> device wherever possible. By default, every entry — text, photo, voice memo, GPS coordinate, timestamp hash and PIN — is stored only in the local storage of your browser or installed app, on the device you used to create it. We do not see, copy or back up that data unless you explicitly opt in to one of the optional features described below.</p>
+
+    <h2>4. Data We Collect</h2>
+    <p style="font-family:var(--font-serif);font-size:15px;color:var(--cream);margin:14px 0 6px"><strong>4.1 Data stored only on your device (default)</strong></p>
     <ul>
-      <li><strong>Text entries:</strong> Stored locally in your browser's localStorage</li>
-      <li><strong>Photos:</strong> Resized and stored as base64 in localStorage on your device only</li>
-      <li><strong>Location:</strong> GPS coordinates captured only when you enable this feature; stored locally only</li>
+      <li><strong>Entries:</strong> title, body text, category, mood, tags, custom fields and timestamps you choose to record.</li>
+      <li><strong>Photos:</strong> images you attach, resized and stored in your browser's IndexedDB.</li>
+      <li><strong>Voice memos:</strong> short audio recordings stored locally as binary blobs in IndexedDB.</li>
+      <li><strong>Location:</strong> GPS coordinates captured only when you tap "Add Location" inside an entry.</li>
+      <li><strong>Integrity hashes:</strong> SHA-256 fingerprints computed in your browser to let you later prove an entry has not been altered.</li>
+      <li><strong>App lock:</strong> a SHA-256 hash of the PIN you set; the original PIN is never stored or transmitted.</li>
+      <li><strong>Drafts &amp; preferences:</strong> autosaved form drafts, theme, language, sort order and other UI preferences.</li>
     </ul>
-    <h2>3. Permissions Requested</h2>
+
+    <p style="font-family:var(--font-serif);font-size:15px;color:var(--cream);margin:14px 0 6px"><strong>4.2 Data we collect only if you opt in to Cloud Sync</strong></p>
     <ul>
-      <li><strong>Camera / Photo Library:</strong> Required only when you tap "Attach Photo." Images are stored locally only.</li>
-      <li><strong>Microphone:</strong> Required only when you enable "Voice Memo." Audio is recorded and stored locally on your device only. It is never transmitted.</li>
-      <li><strong>Location:</strong> Required only when you enable GPS logging. Used solely to capture coordinates at the time of entry.</li>
+      <li><strong>Account identifier:</strong> the email address you provide to receive a one-time login code via Supabase.</li>
+      <li><strong>Encrypted entry payloads:</strong> a copy of selected entries (and attachments you choose to sync) is uploaded to our managed Supabase backend so it can be restored or accessed from another device.</li>
+      <li><strong>Sync metadata:</strong> last-synced timestamps, device identifiers (random UUIDs) and conflict-resolution markers.</li>
     </ul>
-    <h2>4. Data Sharing</h2>
-    <p>We do not sell, rent, or share your personal data. Your records never leave your device unless you explicitly choose to export them (e.g., PDF export to your own files).</p>
-    <h2>5. Data Deletion</h2>
-    <p>You can delete individual entries at any time from within the app. You can delete all data via Settings → Clear All Data. Uninstalling the app will also remove all locally stored data.</p>
-    <h2>6. Children's Privacy</h2>
-    <p>The App is not intended for children under 13. We do not knowingly collect data from children.</p>
-    <h2>7. Changes to This Policy</h2>
-    <p>We may update this policy periodically. The updated date will be reflected at the top. Your continued use of the app constitutes acceptance of any changes.</p>
-    <h2>8. Contact</h2>
-    <p>For privacy-related questions, contact us at: <strong style="color:var(--amber)">privacy@loggedapp.io</strong></p>
+
+    <p style="font-family:var(--font-serif);font-size:15px;color:var(--cream);margin:14px 0 6px"><strong>4.3 Data we collect only if you opt in to Bitcoin Anchoring</strong></p>
+    <ul>
+      <li><strong>Hash submissions:</strong> the SHA-256 hash of the entry (never the entry content itself) is sent to public OpenTimestamps calendar servers and ultimately committed to the public Bitcoin blockchain. <strong style="color:var(--cream)">This information is permanent and cannot be deleted</strong> once anchored. The hash on its own does not reveal your data, but you should not anchor information you may later wish to disavow.</li>
+    </ul>
+
+    <p style="font-family:var(--font-serif);font-size:15px;color:var(--cream);margin:14px 0 6px"><strong>4.4 Data automatically processed when you visit the Service</strong></p>
+    <ul>
+      <li><strong>Technical data:</strong> IP address, user-agent string, language preference, approximate region (derived from IP), referring URL and time of request — handled transiently by the web server delivering the app and our content-delivery providers.</li>
+      <li><strong>Crash and error logs:</strong> if a fatal error occurs we may receive an anonymised stack trace containing no personal data.</li>
+    </ul>
+    <p>We do <strong style="color:var(--cream)">not</strong> use third-party analytics, advertising trackers, fingerprinting libraries, session-recording tools or social-media pixels.</p>
+
+    <h2>5. Purposes of Processing &amp; Legal Bases (GDPR)</h2>
+    <ul>
+      <li><strong>To provide the Service</strong> — performance of a contract.</li>
+      <li><strong>To authenticate you</strong> when you opt in to Cloud Sync — performance of a contract / consent.</li>
+      <li><strong>To process payments</strong> for Pro subscriptions — performance of a contract / legal obligation (tax records).</li>
+      <li><strong>To secure the Service</strong>, prevent abuse and detect fraud — legitimate interest.</li>
+      <li><strong>To comply with the law</strong> and respond to valid requests from public authorities — legal obligation.</li>
+      <li><strong>To send essential service messages</strong> (e.g. login codes, billing receipts, breach notifications) — legitimate interest / contract.</li>
+    </ul>
+    <p>We do not use your personal data for advertising, profiling, automated decision-making with legal effects, or sale to third parties.</p>
+
+    <h2>6. Third-Party Processors</h2>
+    <p>The Service uses a small, deliberately limited set of sub-processors. Each is engaged under a written data-processing agreement and only receives the minimum data necessary.</p>
+    <ul>
+      <li><strong>Supabase Inc. (authentication &amp; optional cloud sync)</strong> — receives your email address and any entries you choose to sync. Data may be stored in the United States or European Union depending on the project region. See <em>supabase.com/privacy</em>.</li>
+      <li><strong>OpenTimestamps calendar servers (timestamp anchoring, optional)</strong> — receive the SHA-256 hash of an entry and return a Bitcoin proof. They never receive entry content.</li>
+      <li><strong>Apple App Store / Google Play Billing / Stripe (payments, where applicable)</strong> — process subscription payments. We never receive your full card number; we only receive a transaction reference, plan code and country.</li>
+      <li><strong>Hosting &amp; CDN providers (delivery of the static app)</strong> — process transient request logs (IP, user-agent, URL).</li>
+      <li><strong>Browser &amp; operating-system APIs</strong> — Web Crypto, IndexedDB, MediaDevices, Geolocation, Notifications and BiometricAuth APIs run locally on your device and are governed by your browser/OS vendor (Apple, Google, Microsoft, Mozilla).</li>
+    </ul>
+    <p>We will not add a new processor that materially changes how your personal data is used without first updating this Policy.</p>
+
+    <h2>7. Data Sharing &amp; Disclosure</h2>
+    <p>We do not sell, rent, trade, share for cross-context behavioural advertising, or otherwise disclose your personal data to third parties, except:</p>
+    <ul>
+      <li>to the processors listed in Section 6, strictly to operate the Service;</li>
+      <li>where required by a binding court order, subpoena, regulatory request or applicable law in a jurisdiction where we operate (we will, where lawful, notify you in advance);</li>
+      <li>to protect our rights, property, safety, or those of our users or the public, including to prevent fraud or imminent harm;</li>
+      <li>in connection with a corporate transaction (merger, acquisition, asset sale, financing, reorganisation, bankruptcy or receivership), in which case the recipient will be bound by terms at least as protective as this Policy.</li>
+    </ul>
+
+    <h2>8. International Data Transfers</h2>
+    <p>If you are located outside the country in which our processors store your data (typically the United States or the European Union), your information may be transferred across borders. Where personal data is transferred from the European Economic Area, United Kingdom or Switzerland, we rely on Standard Contractual Clauses approved by the European Commission and/or other lawful transfer mechanisms.</p>
+
+    <h2>9. Data Retention</h2>
+    <ul>
+      <li><strong>On-device data</strong> — kept until you delete the entry, clear the app data, or uninstall the app.</li>
+      <li><strong>Cloud-synced data</strong> — kept until you delete it from the app or request account deletion. Backup snapshots are purged within 30 days of deletion.</li>
+      <li><strong>Account record</strong> — kept for as long as the account is active and for up to 90 days after deletion to satisfy security and anti-fraud requirements.</li>
+      <li><strong>Billing records</strong> — kept for the period required by tax law (typically 5–10 years) in anonymised, aggregate form where possible.</li>
+      <li><strong>Bitcoin-anchored hashes</strong> — permanent and outside our control once published.</li>
+    </ul>
+
+    <h2>10. Security</h2>
+    <p>We apply technical and organisational measures appropriate to the risk, including:</p>
+    <ul>
+      <li>HTTPS / TLS encryption for all data in transit;</li>
+      <li>encryption at rest of cloud-synced data on our managed Supabase infrastructure;</li>
+      <li>SHA-256 cryptographic hashing of PINs and entries;</li>
+      <li>row-level-security policies that mathematically isolate one user's data from another's;</li>
+      <li>least-privilege access for our personnel, with audit logging;</li>
+      <li>optional in-app PIN lock and biometric unlock.</li>
+    </ul>
+    <p>No method of electronic storage or transmission is perfectly secure. You acknowledge that you provide your information at your own risk and that we cannot guarantee absolute security.</p>
+
+    <h2>11. Your Rights</h2>
+    <p>Depending on where you live, you may have the following rights in respect of your personal data. We will honour valid requests free of charge, in line with applicable law.</p>
+    <ul>
+      <li><strong>Access</strong> a copy of the personal data we hold about you;</li>
+      <li><strong>Rectify</strong> inaccurate or incomplete data;</li>
+      <li><strong>Erase</strong> ("right to be forgotten") your personal data;</li>
+      <li><strong>Restrict</strong> or <strong>object</strong> to certain processing;</li>
+      <li><strong>Portability</strong> — receive your data in a structured, machine-readable format (the Service offers JSON and PDF export from Settings → Data);</li>
+      <li><strong>Withdraw consent</strong> at any time, without affecting the lawfulness of prior processing;</li>
+      <li><strong>Lodge a complaint</strong> with your local supervisory authority (e.g. your national data-protection authority in the EU/UK).</li>
+    </ul>
+    <p>To exercise any of these rights, email <strong style="color:var(--amber)">privacy@loggedapp.io</strong>. We may need to verify your identity before responding. We will reply within 30 days (or such shorter period as the law requires).</p>
+
+    <h2>12. Account &amp; Data Deletion</h2>
+    <p>You may delete your data at any time without contacting us:</p>
+    <ul>
+      <li><strong>Delete a single entry</strong> — open the entry and tap the delete icon, or swipe left on the entry card.</li>
+      <li><strong>Delete all on-device data</strong> — Settings → Data → "Clear All Data".</li>
+      <li><strong>Delete your cloud account &amp; synced data</strong> — Settings → Account → "Delete Account". This is irreversible and removes all cloud-stored entries within 30 days.</li>
+      <li><strong>Email request</strong> — send "Delete my account" from your registered email to <strong style="color:var(--amber)">privacy@loggedapp.io</strong>.</li>
+    </ul>
+    <p>Deletion does not remove information that has already been published to a public ledger (e.g. Bitcoin-anchored hashes), copies that may exist in your own backups, or records we are legally required to retain.</p>
+
+    <h2>13. Children's Privacy</h2>
+    <p>The Service is not directed to children under the age of 13 (or under 16 in the EEA, or such higher age as required by your local law). We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact <strong style="color:var(--amber)">privacy@loggedapp.io</strong> and we will delete it promptly.</p>
+
+    <h2>14. Sensitive Information</h2>
+    <p>Logged is often used to record events of a personal or sensitive nature (relationships, health, workplace incidents, etc.). You decide what to record and when to enable cloud sync or anchoring. You are responsible for keeping your device, browser and Logged account credentials secure. Where local law requires the consent of other people you reference in your entries (for example, recording another person's voice or photograph), it is your responsibility to obtain such consent.</p>
+
+    <h2>15. Permissions Explainer</h2>
+    <ul>
+      <li><strong>Camera / Photo Library</strong> — only when you tap "Attach Photo".</li>
+      <li><strong>Microphone</strong> — only when you tap "Voice Memo".</li>
+      <li><strong>Location (GPS)</strong> — only when you tap "Add Location".</li>
+      <li><strong>Notifications</strong> — only if you enable reminders.</li>
+      <li><strong>Biometric Authentication</strong> — only if you enable App Lock with biometrics.</li>
+      <li><strong>Storage</strong> — used to keep entries on your device.</li>
+    </ul>
+    <p>You may revoke any permission at any time from your device settings; some features may stop working as a result.</p>
+
+    <h2>16. Cookies &amp; Local Storage</h2>
+    <p>The Service uses your browser's <em>localStorage</em> and <em>IndexedDB</em> to store entries and preferences. It does <strong>not</strong> use third-party cookies, advertising cookies or tracking pixels. A small first-party session cookie may be set if you sign in to Cloud Sync; it is removed when you sign out.</p>
+
+    <h2>17. California Residents (CCPA / CPRA)</h2>
+    <p>If you are a California resident you have the right to: (a) know what personal information we collect, use and disclose; (b) request deletion of your personal information; (c) request correction of inaccurate personal information; (d) limit the use of "sensitive personal information"; (e) opt out of "sale" or "sharing" — note we do <strong>not</strong> sell or share personal information for cross-context behavioural advertising; and (f) be free from discrimination for exercising these rights. You may submit a request via <strong style="color:var(--amber)">privacy@loggedapp.io</strong>.</p>
+
+    <h2>18. Other US States &amp; Global Privacy Controls</h2>
+    <p>Residents of Virginia, Colorado, Connecticut, Utah, Texas and other US states with comprehensive privacy laws may exercise the rights granted by their state of residence by contacting us at <strong style="color:var(--amber)">privacy@loggedapp.io</strong>. We treat the Global Privacy Control browser signal as a valid opt-out request where applicable.</p>
+
+    <h2>19. Apple App Store Privacy Labels &amp; Google Play Data Safety</h2>
+    <p>Where Logged is distributed via the Apple App Store or Google Play, the data-handling disclosures shown on the store listing are consistent with this Policy. If you spot a discrepancy, this Policy controls and we will update the store labels at the next available release.</p>
+
+    <h2>20. Changes to This Policy</h2>
+    <p>We may amend this Policy from time to time. Material changes will be notified through an in-app banner and (if you have a Cloud Sync account) by email at least 15 days before they take effect. Your continued use of the Service after the effective date constitutes acceptance.</p>
+
+    <h2>21. Contact</h2>
+    <p>If you have any questions, comments or complaints about this Policy or our handling of your personal data, please write to:</p>
+    <p><strong style="color:var(--amber)">privacy@loggedapp.io</strong></p>
+    <p style="font-size:11px;color:var(--faint-on-navy);margin-top:24px;padding-top:16px;border-top:1px solid rgba(245,241,232,0.08)">© 2026 Logged. All rights reserved. This Policy is published in English; translations are provided for convenience only — the English version controls in case of conflict.</p>
   </div>
 </div>
 
@@ -3159,35 +3295,159 @@ body[data-theme="light"] .new-btn{
 <div class="full-modal" id="termsModal">
   <div class="full-modal-header">
     <button class="back-btn" onclick="closeFullModal('termsModal')">←</button>
-    <div class="screen-title">Terms & Conditions</div>
+    <div class="screen-title">Terms &amp; Conditions</div>
   </div>
   <div class="full-modal-body">
-    <p class="eff-date">Effective Date: April 2026</p>
-    <h2>1. Acceptance of Terms</h2>
-    <p>By using Logged ("the App"), you agree to these Terms and Conditions. If you do not agree, please discontinue use of the App.</p>
-    <h2>2. Description of Service</h2>
-    <p>Logged is a personal record-keeping tool that allows users to document events, incidents, and notes for their own personal reference. All data is stored locally on your device.</p>
-    <h2>3. Not a Legal or Professional Service</h2>
-    <p><strong style="color:var(--cream)">Logged is NOT a legal service, professional advice service, or evidence-management platform.</strong> Records created in Logged are personal notes only. They do not constitute legal evidence, medical documentation, or professional reports. For any matter requiring professional guidance — legal, medical, psychological, financial, or otherwise — please seek qualified professional support.</p>
-    <h2>4. User Responsibilities</h2>
+    <p class="eff-date">Effective Date: 27 April 2026 · Last Updated: 27 April 2026 · Version 2.0</p>
+
+    <div style="background:rgba(212,133,42,0.12);border:1px solid rgba(212,133,42,0.35);border-radius:14px;padding:14px 16px;margin-bottom:22px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--amber);margin-bottom:6px">Read This Carefully</div>
+      <div style="font-size:12px;color:var(--sub-on-navy);line-height:1.7">These Terms &amp; Conditions are a legally binding agreement between you and the operators of Logged. They contain disclaimers of warranties, limitations of liability, mandatory arbitration and a class-action waiver where enforceable. By using the Service you accept them in full. If you do not accept them, do not use the Service.</div>
+    </div>
+
+    <h2>1. Definitions</h2>
     <ul>
-      <li>You are solely responsible for the accuracy and content of your records</li>
-      <li>You must not use the App to record others without their consent where legally required</li>
-      <li>You must not use the App for any unlawful purpose</li>
-      <li>You are responsible for maintaining your own backups of important records</li>
+      <li><strong>"Logged"</strong>, "we", "us" or "our" — the operators of the Logged application.</li>
+      <li><strong>"Service"</strong> — the Logged mobile, web, progressive-web (PWA) and desktop application, together with all features, content, APIs and websites that link to these Terms.</li>
+      <li><strong>"User"</strong>, "you" or "your" — any natural person or legal entity that downloads, installs, accesses or uses the Service.</li>
+      <li><strong>"User Content"</strong> — text, photos, audio, location data, tags, hashes and any other material you submit to or generate within the Service.</li>
+      <li><strong>"Pro Plan"</strong> — any paid subscription tier of the Service.</li>
     </ul>
-    <h2>5. Limitation of Liability</h2>
-    <p>The App is provided "as is." We make no warranties regarding accuracy, reliability, or fitness for a particular purpose. We are not liable for any loss of data, loss of records, or any consequential damages arising from use of the App.</p>
-    <h2>6. Subscriptions & Payments</h2>
-    <p>Free tier: 5 entries per month, 1 PDF export per month. Pro plans are available at $1.99/month or $14.99/year. Subscriptions can be cancelled at any time. No refunds for partial billing periods.</p>
-    <h2>7. Intellectual Property</h2>
-    <p>The Logged name, logo, and application design are the intellectual property of Logged. Your personal records remain your own.</p>
-    <h2>8. Modifications</h2>
-    <p>We reserve the right to modify these terms at any time. Continued use of the App after changes constitutes acceptance.</p>
-    <h2>9. Governing Law</h2>
-    <p>These terms are governed by the laws of the United Arab Emirates.</p>
-    <h2>10. Contact</h2>
-    <p>For terms-related enquiries: <strong style="color:var(--amber)">legal@loggedapp.io</strong></p>
+
+    <h2>2. Acceptance of Terms</h2>
+    <p>By tapping "I agree", creating an account, or otherwise using the Service, you confirm that you have read, understood and agreed to be bound by these Terms and the linked Privacy Policy. If you are using the Service on behalf of an organisation, you represent that you have authority to bind that organisation, in which case "you" includes the organisation.</p>
+
+    <h2>3. Eligibility</h2>
+    <ul>
+      <li>You must be at least 13 years old (or such higher minimum age as your local law requires — for example, 16 in many EEA countries) to use the Service.</li>
+      <li>If you are under the age of legal majority in your jurisdiction, a parent or guardian must read and accept these Terms on your behalf.</li>
+      <li>You may not use the Service if you are barred from doing so under the laws of your country, the United Arab Emirates, or any other jurisdiction whose sanctions or export-control regimes apply to you.</li>
+      <li>You may not use the Service if you have previously been suspended or removed from it.</li>
+    </ul>
+
+    <h2>4. Description of the Service</h2>
+    <p>Logged is a personal record-keeping and journaling tool. It lets you create, store, search, optionally cryptographically fingerprint and optionally Bitcoin-anchor entries about events in your own life. Logged is intended for personal, lawful, non-commercial use. <strong style="color:var(--cream)">Logged is not a legal service, evidentiary chain-of-custody platform, medical device, financial product, professional advice service, emergency-response tool, or substitute for any of the foregoing.</strong></p>
+
+    <h2>5. Your Account &amp; Security</h2>
+    <ul>
+      <li>If you opt in to Cloud Sync, you must provide an accurate email address and keep it up to date.</li>
+      <li>You are responsible for safeguarding your device, your login email inbox, and your in-app PIN. Anyone with access to those can read or modify your records.</li>
+      <li>You must promptly notify us of any unauthorised access at <strong style="color:var(--amber)">security@loggedapp.io</strong>.</li>
+      <li>You may not share, rent or transfer your account.</li>
+    </ul>
+
+    <h2>6. Acceptable Use</h2>
+    <p>You agree not to use the Service to:</p>
+    <ul>
+      <li>upload or generate content that is unlawful, infringing, defamatory, obscene, harassing, threatening, hateful or otherwise objectionable;</li>
+      <li>impersonate any person or misrepresent your affiliation;</li>
+      <li>infringe the intellectual-property, privacy, publicity or other rights of any third party;</li>
+      <li>record or photograph other people in violation of applicable wiretap, surveillance, image-rights or privacy laws;</li>
+      <li>upload viruses, worms, malicious code or any other harmful component;</li>
+      <li>scrape, crawl, reverse-engineer, decompile, disassemble or attempt to derive the source code of the Service except as expressly permitted by mandatory law;</li>
+      <li>circumvent rate limits, paywalls, the App Lock or any security mechanism;</li>
+      <li>use the Service to develop a competing product, train a machine-learning model, or for any benchmarking purpose without our prior written consent;</li>
+      <li>resell, sub-licence or otherwise commercially exploit the Service;</li>
+      <li>engage in any activity that would expose us to legal, regulatory, financial or reputational harm.</li>
+    </ul>
+
+    <h2>7. User Content &amp; Licence</h2>
+    <p>You retain all ownership rights in your User Content. To the limited extent necessary to operate the Service for you, you grant us a worldwide, non-exclusive, royalty-free licence to host, store, transmit, copy, back up, encrypt, decrypt and display your User Content. This licence is solely for the purpose of providing the Service and ends when you delete the relevant content (subject to short-lived backups described in the Privacy Policy).</p>
+    <p>You represent and warrant that: (a) you own or have all necessary rights in your User Content; (b) your User Content does not violate this Section or any law; (c) you have obtained any consents required from third parties depicted, recorded or named in your User Content.</p>
+
+    <h2>8. Recording Other People &amp; Privacy of Third Parties</h2>
+    <p>Many jurisdictions require all-party or one-party consent before recording audio, video or images of another person, or before storing personal data about them. <strong style="color:var(--cream)">It is solely your responsibility to know and comply with the laws of your country, state or province before using the Service to record or describe other people.</strong> We are not a party to your recording, do not control the circumstances of capture, and accept no liability for your failure to obtain required consents.</p>
+
+    <h2>9. Not Legal, Medical, Financial or Professional Advice</h2>
+    <p>Anything you read in the Service — including category guides, prompts, suggested fields, AI-generated summaries (where present), help text or example entries — is provided for informational purposes only. It does not constitute legal, medical, psychological, financial, tax, accounting or any other professional advice and must not be relied on as such. Always consult a qualified professional for advice on your specific situation. <strong style="color:var(--cream)">No attorney–client, doctor–patient, fiduciary or other professional relationship is created by your use of the Service.</strong></p>
+
+    <h2>10. Records Are Not Court Evidence</h2>
+    <p>While Logged offers cryptographic SHA-256 fingerprinting and optional Bitcoin anchoring to help you demonstrate that an entry has not been changed since a particular date, <strong style="color:var(--cream)">we make no representation that any record produced from the Service will be admissible, sufficient or persuasive as evidence in any court, tribunal, arbitration, regulatory proceeding or insurance claim.</strong> Admissibility depends on local rules of evidence, chain of custody and other factors outside our control.</p>
+
+    <h2>11. Subscriptions, Billing &amp; Refunds</h2>
+    <ul>
+      <li><strong>Free tier:</strong> 5 entries per month and 1 PDF export per month, plus all on-device privacy features.</li>
+      <li><strong>Pro Plans:</strong> currently US$1.99 per month or US$14.99 per year (or local-currency equivalent), with unlimited entries, unlimited exports and additional Pro-only features.</li>
+      <li><strong>Auto-renewal:</strong> subscriptions automatically renew at the end of each billing period at the then-current price unless cancelled at least 24 hours before the renewal date. You can cancel anytime from your Apple ID, Google Play account or — where the subscription was purchased through our website — from Settings → Subscription.</li>
+      <li><strong>Free trial:</strong> if a free trial is offered, any unused portion of the trial is forfeited if you upgrade earlier.</li>
+      <li><strong>Refunds:</strong> we do not offer refunds for partial billing periods or for periods you did not use, except where required by law (for example, the EU/UK consumer right of withdrawal where applicable). Refunds for purchases made through Apple or Google are governed by their respective storefronts.</li>
+      <li><strong>Price changes:</strong> we may change subscription prices on at least 30 days' notice; any change applies from your next renewal.</li>
+      <li><strong>Taxes:</strong> prices may be exclusive of applicable taxes, which we will collect where required.</li>
+    </ul>
+
+    <h2>12. Apple App Store &amp; Google Play Specific Terms</h2>
+    <p>Where you obtain the Service from a third-party app marketplace ("Distributor"), the following also apply and prevail over any conflicting term elsewhere in these Terms:</p>
+    <ul>
+      <li>These Terms are between you and Logged only, not the Distributor. The Distributor is not responsible for the Service or its content.</li>
+      <li>The licence granted to use the Service is non-transferable and limited to use on devices you own or control and as permitted by the Distributor's usage rules.</li>
+      <li>The Distributor has no obligation to provide any maintenance or support.</li>
+      <li>If the Service fails to conform to any applicable warranty, you may notify the Distributor and the Distributor may refund the purchase price (where required); to the maximum extent permitted by law, the Distributor has no other warranty obligation.</li>
+      <li>Logged, not the Distributor, is responsible for product claims, including product-liability, consumer-protection and intellectual-property claims.</li>
+      <li>You represent that you are not located in a country subject to a US Government embargo or designated as a "terrorist supporting" country, and that you are not on any US Government list of prohibited or restricted parties.</li>
+      <li>The Distributor and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you.</li>
+    </ul>
+
+    <h2>13. Open-Source Components &amp; Bitcoin Anchoring</h2>
+    <p>The Service uses open-source software, including OpenTimestamps client libraries and the Supabase JavaScript SDK. Such components are provided under their respective licences. Bitcoin anchoring relies on third-party calendar servers and the public Bitcoin blockchain; we do not operate either and cannot guarantee their availability, performance or continued operation.</p>
+
+    <h2>14. Beta Features</h2>
+    <p>From time to time we may make experimental ("beta") features available. They are provided AS IS, without any warranty, may be modified or removed at any time, and are not subject to any service-level commitments.</p>
+
+    <h2>15. Intellectual Property</h2>
+    <p>The Logged name, logo, graphics, design, source code, copy, sound, animations and overall look-and-feel of the Service are owned by us or our licensors and are protected by copyright, trade-mark and other intellectual-property laws. Except for the limited rights expressly granted to you in these Terms, all rights are reserved. Nothing in these Terms transfers any of our intellectual property to you.</p>
+
+    <h2>16. Feedback</h2>
+    <p>If you send us suggestions, ideas, feature requests or other feedback, you grant us a perpetual, irrevocable, worldwide, royalty-free licence to use, reproduce, modify and incorporate such feedback into the Service without obligation or compensation to you.</p>
+
+    <h2>17. Copyright Complaints (DMCA)</h2>
+    <p>If you believe content in the Service infringes your copyright, please send a notice that complies with 17 U.S.C. § 512(c)(3) to <strong style="color:var(--amber)">copyright@loggedapp.io</strong>. We may suspend or remove allegedly infringing content and terminate repeat infringers' accounts in appropriate circumstances.</p>
+
+    <h2>18. Suspension &amp; Termination</h2>
+    <p>You may stop using the Service at any time and delete your account and on-device data as described in the Privacy Policy. We may, in our reasonable discretion, suspend or terminate your access (in whole or in part) immediately and without notice if we believe you have violated these Terms, exposed us or other users to harm, or if continuing to provide the Service would put us in breach of law. Upon termination, your licence to use the Service ends and we may delete any data we hold for you, subject to any retention obligations.</p>
+
+    <h2>19. DISCLAIMER OF WARRANTIES</h2>
+    <p style="text-transform:uppercase;font-weight:700;color:var(--cream)">THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT ANY WARRANTY OF ANY KIND, EXPRESS, IMPLIED OR STATUTORY, INCLUDING WITHOUT LIMITATION ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, ACCURACY, RELIABILITY, OR THAT THE SERVICE WILL BE UNINTERRUPTED, TIMELY, SECURE OR ERROR-FREE.</p>
+    <p>We do not warrant that any data you save will be preserved, that any feature will continue to function, or that any third-party processor (including Supabase, OpenTimestamps calendar servers or the Bitcoin network) will be available. You are solely responsible for backing up your own data.</p>
+
+    <h2>20. LIMITATION OF LIABILITY</h2>
+    <p style="text-transform:uppercase;font-weight:700;color:var(--cream)">TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT WILL LOGGED, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, LICENSORS OR PROCESSORS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE OR EXEMPLARY DAMAGES, OR FOR ANY LOSS OF PROFITS, REVENUE, GOODWILL, DATA, RECORDS, EVIDENCE, OPPORTUNITY, OR SUBSTITUTE GOODS OR SERVICES, ARISING OUT OF OR RELATED TO THESE TERMS OR THE SERVICE, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR ANY OTHER LEGAL THEORY, AND WHETHER OR NOT WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+    <p style="text-transform:uppercase;font-weight:700;color:var(--cream)">OUR TOTAL CUMULATIVE LIABILITY TO YOU FOR ALL CLAIMS RELATING TO THE SERVICE WILL NOT EXCEED THE GREATER OF (A) US$100 OR (B) THE TOTAL AMOUNTS YOU ACTUALLY PAID US FOR THE SERVICE IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM.</p>
+    <p>Some jurisdictions do not allow the exclusion or limitation of certain damages; in those jurisdictions our liability is limited to the smallest extent permitted by law.</p>
+
+    <h2>21. Indemnification</h2>
+    <p>You agree to defend, indemnify and hold harmless Logged and its affiliates, officers, directors, employees, agents and processors from and against any and all claims, damages, obligations, losses, liabilities, costs and expenses (including reasonable attorneys' fees) arising from or related to: (a) your use or misuse of the Service; (b) your violation of these Terms; (c) your violation of any third-party right, including any privacy, publicity or intellectual-property right; (d) your User Content; or (e) any breach by you of applicable law.</p>
+
+    <h2>22. Force Majeure</h2>
+    <p>We are not liable for any failure or delay in performance to the extent caused by events beyond our reasonable control, including acts of God, war, terrorism, civil unrest, epidemics, pandemics, government actions, labour disputes, internet or telecommunications outages, attacks on our systems, or failure of third-party services or the Bitcoin network.</p>
+
+    <h2>23. Export Controls &amp; Sanctions</h2>
+    <p>You agree to comply with all applicable export-control and sanctions laws of the United Arab Emirates, the United States, the European Union and any other jurisdiction with authority over you. You may not use, export or re-export the Service in violation of those laws.</p>
+
+    <h2>24. Governing Law &amp; Dispute Resolution</h2>
+    <p>These Terms are governed by the laws of the United Arab Emirates, without regard to its conflict-of-laws rules. The United Nations Convention on Contracts for the International Sale of Goods does not apply.</p>
+    <p><strong>Informal resolution.</strong> Before filing any formal action, you agree to contact us at <strong style="color:var(--amber)">legal@loggedapp.io</strong> with a description of the dispute and to give us at least 30 days to attempt resolution in good faith.</p>
+    <p><strong>Binding arbitration &amp; class waiver (where enforceable).</strong> To the maximum extent permitted by law, any dispute, claim or controversy arising out of or related to these Terms or the Service that cannot be resolved informally will be finally resolved by binding individual arbitration administered by the Dubai International Arbitration Centre (DIAC) under its rules then in force, by a single arbitrator, in Dubai, UAE, and conducted in English. <strong style="color:var(--cream)">You and Logged each waive any right to participate in a class, collective or representative action, or to have a dispute decided by a jury, to the extent that waiver is enforceable.</strong> Nothing in this Section prevents either party from seeking injunctive or other equitable relief in any court of competent jurisdiction to protect its intellectual-property rights.</p>
+    <p><strong>Consumer carve-outs.</strong> If you are a consumer in the European Union, the United Kingdom or another jurisdiction whose mandatory consumer-protection laws give you the right to bring proceedings in your local courts and under your local law, those rights are preserved.</p>
+
+    <h2>25. Changes to These Terms</h2>
+    <p>We may revise these Terms from time to time. If a revision is material, we will provide at least 15 days' notice through an in-app banner and (if you have a Cloud Sync account) by email. Your continued use of the Service after the effective date constitutes acceptance. If you do not agree to the revised Terms, you must stop using the Service and delete your account.</p>
+
+    <h2>26. Miscellaneous</h2>
+    <ul>
+      <li><strong>Entire agreement.</strong> These Terms and the Privacy Policy constitute the entire agreement between you and us regarding the Service and supersede any prior agreement.</li>
+      <li><strong>Severability.</strong> If any provision is held unenforceable, the remaining provisions remain in full force.</li>
+      <li><strong>No waiver.</strong> Our failure to enforce any provision is not a waiver of our right to do so later.</li>
+      <li><strong>Assignment.</strong> You may not assign these Terms without our prior written consent. We may assign them in connection with a corporate transaction.</li>
+      <li><strong>Notices.</strong> We may give you notice through the Service, by email to your registered address, or by posting an update on our website. You should send notices to us at <strong style="color:var(--amber)">legal@loggedapp.io</strong>.</li>
+      <li><strong>Headings.</strong> Section headings are for convenience only and do not affect interpretation.</li>
+      <li><strong>Independent contractors.</strong> Nothing in these Terms creates a partnership, joint venture, agency or employment relationship.</li>
+      <li><strong>Survival.</strong> Sections that by their nature should survive termination (including Sections 7, 9–11, 15, 17, 19–25) survive.</li>
+      <li><strong>Language.</strong> These Terms are published in English. Translations are provided for convenience only; the English version controls in case of conflict.</li>
+    </ul>
+
+    <h2>27. Contact</h2>
+    <p>For questions about these Terms, write to <strong style="color:var(--amber)">legal@loggedapp.io</strong>.</p>
+    <p style="font-size:11px;color:var(--faint-on-navy);margin-top:24px;padding-top:16px;border-top:1px solid rgba(245,241,232,0.08)">© 2026 Logged. All rights reserved.</p>
   </div>
 </div>
 

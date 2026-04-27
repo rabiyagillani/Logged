@@ -1,8 +1,8 @@
-// Logged — Service Worker  (v=cleanup2)
+// Logged — Service Worker  (v=cleanup3)
 // Strategy: Cache-first for assets, Network-first for navigation
 // Wipes any stale caches from previous versions on install.
 
-const CACHE_NAME = 'logged-v2';
+const CACHE_NAME = 'logged-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',

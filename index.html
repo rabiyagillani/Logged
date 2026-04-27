@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#3d1a22">
-<link rel="manifest" href="manifest.webmanifest?v=5">
+<link rel="manifest" href="manifest.webmanifest?v=6">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
 
@@ -121,7 +121,64 @@
   // We can re-introduce a real PWA service worker once the app has stabilized.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=cleanup5').catch(() => {});
+      navigator.serviceWorker.register('sw.js?v=cleanup6').then(reg => {
+        if(!reg) return;
+
+        function showUpdatePill(worker){
+          if(document.getElementById('updatePill')) return;
+          const isLight = (localStorage.getItem('logged_theme')||'dark') === 'light';
+          const bg = isLight ? '#3d1a22' : '#F2E8DC';
+          const fg = isLight ? '#F2E8DC' : '#3d1a22';
+          const pill = document.createElement('div');
+          pill.id = 'updatePill';
+          pill.setAttribute('role','status');
+          pill.style.cssText =
+            'position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 96px);' +
+            'transform:translate(-50%,12px);z-index:2147483646;display:flex;align-items:center;gap:10px;' +
+            'padding:10px 14px;border-radius:999px;background:'+bg+';color:'+fg+';' +
+            'font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;' +
+            'box-shadow:0 8px 24px rgba(0,0,0,.28);opacity:0;transition:opacity .25s ease, transform .25s ease;' +
+            'max-width:calc(100% - 32px)';
+          pill.innerHTML =
+            '<span style="opacity:.85">Update available</span>' +
+            '<button type="button" id="updatePillBtn" style="all:unset;cursor:pointer;padding:6px 12px;border-radius:999px;background:'+fg+';color:'+bg+';font-weight:700;font-size:12px;letter-spacing:.2px">Refresh</button>' +
+            '<button type="button" id="updatePillClose" aria-label="Dismiss" style="all:unset;cursor:pointer;padding:4px 6px;opacity:.6;font-size:16px;line-height:1">×</button>';
+          document.body.appendChild(pill);
+          requestAnimationFrame(() => {
+            pill.style.opacity = '1';
+            pill.style.transform = 'translate(-50%,0)';
+          });
+          let reloading = false;
+          navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if(reloading) return;
+            reloading = true;
+            window.location.reload();
+          });
+          document.getElementById('updatePillBtn').addEventListener('click', () => {
+            if(worker && worker.state === 'installed') worker.postMessage({type:'SKIP_WAITING'});
+            // Fallback: if no message handler, just reload after a moment
+            setTimeout(() => { if(!reloading){ reloading = true; window.location.reload(); } }, 800);
+          });
+          document.getElementById('updatePillClose').addEventListener('click', () => {
+            pill.style.opacity = '0';
+            pill.style.transform = 'translate(-50%,12px)';
+            setTimeout(() => pill.remove(), 250);
+          });
+        }
+
+        // If a worker is already waiting when the page loads, show the pill
+        if(reg.waiting && navigator.serviceWorker.controller) showUpdatePill(reg.waiting);
+
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          if(!newWorker) return;
+          newWorker.addEventListener('statechange', () => {
+            if(newWorker.state === 'installed' && navigator.serviceWorker.controller){
+              showUpdatePill(newWorker);
+            }
+          });
+        });
+      }).catch(() => {});
     });
   }
 

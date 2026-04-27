@@ -36,3 +36,17 @@ python3 -m http.server 5000 --bind 0.0.0.0
 ## Deployment
 
 Configured as a **static** deployment — files served directly with no backend.
+
+## Recent Updates (Apr 2026 — Home Page Refresh)
+
+Implemented a full set of home-page improvements based on expert review:
+
+- **Trust-focused stat tiles** (4 chips): Total · Verified · Anchored · Last log — replacing the gamified day-streak.
+- **Pending-anchor inline status** when entries are awaiting Bitcoin confirmation.
+- **Quick voice / capture button** placed beside the New Entry button for one-tap capture.
+- **Date filter chips** (All / Today / Week / Month / Year) above the records list.
+- **Month dividers** in the records list when sorting chronologically.
+- **Export Report** CTA on the home page (uses existing `exportAllPDF`).
+- **Draft autosave + resume**: form inputs autosave to `localStorage` (`logged_draft_v1`); a "Continue draft" card appears on home. Cleared automatically on save.
+- **Richer empty state**: lock icon, starter category chips, and a privacy-promise card highlighting the SHA-256 + Bitcoin + local-first guarantees.
+- **App Lock (PIN)**: optional 4–8 digit PIN with SHA-256-hashed storage (`logged_pin_hash`). Settings → Privacy section to enable/change. Lock screen shown at boot and on visibility-resume after 60s. Custom on-screen number pad.

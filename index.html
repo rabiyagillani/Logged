@@ -1732,6 +1732,94 @@ body[data-theme="light"] .swipe-delete-bg{background:linear-gradient(90deg,rgba(
 
 /* Empty state */
 .empty-state{text-align:center;padding:60px 28px;color:var(--sub-on-dark)}
+
+/* ── Trust stats (4-col on home) ── */
+.stats-strip.stats-trust{grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}
+.stats-strip.stats-trust .stat-chip{padding:10px 6px}
+.stats-strip.stats-trust .stat-chip-val{font-size:20px}
+.trust-line{margin:0 22px 14px;padding:8px 12px;background:rgba(236,179,152,0.10);border:1px solid rgba(236,179,152,0.22);border-radius:10px;color:var(--peach,#ECB398);font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px}
+.trust-line .ic{width:14px;height:14px}
+
+/* ── Draft resume card ── */
+.draft-card{margin:0 22px 14px;padding:12px 14px;background:linear-gradient(135deg,rgba(236,179,152,0.18),rgba(236,179,152,0.06));border:1px solid rgba(236,179,152,0.30);border-radius:14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:transform .15s,background .2s}
+.draft-card:hover{background:linear-gradient(135deg,rgba(236,179,152,0.24),rgba(236,179,152,0.10))}
+.draft-card:active{transform:scale(0.99)}
+.draft-card-icon{width:36px;height:36px;border-radius:10px;background:rgba(236,179,152,0.25);display:flex;align-items:center;justify-content:center;color:var(--peach,#ECB398);flex-shrink:0}
+.draft-card-icon .ic{width:18px;height:18px}
+.draft-card-body{flex:1;min-width:0}
+.draft-card-title{font-size:13px;font-weight:700;color:var(--peach,#ECB398);letter-spacing:.2px}
+.draft-card-sub{font-size:12px;color:var(--sub-on-dark);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.draft-card-x{background:transparent;border:none;color:var(--sub-on-dark);font-size:20px;line-height:1;cursor:pointer;padding:4px 8px;border-radius:8px;flex-shrink:0}
+.draft-card-x:hover{background:rgba(255,255,255,0.06);color:#fff}
+
+/* ── Hero row: New Entry + Quick Voice ── */
+.home-new-strip{display:flex;gap:10px;align-items:stretch}
+.home-new-strip .new-btn{flex:1}
+.quick-voice-btn{width:66px;min-height:66px;border-radius:18px;border:none;background:rgba(255,255,255,0.06);color:var(--peach,#ECB398);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s,transform .12s;flex-shrink:0}
+.quick-voice-btn:hover{background:rgba(236,179,152,0.18)}
+.quick-voice-btn:active{transform:scale(0.96)}
+.quick-voice-btn .ic{width:24px;height:24px}
+body[data-theme="light"] .quick-voice-btn{background:rgba(123,71,82,0.08);color:#7b4752}
+body[data-theme="light"] .quick-voice-btn:hover{background:rgba(123,71,82,0.14)}
+
+/* ── Empty-state starter chips + privacy promise ── */
+.starter-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:22px auto 0;max-width:340px}
+.starter-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:22px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.10);color:var(--text-on-dark,#F2E8DC);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .18s}
+.starter-chip:hover{background:rgba(236,179,152,0.18);border-color:rgba(236,179,152,0.4);transform:translateY(-1px)}
+.starter-chip-icon{display:inline-flex;width:14px;height:14px;color:var(--cat-color,#ECB398)}
+.starter-chip-icon .ic{width:14px;height:14px}
+body[data-theme="light"] .starter-chip{background:rgba(123,71,82,0.05);border-color:rgba(123,71,82,0.15);color:#3d1a22}
+body[data-theme="light"] .starter-chip:hover{background:rgba(236,179,152,0.20);border-color:rgba(236,179,152,0.5)}
+
+.empty-promise{margin:30px auto 0;max-width:300px;display:flex;flex-direction:column;gap:8px;padding:16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px}
+.empty-promise-line{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--sub-on-dark);font-weight:500;text-align:left}
+.empty-promise-line .ic{width:14px;height:14px;color:var(--peach,#ECB398);flex-shrink:0}
+body[data-theme="light"] .empty-promise{background:rgba(123,71,82,0.04);border-color:rgba(123,71,82,0.12)}
+body[data-theme="light"] .empty-promise-line{color:#7a4a52}
+body[data-theme="light"] .empty-promise-line .ic{color:#b85d3f}
+
+/* ── Date-filter chips ── */
+.date-chips{display:flex;gap:6px;padding:0 22px 12px;overflow-x:auto;scrollbar-width:none}
+.date-chips::-webkit-scrollbar{display:none}
+.date-chip{flex-shrink:0;padding:5px 12px;border-radius:14px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;border:1.5px solid rgba(255,255,255,0.10);background:transparent;color:var(--sub-on-dark);cursor:pointer;transition:all .15s;font-family:inherit}
+.date-chip.active{background:var(--peach,#ECB398);border-color:var(--peach,#ECB398);color:var(--wine-1,#3d1a22)}
+.date-chip:active{transform:scale(0.95)}
+body[data-theme="light"] .date-chip{color:#7a4a52;border-color:rgba(123,71,82,0.20)}
+body[data-theme="light"] .date-chip.active{color:#fff;background:#7b4752;border-color:#7b4752}
+
+/* ── Home actions (Export Report) ── */
+.home-actions{padding:0 22px 14px}
+.home-action-btn{width:100%;padding:11px 14px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);color:var(--text-on-dark,#F2E8DC);font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;transition:background .18s}
+.home-action-btn:hover{background:rgba(236,179,152,0.14)}
+.home-action-btn .ic{width:14px;height:14px;color:var(--peach,#ECB398)}
+body[data-theme="light"] .home-action-btn{background:rgba(123,71,82,0.05);border-color:rgba(123,71,82,0.15);color:#3d1a22}
+body[data-theme="light"] .home-action-btn:hover{background:rgba(123,71,82,0.10)}
+
+/* ── Month divider in records list ── */
+.month-divider{padding:14px 22px 6px;display:flex;align-items:center;gap:10px}
+.month-divider span{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint-on-navy,rgba(242,232,220,0.5))}
+.month-divider::after{content:"";flex:1;height:1px;background:rgba(255,255,255,0.06)}
+body[data-theme="light"] .month-divider span{color:rgba(123,71,82,0.55)}
+body[data-theme="light"] .month-divider::after{background:rgba(123,71,82,0.10)}
+
+/* ── App Lock screen ── */
+#lockScreen{position:fixed;inset:0;z-index:9999;background:linear-gradient(180deg,#3d1a22 0%,#2e1118 100%);display:flex;align-items:center;justify-content:center;padding:24px;animation:lockIn .25s ease}
+#lockScreen.out{animation:lockOut .25s ease forwards}
+@keyframes lockIn{from{opacity:0}to{opacity:1}}
+@keyframes lockOut{from{opacity:1}to{opacity:0;transform:scale(1.04)}}
+.lock-card{width:100%;max-width:320px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.lock-logo{margin-bottom:4px}
+.lock-title{font-family:var(--font-serif,Georgia,serif);font-size:24px;font-weight:700;color:#F2E8DC;letter-spacing:.3px}
+.lock-sub{font-size:13px;color:rgba(242,232,220,0.6);margin-top:-10px}
+.lock-dots{display:flex;gap:14px;margin:6px 0 4px}
+.lock-dots span{width:14px;height:14px;border-radius:50%;background:transparent;border:1.5px solid rgba(242,232,220,0.35);transition:background .15s,border-color .15s}
+.lock-dots span.on{background:#ECB398;border-color:#ECB398}
+.lock-pad{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;max-width:280px;margin-top:8px}
+.lock-key{aspect-ratio:1;border-radius:50%;border:none;background:rgba(255,255,255,0.06);color:#F2E8DC;font-size:24px;font-weight:500;font-family:inherit;cursor:pointer;transition:background .12s,transform .08s}
+.lock-key:hover{background:rgba(255,255,255,0.10)}
+.lock-key:active{transform:scale(0.94);background:rgba(236,179,152,0.20)}
+.lock-key.back{font-size:18px;color:rgba(242,232,220,0.7);background:transparent}
+.lock-key.back:hover{background:rgba(255,255,255,0.06)}
 .empty-icon{font-size:52px;margin-bottom:14px;display:block;opacity:0.7}
 .empty-title{font-family:var(--font-serif);font-size:22px;color:var(--ivory);margin-bottom:8px;letter-spacing:-0.3px}
 .empty-sub{font-size:13.5px;line-height:1.6;color:var(--sub-on-dark)}
@@ -3522,13 +3610,13 @@ body[data-theme="light"] .new-btn{
     <div class="form-body">
       <div class="form-field">
         <label class="form-label" for="entryTitle" data-i18n="form.titleLabel">Entry Title *</label>
-        <input class="fi" id="entryTitle" type="text" placeholder="Give this a short title…" data-i18n-placeholder="form.titlePh">
+        <input class="fi" id="entryTitle" type="text" placeholder="Give this a short title…" data-i18n-placeholder="form.titlePh" oninput="autosaveDraftFromForm()">
         <button type="button" class="title-sug" id="titleSugBtn" style="display:none" onclick="acceptTitleSuggestion()"><svg class="ic"><use href="#ic-sparkle"/></svg> <span id="titleSugText"></span></button>
         <div class="err-msg" id="titleErr" style="display:none"><svg class="ic"><use href="#ic-alert"/></svg> <span data-i18n="form.titleErr">Please add a title to continue</span></div>
       </div>
       <div class="form-field">
         <label class="form-label" for="entryNote" data-i18n="form.noteLabel">Your Account</label>
-        <textarea class="fi" id="entryNote" placeholder="Write what happened, in your own words…" data-i18n-placeholder="form.notePh"></textarea>
+        <textarea class="fi" id="entryNote" placeholder="Write what happened, in your own words…" data-i18n-placeholder="form.notePh" oninput="autosaveDraftFromForm()"></textarea>
       </div>
       <div class="form-field">
         <label class="form-label" data-i18n="form.importance">Importance</label>
@@ -3840,6 +3928,233 @@ let confirmCallback = null;
 let searchQuery = '';
 let filterCat   = 'all';
 let sortMode    = localStorage.getItem('logged_sort') || 'newest';
+let dateFilter  = 'all'; // all | today | week | month | year
+
+// ── DRAFT helpers (autosave for in-progress entries) ──
+const DRAFT_KEY = 'logged_draft_v1';
+function getDraft(){
+  try{ const raw = localStorage.getItem(DRAFT_KEY); return raw ? JSON.parse(raw) : null; }catch(e){ return null; }
+}
+function saveDraft(partial){
+  try{
+    const cur = getDraft() || {};
+    const merged = Object.assign({}, cur, partial, { ts: Date.now() });
+    if(!merged.title && !merged.note){ clearDraft(); return; }
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(merged));
+  }catch(e){}
+}
+function clearDraft(){ try{ localStorage.removeItem(DRAFT_KEY); }catch(e){} }
+function autosaveDraftFromForm(){
+  try{
+    const t = document.getElementById('entryTitle');
+    const n = document.getElementById('entryNote');
+    const cat = (typeof newEntry !== 'undefined' && newEntry) ? newEntry.cat : null;
+    saveDraft({ title:(t?t.value:''), note:(n?n.value:''), cat });
+  }catch(e){}
+}
+function resumeDraft(){
+  const d = getDraft(); if(!d) return;
+  if(typeof newEntry === 'undefined' || !newEntry){
+    try{ window.newEntry = { cat: d.cat || (CATS && CATS[0] && CATS[0].id) || 'general', imp:'med', gps:false }; }catch(e){}
+  } else {
+    if(d.cat) newEntry.cat = d.cat;
+  }
+  go('formScreen');
+  setTimeout(()=>{
+    const t = document.getElementById('entryTitle'); if(t && d.title) t.value = d.title;
+    const n = document.getElementById('entryNote');  if(n && d.note)  n.value = d.note;
+    if(typeof updateFormCatTitle === 'function') updateFormCatTitle();
+  }, 50);
+}
+function dismissDraft(){ clearDraft(); if(document.getElementById('homeScreen').classList.contains('active')) renderHome(); }
+
+// ── DATE FILTER helpers ──
+function dateFilterCutoff(mode){
+  const d = new Date();
+  if(mode==='today'){ d.setHours(0,0,0,0); return d.getTime(); }
+  if(mode==='week') { d.setDate(d.getDate()-7); return d.getTime(); }
+  if(mode==='month'){ d.setMonth(d.getMonth()-1); return d.getTime(); }
+  if(mode==='year') { d.setFullYear(d.getFullYear()-1); return d.getTime(); }
+  return 0;
+}
+function setDateFilter(mode){ dateFilter = mode; renderHome(); }
+
+// ── APP LOCK (PIN) ──
+async function _hashPin(pin){
+  try{
+    const enc = new TextEncoder().encode('logged-pin-v1::'+pin);
+    const buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }catch(e){ return 'fallback::'+pin; }
+}
+function isAppLockEnabled(){ return localStorage.getItem('logged_pin_hash') ? true : false; }
+async function setAppLockPin(pin){
+  if(!pin || !/^\d{4,8}$/.test(pin)) throw new Error('PIN must be 4–8 digits');
+  const h = await _hashPin(pin);
+  localStorage.setItem('logged_pin_hash', h);
+}
+function disableAppLock(){ localStorage.removeItem('logged_pin_hash'); localStorage.removeItem('logged_pin_unlocked_at'); }
+async function verifyPin(pin){
+  const stored = localStorage.getItem('logged_pin_hash'); if(!stored) return true;
+  const h = await _hashPin(pin); return h === stored;
+}
+function showLockScreen(){
+  if(!isAppLockEnabled()) return;
+  let el = document.getElementById('lockScreen');
+  if(!el){
+    el = document.createElement('div'); el.id = 'lockScreen';
+    el.innerHTML = `
+      <div class="lock-card">
+        <div class="lock-logo">
+          <svg width="56" height="56" viewBox="0 0 100 100" style="border-radius:14px;background:#F2E8DC">
+            <text x="10" y="68" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#3d1a22">[</text>
+            <text x="30" y="68" font-family="Georgia,serif" font-size="48" font-style="italic" fill="#3d1a22">l</text>
+            <circle cx="56" cy="62" r="9" fill="#ECB398"/>
+            <text x="59" y="68" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#3d1a22">]</text>
+          </svg>
+        </div>
+        <div class="lock-title">Enter PIN</div>
+        <div class="lock-sub" id="lockSub">Logged is locked</div>
+        <div class="lock-dots" id="lockDots"><span></span><span></span><span></span><span></span></div>
+        <div class="lock-pad" id="lockPad"></div>
+      </div>`;
+    document.body.appendChild(el);
+    const pad = el.querySelector('#lockPad');
+    let buf = '';
+    const dots = ()=>{
+      const d = el.querySelectorAll('.lock-dots span');
+      d.forEach((s,i)=> s.classList.toggle('on', i<buf.length));
+    };
+    const press = async (k)=>{
+      if(k==='back'){ buf = buf.slice(0,-1); dots(); return; }
+      if(buf.length>=8) return;
+      buf += k; dots();
+      if(buf.length>=4){
+        const ok = await verifyPin(buf);
+        if(ok){
+          localStorage.setItem('logged_pin_unlocked_at', String(Date.now()));
+          el.classList.add('out');
+          setTimeout(()=> el.remove(), 280);
+        } else if(buf.length>=8 || buf.length===6){
+          const sub = el.querySelector('#lockSub');
+          if(sub){ sub.textContent='Incorrect PIN'; sub.style.color='#ff7a7a'; }
+          if(navigator.vibrate) navigator.vibrate([15,40,15]);
+          buf=''; dots();
+          setTimeout(()=>{ if(sub){ sub.textContent='Enter your PIN'; sub.style.color=''; } }, 1200);
+        }
+      }
+    };
+    const keys = ['1','2','3','4','5','6','7','8','9','','0','back'];
+    keys.forEach(k=>{
+      const b = document.createElement('button'); b.type='button'; b.className='lock-key';
+      if(k==='back'){ b.innerHTML='⌫'; b.classList.add('back'); }
+      else if(k===''){ b.style.visibility='hidden'; b.disabled = true; }
+      else { b.textContent = k; }
+      if(k!=='') b.addEventListener('click', ()=>press(k));
+      pad.appendChild(b);
+    });
+  }
+}
+function maybeRequireLockOnResume(){
+  if(!isAppLockEnabled()) return;
+  const last = parseInt(localStorage.getItem('logged_pin_unlocked_at')||'0');
+  if(!last || (Date.now()-last) > 60000) showLockScreen();
+}
+document.addEventListener('visibilitychange', ()=>{
+  if(document.visibilityState === 'visible') maybeRequireLockOnResume();
+});
+
+// Show lock screen at app boot if enabled.
+window.addEventListener('load', ()=>{
+  try{
+    if(isAppLockEnabled()){
+      localStorage.removeItem('logged_pin_unlocked_at');
+      setTimeout(()=> showLockScreen(), 200);
+    }
+  }catch(e){}
+});
+
+// ── Settings: toggle/change PIN (uses prompt for simplicity; falls back to a custom inline overlay) ──
+function _promptPin(message){
+  return new Promise(resolve => {
+    // Build a tiny modal for PIN entry (mirrors the lock screen styling)
+    const wrap = document.createElement('div');
+    wrap.id = 'pinPromptOverlay';
+    wrap.innerHTML = `
+      <div class="lock-card">
+        <div class="lock-title">${escHtml(message||'Enter PIN')}</div>
+        <div class="lock-sub">4–8 digits</div>
+        <div class="lock-dots" id="pinPromptDots"><span></span><span></span><span></span><span></span></div>
+        <div class="lock-pad" id="pinPromptPad"></div>
+        <div style="display:flex;gap:10px;margin-top:6px">
+          <button type="button" id="pinPromptCancel" class="home-action-btn" style="background:rgba(255,255,255,0.06);max-width:140px">Cancel</button>
+          <button type="button" id="pinPromptOk" class="home-action-btn" style="background:var(--peach);color:var(--wine-1);max-width:140px;border-color:var(--peach)">OK</button>
+        </div>
+      </div>`;
+    Object.assign(wrap.style, {position:'fixed',inset:'0',zIndex:'10000',background:'rgba(46,17,24,0.92)',display:'flex',alignItems:'center',justifyContent:'center',padding:'24px'});
+    document.body.appendChild(wrap);
+    let buf = '';
+    const dotsEl = wrap.querySelector('#pinPromptDots');
+    const ensureDots = ()=>{
+      while(dotsEl.children.length < Math.max(4, buf.length)) {
+        const s = document.createElement('span'); dotsEl.appendChild(s);
+      }
+      Array.from(dotsEl.children).forEach((s,i)=> s.classList.toggle('on', i<buf.length));
+    };
+    const press = (k)=>{
+      if(k==='back'){ buf = buf.slice(0,-1); ensureDots(); return; }
+      if(buf.length>=8) return;
+      buf += k; ensureDots();
+    };
+    const pad = wrap.querySelector('#pinPromptPad');
+    ['1','2','3','4','5','6','7','8','9','','0','back'].forEach(k=>{
+      const b = document.createElement('button'); b.type='button'; b.className='lock-key';
+      if(k==='back'){ b.innerHTML='⌫'; b.classList.add('back'); }
+      else if(k===''){ b.style.visibility='hidden'; b.disabled = true; }
+      else { b.textContent = k; }
+      if(k!=='') b.addEventListener('click', ()=>press(k));
+      pad.appendChild(b);
+    });
+    wrap.querySelector('#pinPromptCancel').addEventListener('click', ()=>{ wrap.remove(); resolve(null); });
+    wrap.querySelector('#pinPromptOk').addEventListener('click', ()=>{
+      if(buf.length<4){ showToast('PIN must be at least 4 digits','error'); return; }
+      wrap.remove(); resolve(buf);
+    });
+  });
+}
+
+async function toggleAppLock(){
+  if(isAppLockEnabled()){
+    // Disabling — verify current PIN first
+    const cur = await _promptPin('Enter current PIN to disable lock');
+    if(!cur) return;
+    const ok = await verifyPin(cur);
+    if(!ok){ showToast('Incorrect PIN','error'); return; }
+    disableAppLock();
+    showToast('App lock disabled');
+  } else {
+    const pin = await _promptPin('Set a new PIN');
+    if(!pin) return;
+    const confirm = await _promptPin('Confirm your PIN');
+    if(confirm !== pin){ showToast('PINs do not match','error'); return; }
+    try{ await setAppLockPin(pin); localStorage.setItem('logged_pin_unlocked_at', String(Date.now())); showToast('App lock enabled'); }
+    catch(e){ showToast(e.message||'Could not set PIN','error'); return; }
+  }
+  if(typeof renderSettings === 'function') renderSettings();
+}
+
+async function changeAppLockPin(){
+  const cur = await _promptPin('Enter current PIN');
+  if(!cur) return;
+  const ok = await verifyPin(cur);
+  if(!ok){ showToast('Incorrect PIN','error'); return; }
+  const pin = await _promptPin('Enter a new PIN');
+  if(!pin) return;
+  const confirm = await _promptPin('Confirm new PIN');
+  if(confirm !== pin){ showToast('PINs do not match','error'); return; }
+  try{ await setAppLockPin(pin); localStorage.setItem('logged_pin_unlocked_at', String(Date.now())); showToast('PIN updated'); }
+  catch(e){ showToast(e.message||'Could not update PIN','error'); }
+}
 
 // ══ TOAST ══
 function showToast(msg, type='', dur=2800) {
@@ -4288,9 +4603,12 @@ function renderHome() {
   const d = new Date();
   const userName = localStorage.getItem('logged_user_name') || '';
   const firstName = userName ? userName.split(' ')[0] : '';
-  const ml  = monthLogs();
-  const streak = computeStreak();
   const last = lastLoggedLabel();
+
+  // Trust-focused aggregates
+  const verifiedCount = logs.filter(l => !!l.fp).length;
+  const anchoredCount = logs.filter(l => l.otsStatus === 'confirmed').length;
+  const pendingCount  = logs.filter(l => l.otsStatus === 'pending' || l.otsStatus === 'queued').length;
 
   document.getElementById('homeDate').textContent = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
   const titleEl = document.getElementById('homeTitle');
@@ -4300,26 +4618,49 @@ function renderHome() {
 
   const greet = `
     <div class="greeting">
-      <div class="greet-hello">${greetingFor(d)}${firstName ? ', ' + escHtml(firstName) : ''}.</div>
-      <div class="greet-sub">What would you like to capture today?</div>
+      <div class="greet-hello">${firstName ? 'Hello, '+escHtml(firstName)+'.' : 'Your records.'}</div>
+      <div class="greet-sub">${logs.length === 0 ? 'Capture what happened — privately, with proof.' : 'Every entry has a tamper-proof fingerprint.'}</div>
     </div>`;
 
+  // 4-tile trust stats
   const stats = `
-    <div class="stats-strip">
+    <div class="stats-strip stats-trust">
       <div class="stat-chip">
         <div class="stat-chip-val">${logs.length}</div>
         <div class="stat-chip-lbl">Total</div>
       </div>
-      <div class="stat-chip">
-        <div class="stat-chip-val">${streak}</div>
-        <div class="stat-chip-lbl">Day streak</div>
+      <div class="stat-chip" title="Entries with SHA-256 fingerprint">
+        <div class="stat-chip-val" style="color:var(--sage,#7fb685)">${verifiedCount}</div>
+        <div class="stat-chip-lbl">Verified</div>
+      </div>
+      <div class="stat-chip" title="Anchored to the Bitcoin blockchain">
+        <div class="stat-chip-val" style="color:var(--amber,#ECB398)">${anchoredCount}</div>
+        <div class="stat-chip-lbl">Anchored</div>
       </div>
       <div class="stat-chip">
-        <div class="stat-chip-val" style="font-size:${last.length>6?'15px':'22px'};line-height:1.3">${last}</div>
-        <div class="stat-chip-lbl">Last logged</div>
+        <div class="stat-chip-val" style="font-size:${last.length>6?'14px':'20px'};line-height:1.3">${last}</div>
+        <div class="stat-chip-lbl">Last log</div>
       </div>
     </div>`;
 
+  // Pending-anchor inline status (only when relevant)
+  const trustLine = pendingCount > 0
+    ? `<div class="trust-line"><svg class="ic"><use href="#ic-clock"/></svg> ${pendingCount} ${pendingCount===1?'entry':'entries'} awaiting Bitcoin confirmation</div>`
+    : '';
+
+  // Resume-draft card
+  const draft = getDraft();
+  const draftCard = (draft && (draft.title || draft.note))
+    ? `<div class="draft-card" role="button" onclick="resumeDraft()">
+        <div class="draft-card-icon"><svg class="ic"><use href="#ic-pencil"/></svg></div>
+        <div class="draft-card-body">
+          <div class="draft-card-title">Continue draft</div>
+          <div class="draft-card-sub">${escHtml((draft.title || draft.note || '').slice(0,60))}${(draft.title || draft.note || '').length>60?'…':''}</div>
+        </div>
+        <button class="draft-card-x" onclick="event.stopPropagation();dismissDraft()" aria-label="Dismiss draft">×</button>
+      </div>` : '';
+
+  // Hero: New Entry + Quick Voice
   const hero = `
     <div class="home-new-strip">
       <button class="new-btn" id="newEntryBtn" onclick="go('catScreen')" oncontextmenu="event.preventDefault();openQuickCapture();return false;">
@@ -4327,19 +4668,38 @@ function renderHome() {
         <span>New Entry</span>
         <span class="new-btn-hint"><svg class="ic"><use href="#ic-zap"/></svg></span>
       </button>
+      <button class="quick-voice-btn" onclick="openQuickCapture()" aria-label="Quick capture" title="Quick voice / photo / text capture">
+        <svg class="ic"><use href="#ic-mic"/></svg>
+      </button>
     </div>`;
 
   if (logs.length === 0) {
-    wrap.innerHTML = greet + stats + hero +
+    const cats = (typeof CATS !== 'undefined' ? CATS : []).slice(0, 6);
+    const starters = cats.length ? `
+      <div class="starter-row">
+        ${cats.map(c=>`<button class="starter-chip" onclick="(function(){ window.newEntry={cat:'${c.id}',imp:'med',gps:false}; go('formScreen'); })()" style="--cat-color:${c.color||'#7b4752'}">
+          <span class="starter-chip-icon">${catIcon(c)}</span>
+          <span>${escHtml(c.label || c.id)}</span>
+        </button>`).join('')}
+      </div>` : '';
+
+    wrap.innerHTML = greet + stats + draftCard + hero +
       `<div class="empty-state">
-        <span class="empty-icon">◔</span>
-        <div class="empty-title">No entries yet</div>
-        <div class="empty-sub">Tap <strong>New Entry</strong> above to start your first record.</div>
+        <span class="empty-icon"><svg class="ic" style="width:42px;height:42px"><use href="#ic-lock"/></svg></span>
+        <div class="empty-title">Ready when you are</div>
+        <div class="empty-sub">Stays on this device unless you sync. Tap a category to start, or use Quick Capture.</div>
+        ${starters}
+        <div class="empty-promise">
+          <div class="empty-promise-line"><svg class="ic"><use href="#ic-check"/></svg> SHA-256 fingerprint on every entry</div>
+          <div class="empty-promise-line"><svg class="ic"><use href="#ic-anchor"/></svg> Optional Bitcoin timestamp proof</div>
+          <div class="empty-promise-line"><svg class="ic"><use href="#ic-lock"/></svg> Local-first — your device, your data</div>
+        </div>
       </div>`;
     return;
   }
 
   // ── Filter + sort ──
+  const dateCut = dateFilterCutoff(dateFilter);
   let filtered = logs.filter(l => {
     const q = searchQuery.trim().toLowerCase();
     let matchSearch = !q;
@@ -4351,7 +4711,8 @@ function renderHome() {
         catLabel.includes(q);
     }
     const matchCat = filterCat === 'all' || l.cat === filterCat;
-    return matchSearch && matchCat;
+    const matchDate = !dateCut || l.ts >= dateCut;
+    return matchSearch && matchCat && matchDate;
   });
 
   const sortLabels = {newest:'Newest',oldest:'Oldest',category:'Category',importance:'Importance'};
@@ -4360,6 +4721,7 @@ function renderHome() {
   else if(sortMode === 'category') filtered = [...filtered].sort((a,b)=>a.cat.localeCompare(b.cat));
   else if(sortMode === 'importance') filtered = [...filtered].sort((a,b)=>(b.imp||0)-(a.imp||0));
 
+  const ml  = monthLogs();
   const pct = Math.min(100,(ml/FREE_LIMIT)*100);
   const over = plan==='free' && ml>=FREE_LIMIT;
   const usageBar = plan==='free' ? `
@@ -4375,6 +4737,15 @@ function renderHome() {
   const allChip = `<button class="filter-chip ${filterCat==='all'?'active':''}" onclick="setFilter('all')">All</button>`;
   const catChips = CATS.map(c=>`<button class="filter-chip ${filterCat===c.id?'active':''}" onclick="setFilter('${c.id}')">${catIcon(c)} ${c.label}</button>`).join('');
 
+  // ── Date filter chips ──
+  const dateChips = [
+    {id:'all',  label:'All'},
+    {id:'today',label:'Today'},
+    {id:'week', label:'Week'},
+    {id:'month',label:'Month'},
+    {id:'year', label:'Year'}
+  ].map(o => `<button class="date-chip ${dateFilter===o.id?'active':''}" onclick="setDateFilter('${o.id}')">${o.label}</button>`).join('');
+
   // ── Search bar ──
   const searchBar = `
     <div class="search-wrap">
@@ -4382,13 +4753,18 @@ function renderHome() {
       <input class="search-input" id="searchInput" type="search" placeholder="Search entries…" value="${escHtml(searchQuery)}" oninput="onSearch(this.value)">
       <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:${searchQuery?'flex':'none'}"><svg class="ic"><use href="#ic-x"/></svg></button>
     </div>
+    <div class="date-chips">${dateChips}</div>
     <div class="filter-chips">${allChip}${catChips}</div>`;
 
   // ── Cards with swipe-to-delete ──
   const sortLabel = sortLabels[sortMode] || 'Newest';
-  const noResults = filtered.length === 0 && (searchQuery || filterCat !== 'all');
+  const noResults = filtered.length === 0 && (searchQuery || filterCat !== 'all' || dateFilter !== 'all');
 
-  const cards = filtered.map(l => {
+  // Build a map of records grouped by month-year for the timeline
+  // (only when sorting chronologically so we don't break category/importance sorts)
+  const useGrouping = (sortMode === 'newest' || sortMode === 'oldest');
+
+  const renderCard = (l) => {
     const cat=getCat(l.cat); const imp=getImp(l.imp);
     const firstPhoto = (l.photosData && l.photosData[0]) || l.photoData || null;
     const photoCount = l.photosData ? l.photosData.length : (l.photoData ? 1 : 0);
@@ -4424,19 +4800,42 @@ function renderHome() {
           </div>
         </div>
       </div>`;
-  }).join('');
+  };
+
+  let cardsHtml = '';
+  if(useGrouping){
+    let lastKey = '';
+    const monthFmt = (ts)=> new Date(ts).toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+    filtered.forEach(l => {
+      const key = monthFmt(l.ts);
+      if(key !== lastKey){
+        cardsHtml += `<div class="month-divider"><span>${key}</span></div>`;
+        lastKey = key;
+      }
+      cardsHtml += renderCard(l);
+    });
+  } else {
+    cardsHtml = filtered.map(renderCard).join('');
+  }
 
   const digest = renderWeeklyDigest();
 
-  wrap.innerHTML = greet + stats + digest + hero + searchBar + `
+  // Export-report CTA (only when there's data)
+  const exportCta = `
+    <div class="home-actions">
+      <button class="home-action-btn" onclick="exportAllPDF()"><svg class="ic"><use href="#ic-download"/></svg> Export report</button>
+    </div>`;
+
+  wrap.innerHTML = greet + stats + trustLine + draftCard + digest + hero + searchBar + `
     <div class="section-head">
-      <span class="section-label">${filtered.length} ${filtered.length===1?'entry':'entries'}</span>
+      <span class="section-label">${filtered.length} ${filtered.length===1?'entry':'entries'}${dateFilter!=='all'?' · '+dateFilter:''}</span>
       <button class="sort-btn" onclick="openSortSheet()"><svg class="ic sort-ic"><use href="#ic-sort"/></svg> ${sortLabel}</button>
     </div>
     ${usageBar}
+    ${exportCta}
     <div class="records-list" id="cardsList">${noResults
-      ? `<div class="empty-state" style="padding:30px 0"><span class="empty-icon" style="font-size:32px"><svg class="ic"><use href="#ic-search"/></svg></span><div class="empty-title" style="font-size:18px">No results</div><div class="empty-sub">Try a different search or category</div></div>`
-      : cards
+      ? `<div class="empty-state" style="padding:30px 0"><span class="empty-icon" style="font-size:32px"><svg class="ic"><use href="#ic-search"/></svg></span><div class="empty-title" style="font-size:18px">No results</div><div class="empty-sub">Try a different search, category, or date range</div></div>`
+      : cardsHtml
     }</div>`;
 
   initSwipe();
@@ -4979,6 +5378,7 @@ async function saveRecord() {
   persistEntries();
   persistMedia(entry);
   sbSyncEntry(entry); // async cloud sync — non-blocking
+  clearDraft(); // entry saved → discard autosaved draft
   document.getElementById('savedSubMsg').textContent=`SHA-256 verified · ${title}`;
   go('savedScreen');
   setTimeout(()=>go('homeScreen'),1800);
@@ -5479,6 +5879,19 @@ function renderSettings() {
       <div class="usage-track"><div class="usage-fill" style="width:${pct}%;background:${pct>=80?'var(--red)':'var(--amber)'}"></div></div>
       <div class="usage-txt">${t('usage.line').replace('{ml}',ml).replace('{fl}',FREE_LIMIT).replace('{ex}',exps).replace('{fe}',FREE_EXPORTS)}</div>
     </div>`:''}
+
+    <!-- PRIVACY & LOCK -->
+    <div class="settings-group-label">Privacy</div>
+    <div class="settings-card">
+      <div class="settings-row" style="cursor:default">
+        <div class="sr-left"><span class="sr-icon"><svg class="ic"><use href="#ic-lock"/></svg></span><div><div class="sr-text">App Lock (PIN)</div><div class="sr-sub" id="appLockSub">${isAppLockEnabled() ? 'Enabled · 4–8 digit PIN' : 'Off · Require PIN to open Logged'}</div></div></div>
+        <button class="tog-sw" id="togAppLock" role="switch" aria-checked="${isAppLockEnabled()?'true':'false'}" onclick="toggleAppLock()" style="background:${isAppLockEnabled()?'var(--peach)':'var(--cream3)'}"><div class="tog-thumb" style="left:${isAppLockEnabled()?'21px':'3px'}"></div></button>
+      </div>
+      ${isAppLockEnabled()?`<div class="settings-row" onclick="changeAppLockPin()" role="button">
+        <div class="sr-left"><span class="sr-icon"><svg class="ic"><use href="#ic-pencil"/></svg></span><div><div class="sr-text">Change PIN</div><div class="sr-sub">Set a new 4–8 digit code</div></div></div>
+        <span class="sr-right">›</span>
+      </div>`:''}
+    </div>
 
     <!-- DATA -->
     <div class="settings-group-label">${t('settings.section.data')}</div>

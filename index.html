@@ -1312,8 +1312,17 @@ body{
 .screen.active{display:block}
 #splashScreen.active{display:flex!important;align-items:center;justify-content:center;flex-direction:column}
 .screen-inner{min-height:100%;padding-bottom:32px}
-/* When the floating glass nav is visible, push content above it so nothing is hidden */
-.shell:has(.bottom-nav.visible) .screen-inner{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 96px)}
+/* When the floating glass nav is visible, push content above it so nothing is hidden.
+   Use ::after instead of padding-bottom — Safari/WebKit silently drops padding-bottom
+   on dynamically-filled scroll content, but ::after is real DOM and always respected. */
+.shell:has(.bottom-nav.visible) .screen-inner{padding-bottom:0}
+.shell:has(.bottom-nav.visible) .screen-inner::after{
+  content:'';
+  display:block;
+  height:calc(env(safe-area-inset-bottom,0px) + 96px);
+  min-height:calc(env(safe-area-inset-bottom,0px) + 96px);
+  flex-shrink:0;
+}
 
 /* ── Single shared bottom nav — Liquid Glass (iOS 26 style) ── */
 .bottom-nav{

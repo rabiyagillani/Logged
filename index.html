@@ -1171,6 +1171,7 @@ body[data-theme="light"]{
 /* But the page background still needs to be light: */
 body[data-theme="light"]{
   background:linear-gradient(180deg,#fff5ec 0%,#fbe8d8 50%,#f6dbc6 100%);
+  background-attachment:fixed;
 }
 
 /* ─── Light-mode per-class fixes (Settings + chrome) ─── */
@@ -1272,6 +1273,10 @@ body[data-theme="light"] .tog-sw{border:1px solid rgba(123,71,82,0.15)}
 /* Prevent iOS Safari from forcing its system blue on unstyled buttons/inputs */
 button,input,select,textarea{color:inherit;-webkit-text-fill-color:currentColor}
 html,body{height:100%;width:100%;overflow:hidden;overscroll-behavior:none;position:fixed;top:0;left:0;right:0;bottom:0}
+/* html background fills the safe-area zones iOS paints behind the layout:
+   dark mode → bottom of --grad-app (#602D37); light mode uses :has() override */
+html{background:#602D37}
+html:has(body[data-theme="light"]){background:#f6dbc6}
 body{
   background:var(--grad-app);
   background-attachment:fixed;

@@ -1,8 +1,8 @@
-// Logged — Service Worker  (v=cleanup6)
+// Logged — Service Worker  (v=cleanup7)
 // Strategy: Cache-first for assets, Network-first for navigation
 // Wipes any stale caches from previous versions on install.
 
-const CACHE_NAME = 'logged-v6';
+const CACHE_NAME = 'logged-v7';
 
 // ── Allow the page to ask us to take over immediately when an update is ready
 self.addEventListener('message', (event) => {

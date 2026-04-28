@@ -126,7 +126,7 @@
 
         function showUpdatePill(worker){
           if(document.getElementById('updatePill')) return;
-          const isLight = (localStorage.getItem('logged_theme')||'dark') === 'light';
+          const isLight = (localStorage.getItem('logged_theme')||'light') === 'light';
           const bg = isLight ? '#3d1a22' : '#F2E8DC';
           const fg = isLight ? '#F2E8DC' : '#3d1a22';
           const pill = document.createElement('div');
@@ -1125,6 +1125,14 @@ body[data-theme="light"] .digest-line1{color:var(--text-on-dark)}
 body[data-theme="light"] .home-icon{background:#3d1a22}
 body[data-theme="light"] .home-icon svg text{fill:#fff5ec !important}
 body[data-theme="light"] .home-icon svg circle{fill:#ECB398 !important}
+
+/* In light mode the .splash-icon-wrap and .ob-icon backgrounds resolve to dark
+   wine (because --cream flips to #3d1a22 for use as text). The brand "[l ●]"
+   inside is currentColor — flip it to cream so it stays visible on the dark tile. */
+body[data-theme="light"] .splash-icon-wrap,
+body[data-theme="light"] .ob-icon{color:#fff5ec}
+body[data-theme="light"] .splash-icon-wrap svg circle,
+body[data-theme="light"] .ob-icon svg circle{fill:#ECB398 !important}
 body[data-theme="light"] .home-title,
 body[data-theme="light"] .greet-hello,
 body[data-theme="light"] .insights-title,
@@ -1467,7 +1475,7 @@ body[data-theme="light"] .bottom-nav::after{
 
 /* ─ SPLASH ─ */
 .splash-wrap{display:flex;flex-direction:column;align-items:center}
-.splash-icon-wrap{width:120px;height:120px;background:var(--cream);border-radius:28px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);margin-bottom:28px;animation:splashPop 0.45s cubic-bezier(.34,1.56,.64,1) forwards}
+.splash-icon-wrap{width:120px;height:120px;background:var(--cream);color:#3d1a22;border-radius:28px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);margin-bottom:28px;animation:splashPop 0.45s cubic-bezier(.34,1.56,.64,1) forwards}
 @keyframes splashPop{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
 .splash-tagline{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;opacity:0;animation:fadeUp 0.3s 0.15s ease forwards}
 .splash-name{font-family:var(--font-serif);font-size:52px;font-weight:800;color:var(--cream);line-height:1;opacity:0;animation:fadeUp 0.3s 0.25s ease forwards}
@@ -1476,7 +1484,7 @@ body[data-theme="light"] .bottom-nav::after{
 /* ─ ONBOARD ─ */
 #onboardScreen{background:var(--navy)}
 .onboard-inner{padding:60px 28px 40px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
-.ob-icon{width:60px;height:60px;background:var(--cream);border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);margin-bottom:36px}
+.ob-icon{width:60px;height:60px;background:var(--cream);color:#3d1a22;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);margin-bottom:36px}
 .ob-title{font-family:var(--font-serif);font-size:38px;font-weight:800;color:var(--cream);line-height:1.1;margin-bottom:12px}
 .ob-sub{font-size:16px;color:var(--sub-on-navy);line-height:1.7;margin-bottom:40px}
 .ob-features{display:flex;flex-direction:column;gap:14px;margin-bottom:40px}
@@ -1732,6 +1740,12 @@ body[data-theme="light"] .swipe-delete-bg{background:linear-gradient(90deg,rgba(
 
 /* Empty state */
 .empty-state{text-align:center;padding:60px 28px;color:var(--sub-on-dark)}
+.empty-state .empty-icon{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:18px;background:rgba(123,71,82,0.08);color:var(--text-on-dark);margin-bottom:16px}
+.empty-state .empty-title{font-family:var(--font-serif);font-size:22px;font-weight:700;color:var(--text-on-dark);margin-bottom:8px;line-height:1.25}
+.empty-state .empty-sub{font-size:14px;color:var(--sub-on-dark);line-height:1.55;max-width:340px;margin:0 auto 22px}
+.empty-state .empty-promise{margin-top:26px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.empty-state .empty-promise-line{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub-on-dark)}
+.empty-state .empty-promise-line .ic{width:14px;height:14px;color:var(--amber)}
 
 /* ── Trust stats (4-col on home) ── */
 .stats-strip.stats-trust{grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}
@@ -3014,7 +3028,7 @@ body[data-theme="light"] .new-btn{
 <script>
 (function(){
   try{
-    if((localStorage.getItem('logged_theme')||'dark')==='light'){
+    if((localStorage.getItem('logged_theme')||'light')!=='dark'){
       var c=document.getElementById('bootCover');
       if(c) c.style.background='#fff5ec';
       var w=document.getElementById('bootWordmark');
@@ -3451,8 +3465,8 @@ body[data-theme="light"] .new-btn{
   </div>
 </div>
 
-<!-- ══ INSTALL MODAL ══ -->
-<div class="full-modal" id="installModal">
+<!-- ══ INSTALL MODAL (kept for legacy deep links — no longer surfaced in Settings) ══ -->
+<div class="full-modal" id="installModal" hidden>
   <div class="full-modal-header">
     <button class="back-btn" onclick="closeFullModal('installModal')">←</button>
     <div class="screen-title">Install Logged</div>
@@ -3645,10 +3659,10 @@ body[data-theme="light"] .new-btn{
   <div class="splash-wrap">
     <div class="splash-icon-wrap">
       <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
-        <text x="8" y="52" font-family="Georgia,serif" font-size="46" font-weight="700" fill="#3d1a22">[</text>
-        <text x="24" y="52" font-family="Georgia,serif" font-size="38" font-style="italic" fill="#3d1a22">l</text>
+        <text x="8" y="52" font-family="Georgia,serif" font-size="46" font-weight="700" fill="currentColor">[</text>
+        <text x="24" y="52" font-family="Georgia,serif" font-size="38" font-style="italic" fill="currentColor">l</text>
         <circle cx="44" cy="46" r="7" fill="#ECB398"/>
-        <text x="46" y="52" font-family="Georgia,serif" font-size="46" font-weight="700" fill="#3d1a22">]</text>
+        <text x="46" y="52" font-family="Georgia,serif" font-size="46" font-weight="700" fill="currentColor">]</text>
       </svg>
     </div>
     <div class="splash-tagline" data-i18n="splash.tagline">Record. Remember. Prove it.</div>
@@ -3661,10 +3675,10 @@ body[data-theme="light"] .new-btn{
   <div class="onboard-inner">
     <div class="ob-icon">
       <svg width="38" height="38" viewBox="0 0 72 72" fill="none">
-        <text x="8" y="52" font-family="Georgia,serif" font-size="46" font-weight="700" fill="#3d1a22">[</text>
-        <text x="24" y="52" font-family="Georgia,serif" font-size="38" font-style="italic" fill="#3d1a22">l</text>
+        <text x="8" y="52" font-family="Georgia,serif" font-size="46" font-weight="700" fill="currentColor">[</text>
+        <text x="24" y="52" font-family="Georgia,serif" font-size="38" font-style="italic" fill="currentColor">l</text>
         <circle cx="44" cy="46" r="7" fill="#ECB398"/>
-        <text x="46" y="52" font-family="Georgia,serif" font-size="46" font-weight="700" fill="#3d1a22">]</text>
+        <text x="46" y="52" font-family="Georgia,serif" font-size="46" font-weight="700" fill="currentColor">]</text>
       </svg>
     </div>
     <!-- ── STEP 1: profile + consent ── -->
@@ -6203,10 +6217,6 @@ function renderSettings() {
     <!-- APP INFO -->
     <div class="settings-group-label">${t('settings.section.app')}</div>
     <div class="settings-card">
-      <div class="settings-row" onclick="openFullModal('installModal')" role="button">
-        <div class="sr-left"><span class="sr-icon"><svg class="ic"><use href="#ic-phone"/></svg></span><div><div class="sr-text">${t('settings.app.install')}</div><div class="sr-sub">${t('settings.app.installSub')}</div></div></div>
-        <span class="sr-right">›</span>
-      </div>
       <div class="settings-row" onclick="openFullModal('privacyModal')" role="button">
         <div class="sr-left"><span class="sr-icon"><svg class="ic"><use href="#ic-lock"/></svg></span><div><div class="sr-text">${t('settings.app.privacy')}</div><div class="sr-sub">${t('settings.app.privacySub')}</div></div></div>
         <span class="sr-right">›</span>
@@ -7618,10 +7628,17 @@ setInterval(()=>{
   // Splash visible for ~600ms — long enough for the brand to register
   // (icon pop + name fade) but short enough to feel instant. Down from
   // the original 2.2s gate.
+  // Optional deep-link: opening with #<screenId> jumps straight to that screen
+  // and skips the brand splash so users land directly on what they asked for.
+  let _bootTarget='homeScreen', _bootDelay=600;
+  if(location.hash){
+    const want=location.hash.slice(1);
+    if(document.getElementById(want)){ _bootTarget=want; _bootDelay=0; }
+  }
   setTimeout(()=>{
     document.getElementById('splashScreen').classList.remove('active');
-    go('homeScreen');
-  }, 600);
+    go(_bootTarget);
+  }, _bootDelay);
   setTimeout(()=>maybeShowTutorial(), 1000);
   setTimeout(()=>sbRestoreSession(), 700);    // silent — only succeeds if user previously signed in
   setTimeout(()=>maybeShowSyncBanner(), 1100); // shown only if not signed in AND not dismissed
@@ -7865,7 +7882,7 @@ function handleShareTarget(){
 //   THEME (light / dark)
 // ══════════════════════════════════════════════════════════════════
 function applyTheme(){
-  const t = localStorage.getItem('logged_theme') || 'dark';
+  const t = localStorage.getItem('logged_theme') || 'light';
   if(t === 'light') document.body.setAttribute('data-theme','light');
   else document.body.removeAttribute('data-theme');
   const meta = document.querySelector('meta[name="theme-color"]');
@@ -7879,15 +7896,15 @@ function applyTheme(){
   if(status) status.textContent = t === 'light' ? 'On · pastel light theme' : 'Off · using dark theme';
 }
 function toggleTheme(){
-  const cur = localStorage.getItem('logged_theme') || 'dark';
+  const cur = localStorage.getItem('logged_theme') || 'light';
   const next = cur === 'light' ? 'dark' : 'light';
   localStorage.setItem('logged_theme', next);
   applyTheme();
   showToast(next === 'light' ? 'Light theme on' : 'Dark theme on','success',2200);
   if(typeof renderHome === 'function' && document.getElementById('homeScreen').classList.contains('active')) renderHome();
 }
-// Apply immediately so the first paint matches the stored choice
-try{ if((localStorage.getItem('logged_theme')||'dark')==='light') document.body.setAttribute('data-theme','light'); }catch(e){}
+// Apply immediately so the first paint matches the stored choice — light is the default
+try{ if((localStorage.getItem('logged_theme')||'light')!=='dark') document.body.setAttribute('data-theme','light'); }catch(e){}
 
 // ── Init the new features once boot has loaded the DOM ──
 (function initNewFeatures(){

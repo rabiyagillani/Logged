@@ -1577,7 +1577,10 @@ body[data-theme="light"] .sync-banner{background:rgba(123,71,82,0.05);border-col
 
 /* Quick-stats strip */
 .stats-strip{padding:0 22px 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.stat-chip{background:var(--surface-raised);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px 10px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.stat-chip{background:var(--surface-raised);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px 10px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-family:inherit;cursor:default;text-align:center;transition:border-color 0.15s,box-shadow 0.15s}
+button.stat-chip{cursor:pointer}
+button.stat-chip:active{transform:scale(0.97)}
+.stat-chip--active{border-color:var(--peach);box-shadow:0 0 0 2px rgba(236,179,152,0.25)}
 .stat-chip-val{font-family:var(--font-serif);font-size:22px;font-weight:700;color:var(--peach);line-height:1.1}
 .stat-chip-lbl{font-size:10px;color:var(--sub-on-dark);margin-top:3px;letter-spacing:0.3px;text-transform:uppercase;font-weight:600}
 
@@ -2091,6 +2094,12 @@ textarea.fi{resize:none;height:110px;line-height:1.55}
 
 /* Category breakdown bars */
 .cat-bar-row{display:flex;align-items:center;gap:10px;padding:7px 0}
+button.cat-bar-row{width:100%;background:none;border:none;font-family:inherit;text-align:left}
+.cat-bar-row--tap{cursor:pointer;border-radius:10px;padding:7px 6px;margin:0 -6px;transition:background 0.12s}
+.cat-bar-row--tap:hover{background:rgba(255,255,255,0.04)}
+.cat-bar-row--tap:active{background:rgba(255,255,255,0.07)}
+.cat-bar-row--tap:disabled{cursor:default;opacity:0.45}
+.cat-bar-arrow{font-size:15px;opacity:0.4;margin-left:3px;line-height:1}
 .cat-bar-icon{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.15)}
 .cat-bar-body{flex:1;min-width:0}
 .cat-bar-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
@@ -2701,6 +2710,9 @@ body[data-theme="light"] .stat-chip{
 body[data-theme="light"] .stat-chip::before{
   background:linear-gradient(160deg, rgba(255,255,255,0.70) 0%, transparent 45%);
 }
+body[data-theme="light"] .stat-chip--active{border-color:var(--peach);box-shadow:inset 0 1px 0 rgba(255,255,255,0.95),0 0 0 2px rgba(171,89,97,0.20),0 4px 16px rgba(123,71,82,0.10);}
+body[data-theme="light"] .cat-bar-row--tap:hover{background:rgba(61,26,34,0.04)}
+body[data-theme="light"] .cat-bar-row--tap:active{background:rgba(61,26,34,0.07)}
 
 body[data-theme="light"] .record-card{
   background:
@@ -3580,6 +3592,23 @@ body[data-theme="light"] .new-btn{
   </div>
 </div>
 
+<!-- ══ CATEGORY DETAIL SORT SHEET ══ -->
+<div class="sort-sheet-overlay" id="catDetailSortSheet" onclick="closeCatDetailSort(event)">
+  <div class="sort-sheet">
+    <div class="sort-sheet-handle"></div>
+    <div class="sort-sheet-ttl">Sort entries</div>
+    <button class="sort-option sel" id="cds-newest" onclick="setCatDetailSort('newest')">
+      <span class="sort-opt-label">Newest first</span><span class="sort-opt-check"><svg class="ic"><use href="#ic-check"/></svg></span>
+    </button>
+    <button class="sort-option" id="cds-oldest" onclick="setCatDetailSort('oldest')">
+      <span class="sort-opt-label">Oldest first</span><span class="sort-opt-check"><svg class="ic"><use href="#ic-check"/></svg></span>
+    </button>
+    <button class="sort-option" id="cds-importance" onclick="setCatDetailSort('importance')">
+      <span class="sort-opt-label">By importance</span><span class="sort-opt-check"><svg class="ic"><use href="#ic-check"/></svg></span>
+    </button>
+  </div>
+</div>
+
 <!-- ══ QUICK CAPTURE SHEET ══ -->
 <div class="sort-sheet-overlay" id="quickSheet" onclick="closeQuickCapture(event)">
   <div class="sort-sheet">
@@ -3980,10 +4009,22 @@ body[data-theme="light"] .new-btn{
 <div class="screen" id="detailScreen">
   <div class="screen-inner">
     <div class="screen-header">
-      <button class="back-btn" onclick="go('homeScreen')">←</button>
+      <button class="back-btn" onclick="goBackFromDetail()">←</button>
       <div><div class="screen-title">Entry Detail</div></div>
     </div>
     <div style="padding:0 22px" id="detailBody"></div>
+  </div>
+</div>
+
+<!-- ══ CATEGORY DETAIL ══ -->
+<div class="screen" id="catDetailScreen">
+  <div class="screen-inner">
+    <div class="screen-header" id="catDetailHeader">
+      <button class="back-btn" onclick="go('insightsScreen')">←</button>
+      <div><div class="screen-title" id="catDetailTitle">Category</div></div>
+      <button class="sort-btn" id="catDetailSortBtn" onclick="openCatDetailSort()" style="margin-left:auto"><svg class="ic sort-ic"><use href="#ic-sort"/></svg> <span id="catDetailSortLabel">Newest</span></button>
+    </div>
+    <div id="catDetailBody"></div>
   </div>
 </div>
 
@@ -4203,6 +4244,14 @@ let searchQuery = '';
 let filterCat   = 'all';
 let sortMode    = localStorage.getItem('logged_sort') || 'newest';
 let dateFilter  = 'all'; // all | today | week | month | year
+let filterTrust = 'all'; // all | verified | anchored
+
+// ── Category Detail state ──
+let catDetailId     = null;
+let catDetailSort   = 'newest';
+let catDetailSearch = '';
+let currentScreen   = 'homeScreen';
+let detailBackScreen = 'homeScreen';
 
 // ── DRAFT helpers (autosave for in-progress entries) ──
 const DRAFT_KEY = 'logged_draft_v1';
@@ -4487,6 +4536,7 @@ async function sha256(str) {
 const NAV_SCREENS = new Set(['homeScreen','insightsScreen','settingsScreen']);
 
 function go(id) {
+  currentScreen = id;
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active','slide-in'));
   const s = document.getElementById(id);
   if(!s) return;
@@ -4510,6 +4560,7 @@ function go(id) {
   if(id === 'catScreen')      renderCats();
   if(id === 'insightsScreen') renderInsights();
   if(id === 'settingsScreen') renderSettings();
+  if(id === 'catDetailScreen') renderCatDetail();
   // Stop any playing detail voice when navigating away
   if(id !== 'detailScreen' && detailVoiceEl){ try{detailVoiceEl.pause();}catch(e){} }
 }
@@ -4899,18 +4950,18 @@ function renderHome() {
   // 4-tile trust stats
   const stats = `
     <div class="stats-strip stats-trust">
-      <div class="stat-chip">
+      <button class="stat-chip ${filterTrust==='all'&&logs.length>0?'stat-chip--active':''}" onclick="setTrustFilter('all')" title="Show all entries">
         <div class="stat-chip-val">${logs.length}</div>
         <div class="stat-chip-lbl">Total</div>
-      </div>
-      <div class="stat-chip" title="Entries with SHA-256 fingerprint">
+      </button>
+      <button class="stat-chip ${filterTrust==='verified'?'stat-chip--active':''}" onclick="setTrustFilter('verified')" title="Entries with SHA-256 fingerprint">
         <div class="stat-chip-val" style="color:var(--sage,#7fb685)">${verifiedCount}</div>
         <div class="stat-chip-lbl">Verified</div>
-      </div>
-      <div class="stat-chip" title="Anchored to the Bitcoin blockchain">
+      </button>
+      <button class="stat-chip ${filterTrust==='anchored'?'stat-chip--active':''}" onclick="setTrustFilter('anchored')" title="Anchored to the Bitcoin blockchain">
         <div class="stat-chip-val" style="color:var(--amber,#ECB398)">${anchoredCount}</div>
         <div class="stat-chip-lbl">Anchored</div>
-      </div>
+      </button>
       <div class="stat-chip">
         <div class="stat-chip-val" style="font-size:${last.length>6?'14px':'20px'};line-height:1.3">${last}</div>
         <div class="stat-chip-lbl">Last log</div>
@@ -4986,7 +5037,8 @@ function renderHome() {
     }
     const matchCat = filterCat === 'all' || l.cat === filterCat;
     const matchDate = !dateCut || l.ts >= dateCut;
-    return matchSearch && matchCat && matchDate;
+    const matchTrust = filterTrust === 'all' || (filterTrust === 'verified' && !!l.fp) || (filterTrust === 'anchored' && l.otsStatus === 'confirmed');
+    return matchSearch && matchCat && matchDate && matchTrust;
   });
 
   const sortLabels = {newest:'Newest',oldest:'Oldest',category:'Category',importance:'Importance'};
@@ -5032,7 +5084,7 @@ function renderHome() {
 
   // ── Cards with swipe-to-delete ──
   const sortLabel = sortLabels[sortMode] || 'Newest';
-  const noResults = filtered.length === 0 && (searchQuery || filterCat !== 'all' || dateFilter !== 'all');
+  const noResults = filtered.length === 0 && (searchQuery || filterCat !== 'all' || dateFilter !== 'all' || filterTrust !== 'all');
 
   // Build a map of records grouped by month-year for the timeline
   // (only when sorting chronologically so we don't break category/importance sorts)
@@ -5102,7 +5154,7 @@ function renderHome() {
 
   wrap.innerHTML = greet + stats + trustLine + draftCard + digest + hero + searchBar + `
     <div class="section-head">
-      <span class="section-label">${filtered.length} ${filtered.length===1?'entry':'entries'}${dateFilter!=='all'?' · '+dateFilter:''}</span>
+      <span class="section-label">${filtered.length} ${filtered.length===1?'entry':'entries'}${dateFilter!=='all'?' · '+dateFilter:''}${filterTrust!=='all'?' · '+filterTrust:''}</span>
       <button class="sort-btn" onclick="openSortSheet()"><svg class="ic sort-ic"><use href="#ic-sort"/></svg> ${sortLabel}</button>
     </div>
     ${usageBar}
@@ -5128,6 +5180,125 @@ function clearSearch() {
 function setFilter(cat) {
   filterCat = cat;
   renderHome();
+}
+function setTrustFilter(mode) {
+  filterTrust = mode;
+  renderHome();
+}
+
+// ── Category Detail ──
+function openCatDetail(catId) {
+  catDetailId     = catId;
+  catDetailSort   = 'newest';
+  catDetailSearch = '';
+  go('catDetailScreen');
+}
+
+function renderCatDetail() {
+  const body = document.getElementById('catDetailBody');
+  if(!body || !catDetailId) return;
+
+  const cat = getCat(catDetailId);
+  const titleEl = document.getElementById('catDetailTitle');
+  if(titleEl) titleEl.textContent = cat.label;
+
+  const sortLabels = {newest:'Newest',oldest:'Oldest',importance:'Importance'};
+  const sortLabelEl = document.getElementById('catDetailSortLabel');
+  if(sortLabelEl) sortLabelEl.textContent = sortLabels[catDetailSort] || 'Newest';
+
+  const q = catDetailSearch.trim().toLowerCase();
+  let entries = logs.filter(l => l.cat === catDetailId);
+  if(q) {
+    entries = entries.filter(l =>
+      l.title.toLowerCase().includes(q) ||
+      (l.note||'').toLowerCase().includes(q)
+    );
+  }
+
+  if(catDetailSort === 'oldest')    entries = [...entries].sort((a,b)=>a.ts-b.ts);
+  else if(catDetailSort === 'newest')    entries = [...entries].sort((a,b)=>b.ts-a.ts);
+  else if(catDetailSort === 'importance') entries = [...entries].sort((a,b)=>(b.imp||0)-(a.imp||0));
+
+  const renderCdCard = (l) => {
+    const imp = getImp(l.imp);
+    const firstPhoto = (l.photosData && l.photosData[0]) || l.photoData || null;
+    const photoCount = l.photosData ? l.photosData.length : (l.photoData ? 1 : 0);
+    const iconHtml = firstPhoto
+      ? `<div class="rc-cat-icon has-photo"><img src="${firstPhoto}" alt="photo"></div>`
+      : `<div class="rc-cat-icon" style="background:${cat.color}">${catIcon(cat)}</div>`;
+    return `
+      <div class="record-card slide-up" style="--cat-color:${cat.color}" onclick="openDetail(${l.id})" role="button" data-id="${l.id}">
+        <div class="rc-top">
+          ${iconHtml}
+          <div style="flex:1;min-width:0">
+            <div class="rc-title">${escHtml(l.title)}</div>
+            <div class="rc-cat">${fmtDate(l.ts)}</div>
+          </div>
+          <div class="rc-date">${fmtDate(l.ts).split(',')[0]}</div>
+        </div>
+        <div class="rc-pills">
+          <span class="pill" style="color:#fff;background:${imp.color}">${imp.label}</span>
+          ${photoCount>0?`<span class="pill navy"><svg class="ic"><use href="#ic-camera"/></svg>${photoCount>1?' ×'+photoCount:''}</span>`:''}
+          ${l.voiceData?`<span class="pill navy"><svg class="ic"><use href="#ic-mic"/></svg></span>`:''}
+          ${l.gps?`<span class="pill navy"><svg class="ic"><use href="#ic-pin"/></svg></span>`:''}
+          ${l.fp?`<span class="pill" style="color:#fff;background:var(--sage)"><svg class="ic"><use href="#ic-check"/></svg></span>`:''}
+          ${l.otsStatus==='confirmed'?`<span class="ots-badge ots-confirmed"><svg class="ic"><use href="#ic-anchor"/></svg> #${(l.otsBlock||0).toLocaleString()}</span>`:''}
+          ${l.otsStatus==='pending'?`<span class="ots-badge ots-pending"><svg class="ic"><use href="#ic-clock"/></svg> BTC pending</span>`:''}
+        </div>
+      </div>`;
+  };
+
+  const cardsHtml = entries.length > 0
+    ? entries.map(renderCdCard).join('')
+    : `<div class="empty-state" style="padding:30px 0">
+        <div class="empty-icon" style="font-size:32px">${catIcon(cat)}</div>
+        <div class="empty-title" style="font-size:18px">${q ? 'No results' : 'No entries yet'}</div>
+        <div class="empty-sub">${q ? 'Try a different search term' : 'Start a new entry to add to this category'}</div>
+       </div>`;
+
+  body.innerHTML = `
+    <div style="padding:12px 22px 8px">
+      <div class="search-wrap">
+        <span class="search-icon"><svg class="ic"><use href="#ic-search"/></svg></span>
+        <input class="search-input" id="catDetailSearchInput" type="search" placeholder="Search ${escHtml(cat.label)}…" value="${escHtml(catDetailSearch)}"
+          oninput="onCatDetailSearch(this.value)">
+        <button class="search-clear" id="catDetailSearchClear" onclick="clearCatDetailSearch()" style="display:${catDetailSearch?'flex':'none'}"><svg class="ic"><use href="#ic-x"/></svg></button>
+      </div>
+    </div>
+    <div style="padding:2px 22px 10px;display:flex;align-items:center;justify-content:space-between">
+      <span class="section-label">${entries.length} ${entries.length===1?'entry':'entries'}</span>
+    </div>
+    <div class="records-list" style="padding:0 16px 100px">${cardsHtml}</div>`;
+}
+
+function onCatDetailSearch(val) {
+  catDetailSearch = val;
+  const clearBtn = document.getElementById('catDetailSearchClear');
+  if(clearBtn) clearBtn.style.display = val ? 'flex' : 'none';
+  renderCatDetail();
+}
+function clearCatDetailSearch() {
+  catDetailSearch = '';
+  renderCatDetail();
+}
+function openCatDetailSort() {
+  const sheet = document.getElementById('catDetailSortSheet');
+  if(!sheet) return;
+  sheet.classList.add('open');
+  ['newest','oldest','importance'].forEach(k => {
+    const el = document.getElementById('cds-'+k);
+    if(el) el.classList.toggle('sel', catDetailSort===k);
+  });
+}
+function closeCatDetailSort(e) {
+  if(!e || e.target.id==='catDetailSortSheet' || e.currentTarget.id==='catDetailSortSheet') {
+    document.getElementById('catDetailSortSheet').classList.remove('open');
+  }
+}
+function setCatDetailSort(mode) {
+  catDetailSort = mode;
+  document.getElementById('catDetailSortSheet').classList.remove('open');
+  renderCatDetail();
 }
 
 // ── Sort sheet ──
@@ -5328,16 +5499,16 @@ function renderInsights() {
       const pct = Math.round((c.n / maxCat) * 100);
       const share = total ? Math.round((c.n / total) * 100) : 0;
       return `
-        <div class="cat-bar-row">
+        <button class="cat-bar-row cat-bar-row--tap" onclick="openCatDetail('${c.id}')" ${c.n===0?'disabled':''}>
           <div class="cat-bar-icon" style="background:${c.color}">${catIcon(c)}</div>
           <div class="cat-bar-body">
             <div class="cat-bar-head">
               <span class="cat-bar-name">${c.label}</span>
-              <span class="cat-bar-val">${c.n} · ${share}%</span>
+              <span class="cat-bar-val">${c.n} · ${share}%${c.n>0?' <span class="cat-bar-arrow">›</span>':''}</span>
             </div>
             <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${pct}%;background:${c.color}"></div></div>
           </div>
-        </div>`;
+        </button>`;
     }).join('');
 
   // IMPORTANCE distribution
@@ -5731,7 +5902,12 @@ function openDetail(id) {
     <button class="btn btn-amber" onclick="openShareMenu(${l.id})" style="margin-bottom:10px"><svg class="ic"><use href="#ic-share"/></svg> Share</button>
     <button class="btn btn-red" onclick="askDeleteEntry(${l.id})" style="margin-bottom:28px">Delete Entry</button>
   `;
+  detailBackScreen = currentScreen;
   go('detailScreen');
+}
+
+function goBackFromDetail() {
+  go(detailBackScreen || 'homeScreen');
 }
 
 // Uses custom confirm modal

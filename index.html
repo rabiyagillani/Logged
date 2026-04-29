@@ -2110,7 +2110,15 @@ button.cat-bar-row{width:100%;background:none;border:none;font-family:inherit;te
 
 /* Importance stacked bar */
 .imp-stack{height:26px;border-radius:13px;overflow:hidden;display:flex;background:rgba(255,255,255,0.06)}
-.imp-seg{height:100%;transition:flex 0.6s ease;min-width:0}
+.imp-seg{height:100%;transition:flex 0.6s ease;min-width:0;border:none;cursor:default}
+button.imp-seg--tap{cursor:pointer;transition:flex 0.6s ease,filter 0.12s;filter:brightness(1)}
+button.imp-seg--tap:hover{filter:brightness(1.12)}
+button.imp-seg--tap:active{filter:brightness(0.92)}
+.imp-leg-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub-on-dark)}
+button.imp-leg-row{background:none;border:none;font-family:inherit;text-align:left;width:100%;cursor:default}
+.imp-leg-row--tap{cursor:pointer;border-radius:8px;padding:3px 5px;margin:-3px -5px;transition:background 0.12s}
+.imp-leg-row--tap:hover{background:rgba(255,255,255,0.05)}
+.imp-leg-row--tap:active{background:rgba(255,255,255,0.09)}
 .imp-legend{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:14px}
 .imp-leg-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub-on-dark)}
 .imp-leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
@@ -2713,6 +2721,8 @@ body[data-theme="light"] .stat-chip::before{
 body[data-theme="light"] .stat-chip--active{border-color:var(--peach);box-shadow:inset 0 1px 0 rgba(255,255,255,0.95),0 0 0 2px rgba(171,89,97,0.20),0 4px 16px rgba(123,71,82,0.10);}
 body[data-theme="light"] .cat-bar-row--tap:hover{background:rgba(61,26,34,0.04)}
 body[data-theme="light"] .cat-bar-row--tap:active{background:rgba(61,26,34,0.07)}
+body[data-theme="light"] .imp-leg-row--tap:hover{background:rgba(61,26,34,0.04)}
+body[data-theme="light"] .imp-leg-row--tap:active{background:rgba(61,26,34,0.07)}
 
 body[data-theme="light"] .record-card{
   background:
@@ -3606,6 +3616,9 @@ body[data-theme="light"] .new-btn{
     <button class="sort-option" id="cds-importance" onclick="setCatDetailSort('importance')">
       <span class="sort-opt-label">By importance</span><span class="sort-opt-check"><svg class="ic"><use href="#ic-check"/></svg></span>
     </button>
+    <button class="sort-option" id="cds-category" onclick="setCatDetailSort('category')">
+      <span class="sort-opt-label">By category</span><span class="sort-opt-check"><svg class="ic"><use href="#ic-check"/></svg></span>
+    </button>
   </div>
 </div>
 
@@ -4247,10 +4260,12 @@ let dateFilter  = 'all'; // all | today | week | month | year
 let filterTrust = 'all'; // all | verified | anchored
 
 // ── Category Detail state ──
-let catDetailId     = null;
-let catDetailSort   = 'newest';
-let catDetailSearch = '';
-let currentScreen   = 'homeScreen';
+let catDetailId      = null;
+let catDetailSort    = 'newest';
+let catDetailSearch  = '';
+let catDetailType    = 'cat'; // 'cat' | 'imp'
+let catDetailImpId   = null;
+let currentScreen    = 'homeScreen';
 let detailBackScreen = 'homeScreen';
 
 // ── DRAFT helpers (autosave for in-progress entries) ──
@@ -5184,11 +5199,26 @@ function setFilter(cat) {
 function setTrustFilter(mode) {
   filterTrust = mode;
   renderHome();
+  requestAnimationFrame(() => {
+    const list = document.getElementById('cardsList');
+    if(list) list.scrollIntoView({behavior:'smooth', block:'start'});
+  });
 }
 
 // ── Category Detail ──
 function openCatDetail(catId) {
   catDetailId     = catId;
+  catDetailType   = 'cat';
+  catDetailImpId  = null;
+  catDetailSort   = 'newest';
+  catDetailSearch = '';
+  go('catDetailScreen');
+}
+
+function openImpDetail(impId) {
+  catDetailImpId  = impId;
+  catDetailType   = 'imp';
+  catDetailId     = null;
   catDetailSort   = 'newest';
   catDetailSearch = '';
   go('catDetailScreen');
@@ -5196,48 +5226,60 @@ function openCatDetail(catId) {
 
 function renderCatDetail() {
   const body = document.getElementById('catDetailBody');
-  if(!body || !catDetailId) return;
+  if(!body) return;
 
-  const cat = getCat(catDetailId);
+  const isCat = catDetailType === 'cat';
+  const cat  = isCat ? getCat(catDetailId) : null;
+  const imp  = !isCat ? getImp(catDetailImpId) : null;
+  const screenTitle = isCat ? (cat ? cat.label : 'Category') : (imp ? imp.label : 'Importance');
+  const accentColor  = isCat ? (cat ? cat.color : 'var(--peach)') : (imp ? imp.color : 'var(--peach)');
+  const placeholderTxt = isCat ? `Search ${cat ? cat.label : ''}…` : `Search ${imp ? imp.label : ''}…`;
+
   const titleEl = document.getElementById('catDetailTitle');
-  if(titleEl) titleEl.textContent = cat.label;
+  if(titleEl) titleEl.textContent = screenTitle;
 
-  const sortLabels = {newest:'Newest',oldest:'Oldest',importance:'Importance'};
+  const sortLabels = {newest:'Newest',oldest:'Oldest',importance:'Importance',category:'Category'};
   const sortLabelEl = document.getElementById('catDetailSortLabel');
   if(sortLabelEl) sortLabelEl.textContent = sortLabels[catDetailSort] || 'Newest';
 
   const q = catDetailSearch.trim().toLowerCase();
-  let entries = logs.filter(l => l.cat === catDetailId);
+  let entries = isCat
+    ? logs.filter(l => l.cat === catDetailId)
+    : logs.filter(l => l.imp === catDetailImpId);
+
   if(q) {
     entries = entries.filter(l =>
       l.title.toLowerCase().includes(q) ||
-      (l.note||'').toLowerCase().includes(q)
+      (l.note||'').toLowerCase().includes(q) ||
+      (getCat(l.cat).label || '').toLowerCase().includes(q)
     );
   }
 
-  if(catDetailSort === 'oldest')    entries = [...entries].sort((a,b)=>a.ts-b.ts);
-  else if(catDetailSort === 'newest')    entries = [...entries].sort((a,b)=>b.ts-a.ts);
+  if(catDetailSort === 'oldest')      entries = [...entries].sort((a,b)=>a.ts-b.ts);
+  else if(catDetailSort === 'newest') entries = [...entries].sort((a,b)=>b.ts-a.ts);
   else if(catDetailSort === 'importance') entries = [...entries].sort((a,b)=>(b.imp||0)-(a.imp||0));
+  else if(catDetailSort === 'category')   entries = [...entries].sort((a,b)=>a.cat.localeCompare(b.cat));
 
   const renderCdCard = (l) => {
-    const imp = getImp(l.imp);
+    const lCat = getCat(l.cat);
+    const lImp = getImp(l.imp);
     const firstPhoto = (l.photosData && l.photosData[0]) || l.photoData || null;
     const photoCount = l.photosData ? l.photosData.length : (l.photoData ? 1 : 0);
     const iconHtml = firstPhoto
       ? `<div class="rc-cat-icon has-photo"><img src="${firstPhoto}" alt="photo"></div>`
-      : `<div class="rc-cat-icon" style="background:${cat.color}">${catIcon(cat)}</div>`;
+      : `<div class="rc-cat-icon" style="background:${lCat.color}">${catIcon(lCat)}</div>`;
     return `
-      <div class="record-card slide-up" style="--cat-color:${cat.color}" onclick="openDetail(${l.id})" role="button" data-id="${l.id}">
+      <div class="record-card slide-up" style="--cat-color:${lCat.color}" onclick="openDetail(${l.id})" role="button" data-id="${l.id}">
         <div class="rc-top">
           ${iconHtml}
           <div style="flex:1;min-width:0">
             <div class="rc-title">${escHtml(l.title)}</div>
-            <div class="rc-cat">${fmtDate(l.ts)}</div>
+            <div class="rc-cat">${isCat ? fmtDate(l.ts) : lCat.label}</div>
           </div>
           <div class="rc-date">${fmtDate(l.ts).split(',')[0]}</div>
         </div>
         <div class="rc-pills">
-          <span class="pill" style="color:#fff;background:${imp.color}">${imp.label}</span>
+          <span class="pill" style="color:#fff;background:${lImp.color}">${lImp.label}</span>
           ${photoCount>0?`<span class="pill navy"><svg class="ic"><use href="#ic-camera"/></svg>${photoCount>1?' ×'+photoCount:''}</span>`:''}
           ${l.voiceData?`<span class="pill navy"><svg class="ic"><use href="#ic-mic"/></svg></span>`:''}
           ${l.gps?`<span class="pill navy"><svg class="ic"><use href="#ic-pin"/></svg></span>`:''}
@@ -5248,24 +5290,35 @@ function renderCatDetail() {
       </div>`;
   };
 
+  const iconEl = isCat
+    ? `<div style="width:38px;height:38px;border-radius:12px;background:${accentColor};display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff">${catIcon(cat)}</div>`
+    : `<div style="width:38px;height:38px;border-radius:50%;background:${accentColor};flex-shrink:0"></div>`;
+
+  const emptyMsg = q ? 'No results' : 'No entries yet';
+  const emptySub = q ? 'Try a different search term' : (isCat ? 'Start a new entry in this category' : 'No entries at this importance level');
   const cardsHtml = entries.length > 0
     ? entries.map(renderCdCard).join('')
     : `<div class="empty-state" style="padding:30px 0">
-        <div class="empty-icon" style="font-size:32px">${catIcon(cat)}</div>
-        <div class="empty-title" style="font-size:18px">${q ? 'No results' : 'No entries yet'}</div>
-        <div class="empty-sub">${q ? 'Try a different search term' : 'Start a new entry to add to this category'}</div>
+        <div class="empty-icon" style="font-size:32px">${iconEl}</div>
+        <div class="empty-title" style="font-size:18px">${emptyMsg}</div>
+        <div class="empty-sub">${emptySub}</div>
        </div>`;
+
+  const sortSortOpts = isCat
+    ? ['newest','oldest','importance']
+    : ['newest','oldest','category'];
 
   body.innerHTML = `
     <div style="padding:12px 22px 8px">
       <div class="search-wrap">
         <span class="search-icon"><svg class="ic"><use href="#ic-search"/></svg></span>
-        <input class="search-input" id="catDetailSearchInput" type="search" placeholder="Search ${escHtml(cat.label)}…" value="${escHtml(catDetailSearch)}"
+        <input class="search-input" id="catDetailSearchInput" type="search" placeholder="${escHtml(placeholderTxt)}" value="${escHtml(catDetailSearch)}"
           oninput="onCatDetailSearch(this.value)">
         <button class="search-clear" id="catDetailSearchClear" onclick="clearCatDetailSearch()" style="display:${catDetailSearch?'flex':'none'}"><svg class="ic"><use href="#ic-x"/></svg></button>
       </div>
     </div>
-    <div style="padding:2px 22px 10px;display:flex;align-items:center;justify-content:space-between">
+    <div style="padding:2px 22px 10px;display:flex;align-items:center;gap:10px">
+      <div style="width:10px;height:10px;border-radius:50%;background:${accentColor};flex-shrink:0"></div>
       <span class="section-label">${entries.length} ${entries.length===1?'entry':'entries'}</span>
     </div>
     <div class="records-list" style="padding:0 16px 100px">${cardsHtml}</div>`;
@@ -5285,9 +5338,12 @@ function openCatDetailSort() {
   const sheet = document.getElementById('catDetailSortSheet');
   if(!sheet) return;
   sheet.classList.add('open');
-  ['newest','oldest','importance'].forEach(k => {
+  ['newest','oldest','importance','category'].forEach(k => {
     const el = document.getElementById('cds-'+k);
-    if(el) el.classList.toggle('sel', catDetailSort===k);
+    if(!el) return;
+    el.classList.toggle('sel', catDetailSort===k);
+    if(k === 'importance') el.style.display = catDetailType === 'imp' ? 'none' : '';
+    if(k === 'category')   el.style.display = catDetailType === 'cat' ? 'none' : '';
   });
 }
 function closeCatDetailSort(e) {
@@ -5519,14 +5575,22 @@ function renderInsights() {
     const n = impCounts[i.id];
     if(!n) return '';
     const pct = (n / impTotal) * 100;
-    return `<div class="imp-seg" style="flex:${n};background:${i.color}" title="${i.label}: ${n}"></div>`;
+    return `<button class="imp-seg imp-seg--tap" onclick="openImpDetail(${i.id})" style="flex:${n};background:${i.color}" title="${i.label}: ${n} — tap to view"></button>`;
   }).join('');
-  const impLegend = IMPORTANCE.map(i => `
-    <div class="imp-leg-row">
-      <div class="imp-leg-dot" style="background:${i.color}"></div>
-      <div class="imp-leg-name">${i.label}</div>
-      <div class="imp-leg-num">${impCounts[i.id]}</div>
-    </div>`).join('');
+  const impLegend = IMPORTANCE.map(i => {
+    const n = impCounts[i.id];
+    return n > 0
+      ? `<button class="imp-leg-row imp-leg-row--tap" onclick="openImpDetail(${i.id})">
+          <div class="imp-leg-dot" style="background:${i.color}"></div>
+          <div class="imp-leg-name">${i.label}</div>
+          <div class="imp-leg-num">${n} <span class="cat-bar-arrow">›</span></div>
+         </button>`
+      : `<div class="imp-leg-row imp-leg-row--empty">
+          <div class="imp-leg-dot" style="background:${i.color};opacity:0.35"></div>
+          <div class="imp-leg-name" style="opacity:0.45">${i.label}</div>
+          <div class="imp-leg-num" style="opacity:0.35">0</div>
+         </div>`;
+  }).join('');
 
   // ACTIVITY — last 8 weeks × 7 days heatmap
   const WEEKS = 8;

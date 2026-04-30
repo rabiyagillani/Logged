@@ -2219,6 +2219,89 @@ button.imp-leg-row{background:none;border:none;font-family:inherit;text-align:le
 .slide-up{animation:slideUp 0.32s ease forwards}
 @keyframes popIn{0%{transform:scale(0.3);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
 .pop-in{animation:popIn 0.5s cubic-bezier(.34,1.56,.64,1) forwards}
+
+/* ─ T1/T3/T7/T9: Coverage row, anchor bar, tags, cases ─ */
+.cov-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 12px;padding-bottom:12px;border-bottom:1px dashed rgba(242,232,220,0.14)}
+.cov-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--sub-on-dark,#bfa9a3);font-weight:700;margin-right:4px}
+.cov-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;background:rgba(127,182,133,0.14);color:#a8d4ad;border:1px solid rgba(127,182,133,0.28);font-family:var(--font-mono,inherit)}
+.cov-pill--legacy{background:rgba(212,167,42,0.13);color:#e6c473;border-color:rgba(212,167,42,0.3)}
+body[data-theme="light"] .cov-row{border-bottom-color:rgba(125,71,82,0.18)}
+body[data-theme="light"] .cov-label{color:#7a4a52}
+body[data-theme="light"] .cov-pill{background:#e6f1e8;color:#2e6b3e;border-color:#bcdac5}
+body[data-theme="light"] .cov-pill--legacy{background:#fbf2dc;color:#7a5a18;border-color:#e7d291}
+
+.anchor-bar{margin:0 22px 14px;padding:10px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(242,232,220,0.14);border-radius:12px}
+.anchor-bar-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.ab-pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;line-height:1.3}
+.ab-pill .ic{width:11px;height:11px}
+.ab-pill--ok{background:rgba(127,182,133,0.16);color:#a8d4ad;border:1px solid rgba(127,182,133,0.3)}
+.ab-pill--pending{background:rgba(236,179,152,0.14);color:#ECB398;border:1px solid rgba(236,179,152,0.3)}
+.ab-pill--queued{background:rgba(212,167,42,0.13);color:#e6c473;border:1px solid rgba(212,167,42,0.3)}
+.ab-retry{margin-left:auto;background:transparent;color:var(--peach,#ECB398);border:1px solid rgba(236,179,152,0.4);border-radius:8px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+.ab-retry:active{transform:scale(.98)}
+.anchor-bar-warn{margin-top:8px;font-size:11.5px;color:#e6c473;display:flex;align-items:center;gap:6px;line-height:1.4}
+.anchor-bar-warn .ic{width:13px;height:13px;flex-shrink:0}
+body[data-theme="light"] .anchor-bar{background:#fff7eb;border-color:#e7d2a8}
+body[data-theme="light"] .ab-pill--ok{background:#e6f1e8;color:#2e6b3e;border-color:#bcdac5}
+body[data-theme="light"] .ab-pill--pending{background:#fbece1;color:#9a4a30;border-color:#e7c2a8}
+body[data-theme="light"] .ab-pill--queued{background:#fbf2dc;color:#7a5a18;border-color:#e7d291}
+body[data-theme="light"] .ab-retry{color:#9a4a30;border-color:#e7c2a8}
+body[data-theme="light"] .anchor-bar-warn{color:#9a5a18}
+
+.anchor-retry-row{padding:12px 14px;border-radius:12px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px}
+.anchor-retry-row--queued{background:rgba(212,167,42,0.10);border:1px solid rgba(212,167,42,0.25)}
+.anchor-retry-row--stale{background:rgba(236,123,90,0.10);border:1px solid rgba(236,123,90,0.25)}
+.anchor-retry-row .ar-text{font-size:12.5px;color:var(--text-on-dark);line-height:1.5}
+.anchor-retry-row .ots-btn{align-self:flex-start}
+body[data-theme="light"] .anchor-retry-row--queued{background:#fbf2dc;border-color:#e7d291}
+body[data-theme="light"] .anchor-retry-row--stale{background:#fbe5dd;border-color:#e7b4a0}
+body[data-theme="light"] .anchor-retry-row .ar-text{color:#3d1a22}
+
+.detail-tags-card,.detail-case-card{padding:14px 16px}
+.tag-chips-row{display:flex;flex-wrap:wrap;gap:6px}
+.tag-chip{display:inline-flex;align-items:center;gap:3px;background:rgba(140,160,200,0.16);color:#b8c8e8;border:1px solid rgba(140,160,200,0.28);border-radius:999px;padding:4px 10px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s}
+.tag-chip:hover,.tag-chip.active{background:rgba(140,160,200,0.28)}
+.tag-chip--xs{font-size:11px;padding:3px 8px}
+.tag-input-wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:var(--cream2,#3d2a30);border:1.5px solid var(--cream3,#5a3d44);border-radius:12px;padding:8px 10px;min-height:46px}
+.tag-input-wrap .tag-chip{display:inline-flex;align-items:center;gap:5px}
+.tag-input-wrap .tag-chip-x{background:none;border:none;color:inherit;cursor:pointer;font-weight:700;padding:0 0 0 4px;font-size:13px;line-height:1}
+.tag-input-wrap input{flex:1;min-width:120px;background:transparent;border:none;outline:none;color:var(--text-on-dark);font-size:13px;font-family:inherit;padding:4px 2px}
+.tag-input-wrap input::placeholder{color:var(--faint-on-navy,#7a6660)}
+body[data-theme="light"] .tag-chip{background:#e7ecf5;color:#3a4d7a;border-color:#c7d2e8}
+body[data-theme="light"] .tag-input-wrap{background:#fff;border-color:#d4c4ae}
+body[data-theme="light"] .tag-input-wrap input{color:#3d1a22}
+
+.case-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:600;font-family:inherit;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:var(--text-on-dark);max-width:100%}
+.case-pill--linked{cursor:pointer;background:rgba(236,179,152,0.16);color:#ECB398;border-color:rgba(236,179,152,0.3)}
+.case-pill--none{opacity:.7;font-style:italic}
+.case-edit-btn{margin-left:8px;background:transparent;border:1px solid rgba(255,255,255,0.18);color:var(--text-on-dark);font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px;cursor:pointer;font-family:inherit}
+body[data-theme="light"] .case-pill{background:#f3eee5;color:#3d1a22;border-color:#d4c4ae}
+body[data-theme="light"] .case-pill--linked{background:#fbece1;color:#9a4a30;border-color:#e7c2a8}
+body[data-theme="light"] .case-edit-btn{border-color:#d4c4ae;color:#3d1a22}
+
+.case-filter-strip{display:flex;flex-wrap:wrap;gap:6px;padding:0 22px 12px}
+.case-filter-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:var(--text-on-dark);font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;cursor:pointer;font-family:inherit}
+.case-filter-chip.active{background:var(--peach,#ECB398);color:var(--wine-1,#3d1a22);border-color:var(--peach,#ECB398)}
+body[data-theme="light"] .case-filter-chip{background:#fff;border-color:#d4c4ae;color:#3d1a22}
+body[data-theme="light"] .case-filter-chip.active{background:#3d1a22;color:#ECB398;border-color:#3d1a22}
+
+.case-modal-list{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.case-modal-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;color:var(--text-on-dark);font-size:13px}
+.case-modal-row.active{background:rgba(236,179,152,0.16);border-color:rgba(236,179,152,0.4)}
+.case-modal-row .cm-name{flex:1;font-weight:600;text-align:left}
+.case-modal-row .cm-count{font-size:11px;color:var(--sub-on-dark)}
+body[data-theme="light"] .case-modal-row{background:#fff;border-color:#d4c4ae;color:#3d1a22}
+body[data-theme="light"] .case-modal-row.active{background:#fbece1;border-color:#e7c2a8}
+
+/* Verify view: coverage block */
+.v-coverage{background:#f3eee5;border:1px solid #d4c4ae;border-radius:10px;padding:14px;margin-bottom:14px}
+.v-coverage-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#7a4a52;font-weight:700;margin-bottom:8px}
+.v-coverage-pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.v-coverage-pill{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;background:#e6f1e8;color:#2e6b3e;border:1px solid #bcdac5}
+.v-coverage-explainer{font-size:11.5px;line-height:1.6;color:#3d1a22;margin-top:6px}
+.v-explainer-toggle{display:inline-block;margin-top:8px;font-size:11.5px;color:#3d1a22;cursor:pointer;text-decoration:underline;background:none;border:none;padding:0;font-family:inherit;font-weight:600}
+.v-explainer-body{display:none;margin-top:10px;padding:12px;background:#fff;border:1px solid #d4c4ae;border-radius:8px;font-size:11.5px;line-height:1.6;color:#3d1a22}
+.v-explainer-body.open{display:block}
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -3935,6 +4018,17 @@ body[data-theme="light"] .new-btn{
         <textarea class="fi" id="entryNote" placeholder="Write what happened, in your own words…" data-i18n-placeholder="form.notePh" oninput="autosaveDraftFromForm()"></textarea>
       </div>
       <div class="form-field">
+        <label class="form-label">Tags <span style="font-weight:400;font-size:11px;color:var(--faint-on-navy)">(optional — type & press enter)</span></label>
+        <div class="tag-input-wrap" id="tagChips">
+          <input type="text" id="tagInput" placeholder="people, places, themes…" autocomplete="off" inputmode="text">
+        </div>
+        <div id="tagSuggestRow" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px"></div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Case <span style="font-weight:400;font-size:11px;color:var(--faint-on-navy)">(optional — group related entries)</span></label>
+        <div id="formCaseRow"></div>
+      </div>
+      <div class="form-field">
         <label class="form-label" data-i18n="form.importance">Importance</label>
         <div class="imp-row" id="impRow"></div>
       </div>
@@ -4363,22 +4457,55 @@ function showLockScreen(){
       const d = el.querySelectorAll('.lock-dots span');
       d.forEach((s,i)=> s.classList.toggle('on', i<buf.length));
     };
+    // Render lockout state (and tick it down) if currently locked.
+    const sub = ()=> el.querySelector('#lockSub');
+    const setSub = (txt, danger)=>{
+      const s = sub(); if(!s) return;
+      s.textContent = txt;
+      s.style.color = danger ? '#ff7a7a' : '';
+    };
+    let lockTickHandle = null;
+    const renderLockoutTick = ()=>{
+      if(!pinIsLocked()){
+        if(lockTickHandle){ clearInterval(lockTickHandle); lockTickHandle = null; }
+        setSub('Enter your PIN', false);
+        return;
+      }
+      setSub('Too many wrong PINs — locked for ' + pinFmtRemaining(pinRemainingMs()), true);
+      if(!lockTickHandle){
+        lockTickHandle = setInterval(renderLockoutTick, 1000);
+      }
+    };
+    renderLockoutTick();
+
     const press = async (k)=>{
+      if(pinIsLocked()){
+        if(navigator.vibrate) navigator.vibrate([10]);
+        renderLockoutTick();
+        return;
+      }
       if(k==='back'){ buf = buf.slice(0,-1); dots(); return; }
       if(buf.length>=8) return;
       buf += k; dots();
       if(buf.length>=4){
         const ok = await verifyPin(buf);
         if(ok){
+          pinResetCounters();
           localStorage.setItem('logged_pin_unlocked_at', String(Date.now()));
+          if(lockTickHandle){ clearInterval(lockTickHandle); lockTickHandle = null; }
           el.classList.add('out');
           setTimeout(()=> el.remove(), 280);
         } else if(buf.length>=8 || buf.length===6){
-          const sub = el.querySelector('#lockSub');
-          if(sub){ sub.textContent='Incorrect PIN'; sub.style.color='#ff7a7a'; }
+          const lockMs = pinRecordFailure();
           if(navigator.vibrate) navigator.vibrate([15,40,15]);
           buf=''; dots();
-          setTimeout(()=>{ if(sub){ sub.textContent='Enter your PIN'; sub.style.color=''; } }, 1200);
+          if(lockMs > 0){
+            renderLockoutTick();
+          } else {
+            const remain = Math.max(0, 5 - pinFailureCount());
+            setSub(remain > 0 ? `Incorrect PIN — ${remain} attempt${remain===1?'':'s'} left` : 'Incorrect PIN', true);
+            setTimeout(()=>{ if(!pinIsLocked()) setSub('Enter your PIN', false); }, 1500);
+          }
         }
       }
     };
@@ -4544,6 +4671,413 @@ async function sha256(str) {
     const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
     return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');
   } catch(e) { return 'sha256-unavailable'; }
+}
+
+// ══ EVIDENCE MANIFEST ══
+// The "fingerprint" we anchor must cover the EVIDENCE, not just text.
+// If a user later swaps a photo, the manifest hash should change.
+// We hash each photo / voice memo separately, then hash the JSON manifest.
+// `entry.manifest` is stored alongside so verifiers can see what's covered.
+async function buildEvidenceManifest(opts){
+  // opts: { cat, title, note, ts, imp, gpsLat, gpsLng, photos:[base64], voice:base64|null, voiceDuration }
+  const photoHashes = [];
+  if(Array.isArray(opts.photos)){
+    for(const p of opts.photos){ if(p) photoHashes.push(await sha256(p)); }
+  }
+  const voiceHash = opts.voice ? await sha256(opts.voice) : null;
+  return {
+    v: 1,
+    cat: opts.cat || '',
+    title: opts.title || '',
+    note: opts.note || '',
+    ts: opts.ts || 0,
+    imp: opts.imp || null,
+    gpsLat: (typeof opts.gpsLat === 'number') ? opts.gpsLat : null,
+    gpsLng: (typeof opts.gpsLng === 'number') ? opts.gpsLng : null,
+    photoHashes,
+    voiceHash,
+    voiceDuration: opts.voiceDuration || null,
+  };
+}
+// Canonical JSON: stable key order so the same manifest always hashes the same.
+function _canonicalJSON(obj){
+  if(obj === null || typeof obj !== 'object') return JSON.stringify(obj);
+  if(Array.isArray(obj)) return '['+obj.map(_canonicalJSON).join(',')+']';
+  const keys = Object.keys(obj).sort();
+  return '{'+keys.map(k => JSON.stringify(k)+':'+_canonicalJSON(obj[k])).join(',')+'}';
+}
+async function manifestHash(manifest){
+  return await sha256(_canonicalJSON(manifest));
+}
+// Tags helpers (set in T9; safe stubs so save flow always works).
+function readTagsFromForm(){
+  try{
+    const wrap = document.getElementById('tagChips');
+    if(!wrap) return [];
+    return Array.from(wrap.querySelectorAll('[data-tag]')).map(el => el.getAttribute('data-tag')).filter(Boolean);
+  }catch(e){ return []; }
+}
+// Plain-language summary of what a manifest covers — for verify view.
+function manifestCoverage(m){
+  if(!m) return null;
+  const parts = [];
+  if(m.title) parts.push('title');
+  if(m.note) parts.push('written account');
+  if(m.photoHashes && m.photoHashes.length) parts.push(m.photoHashes.length+' photo'+(m.photoHashes.length>1?'s':''));
+  if(m.voiceHash) parts.push('voice memo');
+  if(m.gpsLat != null) parts.push('GPS coordinates');
+  if(m.imp) parts.push('importance');
+  return parts;
+}
+
+// ══ CASES (T7) ══
+// Cases group related entries (e.g. "Landlord 2026 dispute" with 12 entries).
+// Stored in localStorage. Entries point at a case via entry.caseId.
+const CASES_KEY = 'logged_cases_v1';
+function loadCases(){
+  try{ return JSON.parse(localStorage.getItem(CASES_KEY)||'[]'); }catch(e){ return []; }
+}
+function saveCases(arr){
+  try{ localStorage.setItem(CASES_KEY, JSON.stringify(arr||[])); }catch(e){}
+}
+function getCase(id){ if(!id) return null; return loadCases().find(c=>c.id===id) || null; }
+function createCase(name){
+  const cases = loadCases();
+  const c = { id:'c_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), name:(name||'Untitled case').trim().slice(0,80), createdAt:Date.now() };
+  cases.push(c);
+  saveCases(cases);
+  return c;
+}
+function renameCase(id, name){
+  const cases = loadCases();
+  const c = cases.find(x=>x.id===id); if(!c) return;
+  c.name = (name||'').trim().slice(0,80) || c.name;
+  saveCases(cases);
+}
+function deleteCaseRecord(id){
+  saveCases(loadCases().filter(c=>c.id!==id));
+  // Detach entries from this case (don't delete the entries themselves).
+  let touched = false;
+  logs.forEach(l => { if(l.caseId === id){ l.caseId = null; touched = true; } });
+  if(touched) persistEntries();
+}
+function caseEntryCount(id){ return logs.filter(l => l.caseId === id).length; }
+
+// ══ DETAIL HELPERS ══
+function renderCoverageRow(l){
+  const parts = manifestCoverage(l.manifest);
+  if(!parts || !parts.length){
+    // Legacy entry — be honest about what's covered (text only).
+    return `<div class="cov-row" title="Older entry: hash covers text fields only">
+      <span class="cov-label">Hash covers</span>
+      <span class="cov-pill cov-pill--legacy">title · note · timestamp <small style="opacity:.7">(text only — pre-v2)</small></span>
+    </div>`;
+  }
+  return `<div class="cov-row">
+    <span class="cov-label">Hash covers</span>
+    ${parts.map(p=>`<span class="cov-pill">${escHtml(p)}</span>`).join('')}
+  </div>`;
+}
+function renderAnchorRetryRow(l){
+  if(!l) return '';
+  // Show retry for queued (never reached calendar) OR pending entries older than 48h.
+  const ageMs = Date.now() - (l.otsStampedAt || l.ts || 0);
+  const stalePending = l.otsStatus === 'pending' && ageMs > 48*3600*1000;
+  if(l.otsStatus === 'queued'){
+    return `<div class="anchor-retry-row anchor-retry-row--queued">
+      <div class="ar-text">Not yet sent to a Bitcoin calendar — usually because you were offline.</div>
+      <button class="ots-btn primary" onclick="retryAnchor(${l.id})"><svg class="ic"><use href="#ic-refresh"/></svg> Retry anchoring</button>
+    </div>`;
+  }
+  if(stalePending){
+    const days = Math.floor(ageMs/(24*3600*1000));
+    return `<div class="anchor-retry-row anchor-retry-row--stale">
+      <div class="ar-text">Awaiting Bitcoin confirmation for ${days} day${days===1?'':'s'} — calendars usually confirm within 24h.</div>
+      <button class="ots-btn primary" onclick="retryAnchor(${l.id})"><svg class="ic"><use href="#ic-refresh"/></svg> Re-check / re-stamp</button>
+    </div>`;
+  }
+  return '';
+}
+function renderTagsField(l){
+  const tags = (l && Array.isArray(l.tags)) ? l.tags : [];
+  if(!tags.length) return '';
+  return `<div class="detail-card detail-tags-card">
+    <div class="df-label" style="margin-bottom:6px">Tags</div>
+    <div class="tag-chips-row">
+      ${tags.map(tag => `<button class="tag-chip" onclick="filterByTagFromDetail('${escAttr(tag)}')">#${escHtml(tag)}</button>`).join('')}
+    </div>
+  </div>`;
+}
+function renderCaseField(l){
+  const c = getCase(l && l.caseId);
+  return `<div class="detail-card detail-case-card">
+    <div class="df-label" style="margin-bottom:6px">Case</div>
+    ${c ? `<button class="case-pill case-pill--linked" onclick="filterByCaseFromDetail('${escAttr(c.id)}')"><svg class="ic"><use href="#ic-link"/></svg> ${escHtml(c.name)}</button>` : `<div class="case-pill case-pill--none">Not assigned to a case</div>`}
+    <button class="case-edit-btn" onclick="openCasePicker(${l.id})">${c ? 'Change' : 'Add to case'}</button>
+  </div>`;
+}
+// HTML attribute-safe escape (single quotes etc.)
+function escAttr(s){ return String(s||'').replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ══ TAG INPUT (T9) ══
+function _normalizeTag(s){
+  return String(s||'').toLowerCase().trim().replace(/^#+/, '').replace(/[,\s]+/g,'-').replace(/[^a-z0-9\-_]/g,'').slice(0,32);
+}
+function _renderTagChip(tag){
+  return `<span class="tag-chip" data-tag="${escAttr(tag)}">#${escHtml(tag)}<button type="button" class="tag-chip-x" onclick="removeFormTag('${escAttr(tag)}')" aria-label="Remove tag">×</button></span>`;
+}
+function addFormTag(raw){
+  const tag = _normalizeTag(raw);
+  if(!tag) return false;
+  const wrap = document.getElementById('tagChips');
+  if(!wrap) return false;
+  // Dedupe.
+  if(wrap.querySelector(`[data-tag="${CSS.escape(tag)}"]`)) return false;
+  const input = document.getElementById('tagInput');
+  const node = document.createElement('span');
+  node.innerHTML = _renderTagChip(tag);
+  wrap.insertBefore(node.firstChild, input);
+  if(input){ input.value=''; }
+  try{ if(typeof autosaveDraftFromForm==='function') autosaveDraftFromForm(); }catch(e){}
+  return true;
+}
+function removeFormTag(tag){
+  const wrap = document.getElementById('tagChips');
+  if(!wrap) return;
+  const el = wrap.querySelector(`[data-tag="${CSS.escape(tag)}"]`);
+  if(el) el.remove();
+  try{ if(typeof autosaveDraftFromForm==='function') autosaveDraftFromForm(); }catch(e){}
+}
+function resetTagInputUI(){
+  const wrap = document.getElementById('tagChips');
+  if(!wrap) return;
+  wrap.querySelectorAll('[data-tag]').forEach(n => n.remove());
+  const input = document.getElementById('tagInput');
+  if(input) input.value='';
+}
+// Compute top tags across all entries (for suggestions + home filter chips).
+function topTags(limit){
+  const counts = {};
+  (logs||[]).forEach(l => {
+    (Array.isArray(l.tags) ? l.tags : []).forEach(t => {
+      const k = _normalizeTag(t);
+      if(k) counts[k] = (counts[k]||0) + 1;
+    });
+  });
+  return Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0, limit||6).map(([t,n])=>({tag:t, count:n}));
+}
+function renderTagSuggestions(){
+  const row = document.getElementById('tagSuggestRow');
+  if(!row) return;
+  const top = topTags(8);
+  if(!top.length){ row.innerHTML=''; return; }
+  row.innerHTML = '<span style="font-size:10.5px;color:var(--faint-on-navy);margin-right:4px;align-self:center">Recent:</span>' +
+    top.map(t => `<button type="button" class="tag-chip tag-chip--xs" onclick="addFormTag('${escAttr(t.tag)}')">#${escHtml(t.tag)}</button>`).join('');
+}
+// Wire input keydown once DOM is ready.
+function _wireTagInput(){
+  const input = document.getElementById('tagInput');
+  if(!input || input._wired) return;
+  input._wired = true;
+  input.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ',' || e.key === 'Tab'){
+      if(input.value.trim()){
+        e.preventDefault();
+        addFormTag(input.value);
+      }
+    } else if(e.key === 'Backspace' && !input.value){
+      // Remove last chip on backspace in empty input.
+      const wrap = document.getElementById('tagChips');
+      const chips = wrap.querySelectorAll('[data-tag]');
+      if(chips.length){
+        e.preventDefault();
+        removeFormTag(chips[chips.length-1].getAttribute('data-tag'));
+      }
+    }
+  });
+  input.addEventListener('blur', ()=>{
+    if(input.value.trim()) addFormTag(input.value);
+  });
+}
+document.addEventListener('DOMContentLoaded', _wireTagInput);
+// In case DOMContentLoaded already fired:
+setTimeout(_wireTagInput, 100);
+
+// ══ CASE PICKER (T7) ══
+function renderFormCaseRow(){
+  const row = document.getElementById('formCaseRow');
+  if(!row) return;
+  const c = getCase(newEntry && newEntry.caseId);
+  row.innerHTML = c
+    ? `<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="case-pill case-pill--linked"><svg class="ic"><use href="#ic-link"/></svg> ${escHtml(c.name)}</span><button type="button" class="case-edit-btn" onclick="openCasePickerForForm()">Change</button><button type="button" class="case-edit-btn" onclick="clearFormCase()">Remove</button></div>`
+    : `<button type="button" class="case-edit-btn" onclick="openCasePickerForForm()"><svg class="ic"><use href="#ic-plus"/></svg> Add to case</button>`;
+}
+function clearFormCase(){ if(window.newEntry){ newEntry.caseId = null; renderFormCaseRow(); } }
+function openCasePickerForForm(){
+  _openCasePickerCore({
+    selectedId: (newEntry && newEntry.caseId) || null,
+    onPick: (id)=>{ if(window.newEntry){ newEntry.caseId = id; renderFormCaseRow(); } closeCasePicker(); }
+  });
+}
+function openCasePicker(entryId){
+  const entry = logs.find(l => l.id === entryId);
+  if(!entry) return;
+  _openCasePickerCore({
+    selectedId: entry.caseId || null,
+    onPick: (id)=>{
+      entry.caseId = id;
+      persistEntries();
+      closeCasePicker();
+      // Re-render the detail card if open.
+      if(typeof openDetail === 'function' && document.getElementById('detailScreen') && document.getElementById('detailScreen').classList.contains('active')){
+        openDetail(entryId);
+      }
+      showToast(id ? 'Linked to case' : 'Removed from case', 'success', 1800);
+    }
+  });
+}
+function _openCasePickerCore(opts){
+  closeCasePicker();
+  const cases = loadCases();
+  const modal = document.createElement('div');
+  modal.id = 'casePickerModal';
+  modal.className = 'modal-overlay';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML = `
+    <div style="background:var(--surface,#fff);color:var(--text-on-dark,#3d1a22);max-width:420px;width:100%;border-radius:18px;padding:20px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <h3 style="margin:0;font-size:17px;font-weight:700">Choose a case</h3>
+        <button type="button" onclick="closeCasePicker()" style="background:none;border:none;font-size:24px;cursor:pointer;color:inherit;padding:0;line-height:1">×</button>
+      </div>
+      <div class="case-modal-list" id="caseModalList">
+        <button type="button" class="case-modal-row${opts.selectedId? '': ' active'}" data-case-id="">
+          <span class="cm-name">— None —</span>
+        </button>
+        ${cases.map(c => `<button type="button" class="case-modal-row${opts.selectedId===c.id?' active':''}" data-case-id="${escAttr(c.id)}">
+          <span class="cm-name">${escHtml(c.name)}</span>
+          <span class="cm-count">${caseEntryCount(c.id)} entries</span>
+        </button>`).join('')}
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <input id="newCaseName" type="text" placeholder="New case name…" maxlength="80" style="flex:1;padding:10px 12px;border:1px solid #d4c4ae;border-radius:10px;font-size:13px;font-family:inherit;background:#fff;color:#3d1a22">
+        <button type="button" onclick="_createCaseFromPicker()" style="padding:10px 14px;background:var(--peach,#ECB398);color:#3d1a22;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit">Create</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', (e)=>{ if(e.target===modal) closeCasePicker(); });
+  modal.querySelectorAll('.case-modal-row').forEach(row => {
+    row.addEventListener('click', ()=>{
+      const id = row.getAttribute('data-case-id') || null;
+      opts.onPick(id);
+    });
+  });
+  window._casePickerCb = opts.onPick;
+}
+function _createCaseFromPicker(){
+  const inp = document.getElementById('newCaseName');
+  const name = (inp && inp.value || '').trim();
+  if(!name){ if(inp) inp.focus(); return; }
+  const c = createCase(name);
+  if(window._casePickerCb) window._casePickerCb(c.id);
+}
+function closeCasePicker(){
+  const m = document.getElementById('casePickerModal');
+  if(m) m.remove();
+  window._casePickerCb = null;
+}
+
+// ══ FILTER FROM DETAIL (T7/T9) ══
+function filterByTagFromDetail(tag){
+  window.activeTagFilter = _normalizeTag(tag);
+  window.activeCaseFilter = null;
+  go('homeScreen');
+  if(typeof renderHome === 'function') renderHome();
+  showToast('Filtered by #'+window.activeTagFilter, '', 1600);
+}
+function filterByCaseFromDetail(caseId){
+  window.activeCaseFilter = caseId;
+  window.activeTagFilter = null;
+  go('homeScreen');
+  if(typeof renderHome === 'function') renderHome();
+  const c = getCase(caseId);
+  if(c) showToast('Filtered by case: '+c.name, '', 1800);
+}
+function clearActiveFilters(){
+  window.activeTagFilter = null;
+  window.activeCaseFilter = null;
+  if(typeof renderHome === 'function') renderHome();
+}
+
+// ══ ANCHOR RETRY (T3) ══
+async function retryAnchor(id){
+  const entry = logs.find(l => l.id === id);
+  if(!entry){ showToast('Entry not found','error'); return; }
+  showToast('Retrying anchor…','',2500);
+  // For pending entries, the upgrade path checks Bitcoin; for queued, we re-stamp.
+  if(entry.otsStatus === 'pending'){
+    await otsUpgradeAll();
+  } else {
+    entry.otsStatus = 'queued';
+    await otsStampEntry(entry);
+  }
+  // Refresh the detail view if still open
+  const detail = document.getElementById('detailScreen');
+  if(detail && detail.classList.contains('active')) openDetail(id);
+  // Refresh home stats too
+  if(typeof renderHome === 'function' && document.getElementById('homeScreen').classList.contains('active')) renderHome();
+}
+
+// Counts by anchor status, for the home status row.
+function anchorCounts(){
+  let confirmed = 0, pending = 0, queued = 0, stale = 0;
+  const now = Date.now();
+  for(const l of logs){
+    if(l.otsStatus === 'confirmed') confirmed++;
+    else if(l.otsStatus === 'pending'){
+      pending++;
+      const ageMs = now - (l.otsStampedAt || l.ts || 0);
+      if(ageMs > 48*3600*1000) stale++;
+    } else if(l.otsStatus === 'queued') queued++;
+  }
+  return { confirmed, pending, queued, stale };
+}
+async function retryAllQueued(){
+  const cnt = logs.filter(l => l.otsStatus === 'queued' || l.otsStatus === 'pending').length;
+  if(!cnt){ showToast('Nothing to retry','',2000); return; }
+  showToast('Retrying '+cnt+' anchor'+(cnt===1?'':'s')+'…','',2500);
+  await otsUpgradeAll();
+  if(typeof renderHome === 'function' && document.getElementById('homeScreen').classList.contains('active')) renderHome();
+}
+
+// ══ PIN BRUTE-FORCE PROTECTION (T2) ══
+// Escalating lockout after consecutive failed PIN entries.
+// Stored in localStorage so a reload doesn't reset progress.
+const PIN_LOCK_LADDER_MS = [30*1000, 60*1000, 5*60*1000, 15*60*1000, 60*60*1000];
+function pinFailureCount(){ return parseInt(localStorage.getItem('logged_pin_attempts')||'0',10) || 0; }
+function pinLockedUntil(){ return parseInt(localStorage.getItem('logged_pin_locked_until')||'0',10) || 0; }
+function pinIsLocked(){ return pinLockedUntil() > Date.now(); }
+function pinRemainingMs(){ return Math.max(0, pinLockedUntil() - Date.now()); }
+function pinResetCounters(){
+  localStorage.removeItem('logged_pin_attempts');
+  localStorage.removeItem('logged_pin_locked_until');
+}
+function pinRecordFailure(){
+  const n = pinFailureCount() + 1;
+  localStorage.setItem('logged_pin_attempts', String(n));
+  // First 4 failures: no lock. Then escalating from PIN_LOCK_LADDER_MS[0] up.
+  if(n >= 5){
+    const idx = Math.min(n - 5, PIN_LOCK_LADDER_MS.length - 1);
+    const lockMs = PIN_LOCK_LADDER_MS[idx];
+    localStorage.setItem('logged_pin_locked_until', String(Date.now() + lockMs));
+    return lockMs;
+  }
+  return 0;
+}
+function pinFmtRemaining(ms){
+  const s = Math.ceil(ms/1000);
+  if(s < 60) return s + 's';
+  if(s < 3600) return Math.ceil(s/60) + 'm';
+  return Math.ceil(s/3600) + 'h';
 }
 
 // ══ ROUTING ══
@@ -4739,7 +5273,11 @@ function loadOTSLib(){
 }
 
 // ── Canonical entry content string (what we stamp) ──
+// For entries with a manifest (v2+), the fp IS the manifest hash —
+// stamp it directly so the Bitcoin anchor proves the manifest hash, which in turn
+// covers all evidence. For older entries we fall back to the legacy concat.
 function _otsCanonical(entry){
+  if(entry.manifest && entry.fp) return entry.fp;
   return [entry.id, entry.cat, entry.title, entry.note||'', String(entry.ts),
           entry.fp||'', entry.gpsLat||'', entry.gpsLng||'',
           entry.voiceData?'voice':''].join('|');
@@ -4988,6 +5526,19 @@ function renderHome() {
     ? `<div class="trust-line"><svg class="ic"><use href="#ic-clock"/></svg> ${pendingCount} ${pendingCount===1?'entry':'entries'} awaiting Bitcoin confirmation</div>`
     : '';
 
+  // Detailed proof status row — surfaces queued + stale items honestly (T3)
+  const ac = anchorCounts();
+  const anchorBar = (logs.length > 0 && (ac.confirmed + ac.pending + ac.queued + ac.stale > 0)) ? `
+    <div class="anchor-bar">
+      <div class="anchor-bar-row">
+        <span class="ab-pill ab-pill--ok"><svg class="ic"><use href="#ic-anchor"/></svg> ${ac.confirmed} confirmed</span>
+        ${ac.pending > 0 ? `<span class="ab-pill ab-pill--pending"><svg class="ic"><use href="#ic-clock"/></svg> ${ac.pending} pending</span>` : ''}
+        ${ac.queued > 0 ? `<span class="ab-pill ab-pill--queued"><svg class="ic"><use href="#ic-refresh"/></svg> ${ac.queued} queued</span>` : ''}
+        ${(ac.queued > 0 || ac.stale > 0) ? `<button class="ab-retry" onclick="retryAllQueued()">Retry now</button>` : ''}
+      </div>
+      ${ac.stale > 0 ? `<div class="anchor-bar-warn"><svg class="ic"><use href="#ic-alert"/></svg> ${ac.stale} ${ac.stale===1?'entry has':'entries have'} been pending for over 48h — open the entry to re-stamp.</div>` : ''}
+    </div>` : '';
+
   // Resume-draft card
   const draft = getDraft();
   const draftCard = (draft && (draft.title || draft.note))
@@ -5023,7 +5574,7 @@ function renderHome() {
         </button>`).join('')}
       </div>` : '';
 
-    wrap.innerHTML = greet + stats + draftCard + hero +
+    wrap.innerHTML = greet + stats + anchorBar + draftCard + hero +
       `<div class="empty-state">
         <span class="empty-icon"><svg class="ic" style="width:42px;height:42px"><use href="#ic-lock"/></svg></span>
         <div class="empty-title">Ready when you are</div>
@@ -5045,15 +5596,23 @@ function renderHome() {
     let matchSearch = !q;
     if(!matchSearch){
       const catLabel = (getCat(l.cat).label || '').toLowerCase();
+      const tagsStr = (Array.isArray(l.tags) ? l.tags.join(' ') : '').toLowerCase();
+      const qTag = q.replace(/^#/, '');
       matchSearch =
         l.title.toLowerCase().includes(q) ||
         (l.note||'').toLowerCase().includes(q) ||
-        catLabel.includes(q);
+        catLabel.includes(q) ||
+        tagsStr.includes(qTag);
     }
     const matchCat = filterCat === 'all' || l.cat === filterCat;
     const matchDate = !dateCut || l.ts >= dateCut;
     const matchTrust = filterTrust === 'all' || (filterTrust === 'verified' && !!l.fp) || (filterTrust === 'anchored' && l.otsStatus === 'confirmed');
-    return matchSearch && matchCat && matchDate && matchTrust;
+    // T7/T9: active tag/case filters
+    const tagF = window.activeTagFilter;
+    const matchTag = !tagF || (Array.isArray(l.tags) && l.tags.map(t=>String(t).toLowerCase()).includes(tagF));
+    const caseF = window.activeCaseFilter;
+    const matchCase = !caseF || l.caseId === caseF;
+    return matchSearch && matchCat && matchDate && matchTrust && matchTag && matchCase;
   });
 
   const sortLabels = {newest:'Newest',oldest:'Oldest',category:'Category',importance:'Importance'};
@@ -5088,14 +5647,29 @@ function renderHome() {
   ].map(o => `<button class="date-chip ${dateFilter===o.id?'active':''}" onclick="setDateFilter('${o.id}')">${o.label}</button>`).join('');
 
   // ── Search bar ──
+  // T7/T9: case + tag filter strips
+  const _cases = (typeof loadCases === 'function') ? loadCases() : [];
+  const _topTags = (typeof topTags === 'function') ? topTags(6) : [];
+  const activeTag = window.activeTagFilter || null;
+  const activeCase = window.activeCaseFilter || null;
+  let activeFilterStrip = '';
+  if(activeTag || activeCase){
+    const label = activeTag ? `#${escHtml(activeTag)}` : (getCase(activeCase) ? escHtml(getCase(activeCase).name) : 'case');
+    activeFilterStrip = `<div style="padding:0 22px 10px"><div style="display:inline-flex;align-items:center;gap:8px;background:rgba(236,179,152,0.16);border:1px solid rgba(236,179,152,0.35);color:var(--peach,#ECB398);padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600">Filtering: ${label}<button onclick="clearActiveFilters()" style="background:none;border:none;color:inherit;font-weight:700;cursor:pointer;font-size:14px;padding:0;line-height:1">×</button></div></div>`;
+  }
+  const caseStrip = (_cases.length && !activeCase) ? `<div class="case-filter-strip">${_cases.slice(0,8).map(c=>`<button class="case-filter-chip" onclick="filterByCaseFromDetail('${escAttr(c.id)}')"><svg class="ic" style="width:11px;height:11px"><use href="#ic-link"/></svg> ${escHtml(c.name)} <span style="opacity:.6">${caseEntryCount(c.id)}</span></button>`).join('')}</div>` : '';
+  const tagStrip = (_topTags.length && !activeTag) ? `<div class="case-filter-strip">${_topTags.map(t=>`<button class="case-filter-chip" onclick="filterByTagFromDetail('${escAttr(t.tag)}')">#${escHtml(t.tag)} <span style="opacity:.6">${t.count}</span></button>`).join('')}</div>` : '';
   const searchBar = `
     <div class="search-wrap">
       <span class="search-icon"><svg class="ic"><use href="#ic-search"/></svg></span>
-      <input class="search-input" id="searchInput" type="search" placeholder="Search entries…" value="${escHtml(searchQuery)}" oninput="onSearch(this.value)">
+      <input class="search-input" id="searchInput" type="search" placeholder="Search entries or #tag…" value="${escHtml(searchQuery)}" oninput="onSearch(this.value)">
       <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:${searchQuery?'flex':'none'}"><svg class="ic"><use href="#ic-x"/></svg></button>
     </div>
     <div class="date-chips">${dateChips}</div>
-    <div class="filter-chips">${allChip}${catChips}</div>`;
+    <div class="filter-chips">${allChip}${catChips}</div>
+    ${activeFilterStrip}
+    ${caseStrip}
+    ${tagStrip}`;
 
   // ── Cards with swipe-to-delete ──
   const sortLabel = sortLabels[sortMode] || 'Newest';
@@ -5167,7 +5741,7 @@ function renderHome() {
       <button class="home-action-btn" onclick="exportAllPDF()"><svg class="ic"><use href="#ic-download"/></svg> Export report</button>
     </div>`;
 
-  wrap.innerHTML = greet + stats + trustLine + draftCard + digest + hero + searchBar + `
+  wrap.innerHTML = greet + stats + anchorBar + trustLine + draftCard + digest + hero + searchBar + `
     <div class="section-head">
       <span class="section-label">${filtered.length} ${filtered.length===1?'entry':'entries'}${dateFilter!=='all'?' · '+dateFilter:''}${filterTrust!=='all'?' · '+filterTrust:''}</span>
       <button class="sort-btn" onclick="openSortSheet()"><svg class="ic sort-ic"><use href="#ic-sort"/></svg> ${sortLabel}</button>
@@ -5634,6 +6208,33 @@ function renderInsights() {
       <div class="ins-hero-label">${total === 1 ? 'record captured' : 'records captured'}${total === 0 ? ' — add your first below' : ''}</div>
     </div>
 
+    ${(function(){
+      // T7: Cases section
+      const cases = (typeof loadCases === 'function') ? loadCases() : [];
+      if(!cases.length){
+        return `<div class="ins-section">
+          <div class="ins-sec-title">Cases <button onclick="openCasePickerForForm()" style="float:right;background:transparent;border:1px solid var(--cream3);color:var(--text-on-dark);font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;cursor:pointer;font-family:inherit">+ New</button></div>
+          <div style="font-size:12.5px;color:var(--sub-on-dark);line-height:1.5;padding:6px 0">Group related entries into a case (e.g. <em>"Landlord dispute"</em> or <em>"Knee injury follow-ups"</em>) to filter and review them together.</div>
+        </div>`;
+      }
+      const rows = cases.map(c => {
+        const n = caseEntryCount(c.id);
+        return `<button class="cat-bar-row cat-bar-row--tap" onclick="filterByCaseFromDetail('${escAttr(c.id)}')">
+          <div class="cat-bar-icon" style="background:var(--peach,#ECB398);color:#3d1a22"><svg class="ic"><use href="#ic-link"/></svg></div>
+          <div class="cat-bar-body">
+            <div class="cat-bar-head">
+              <span class="cat-bar-name">${escHtml(c.name)}</span>
+              <span class="cat-bar-val">${n} ${n===1?'entry':'entries'} <span class="cat-bar-arrow">›</span></span>
+            </div>
+          </div>
+        </button>`;
+      }).join('');
+      return `<div class="ins-section">
+        <div class="ins-sec-title">Cases <span class="ins-sec-meta">${cases.length} active</span></div>
+        ${rows}
+      </div>`;
+    })()}
+
     <div class="ins-section">
       <div class="ins-sec-title">By category <span class="ins-sec-meta">${CATS.filter(c=>catCounts[c.id]>0).length} used</span></div>
       ${catRows}
@@ -5725,6 +6326,12 @@ function selectCat(id) {
   if(gpsBtn){gpsBtn.style.background='var(--cream3)';gpsBtn.querySelector('.tog-thumb').style.left='3px';gpsBtn.setAttribute('aria-checked','false');}
   // Reset voice memo UI
   resetVoiceUI();
+  // T9: reset tags + T7: reset case
+  resetTagInputUI();
+  newEntry.tags = [];
+  newEntry.caseId = null;
+  renderFormCaseRow();
+  renderTagSuggestions();
   go('formScreen');
 }
 
@@ -5866,7 +6473,6 @@ async function saveRecord() {
   document.getElementById('entryTitle').classList.remove('err');
   const note=document.getElementById('entryNote').value.trim();
   const ts=Date.now();
-  const fp=await sha256(`${newEntry.cat}|${title}|${note}|${ts}`);
   let gpsLat=null,gpsLng=null;
   if(newEntry.gps){
     try{
@@ -5874,6 +6480,17 @@ async function saveRecord() {
       gpsLat=pos.coords.latitude;gpsLng=pos.coords.longitude;
     }catch(e){showToast('<svg class="ic"><use href="#ic-pin"/></svg> GPS unavailable — entry saved without coordinates','',3500);}
   }
+  // Honest fingerprint: covers ALL evidence (title, note, photos, voice, GPS, importance, category, time).
+  // Tampering with any photo or the voice memo invalidates the hash.
+  const tags = readTagsFromForm();
+  const manifest = await buildEvidenceManifest({
+    cat: newEntry.cat, title, note, ts, imp: newEntry.imp,
+    gpsLat, gpsLng,
+    photos: photosBase64,
+    voice: voiceAudioBase64,
+    voiceDuration: voiceAudioBase64 ? voiceAudioDuration : null,
+  });
+  const fp = await manifestHash(manifest);
   const entry={
     id:ts,cat:newEntry.cat,title,note,
     imp:newEntry.imp,photo:photosBase64.length>0,gps:newEntry.gps,
@@ -5881,7 +6498,9 @@ async function saveRecord() {
     photosData:photosBase64.length ? [...photosBase64] : null,
     voiceData:voiceAudioBase64||null,
     voiceDuration:voiceAudioBase64?voiceAudioDuration:null,
-    ts,fp
+    tags,
+    caseId: (newEntry.caseId || null),
+    ts, fp, manifest
   };
   logs.unshift(entry);
   persistEntries();
@@ -5957,12 +6576,16 @@ function openDetail(id) {
       ${photoSection}
       ${l.gps?`<div class="detail-field"><div class="df-label">Location</div><div class="df-value"><svg class="ic"><use href="#ic-pin"/></svg> ${l.gpsLat&&l.gpsLng?`${l.gpsLat.toFixed(6)}, ${l.gpsLng.toFixed(6)}`:'GPS captured at time of entry'}</div></div>`:''}
     </div>
+    ${renderTagsField(l)}
+    ${renderCaseField(l)}
     <div class="detail-card">
       <div class="integrity-label"><svg class="ic"><use href="#ic-check"/></svg> SHA-256 Integrity Verified</div>
+      ${renderCoverageRow(l)}
       <div class="df-label" style="margin-bottom:6px">Record Hash</div>
       <div class="hash-mono">${l.fp||'Hash not available'}</div>
     </div>
     ${otsSection}
+    ${renderAnchorRetryRow(l)}
     <button class="btn btn-amber" onclick="openShareMenu(${l.id})" style="margin-bottom:10px"><svg class="ic"><use href="#ic-share"/></svg> Share</button>
     <button class="btn btn-red" onclick="askDeleteEntry(${l.id})" style="margin-bottom:28px">Delete Entry</button>
   `;
@@ -7080,10 +7703,23 @@ function buildVerifyPayload(entry){
 function buildVerifyUrl(entry){
   // Build a SLIM payload — strip the OTS receipt (often 2KB+) so the URL
   // stays under ~2000 chars and doesn't break in messaging apps.
+  // T5: include manifest summary `mf` so the recipient sees what the hash covers.
+  let mf = null;
+  if(entry.manifest){
+    const m = entry.manifest;
+    mf = {
+      p: (m.photoHashes || []).length,    // photo count
+      v: m.voiceHash ? 1 : 0,             // voice flag
+      g: (m.gpsLat != null) ? 1 : 0,      // gps flag
+      n: m.note ? 1 : 0,                  // has note
+      i: m.imp || null,                   // importance
+    };
+  }
   const slim = {
     v:1, id:entry.id, t:entry.title, ts:entry.ts, c:entry.cat,
     fp:entry.fp||null, oh:entry.otsHash||null,
     os:entry.otsStatus||null, ob:entry.otsBlock||null,
+    mf: mf,
   };
   // Only include receipt if URL would stay short enough
   if(entry.otsReceipt && entry.otsReceipt.length < 600) slim.or = entry.otsReceipt;
@@ -7330,9 +7966,46 @@ function renderVerifyView(payload){
       </div>
     </div>
 
+    ${(function(){
+      // T5: "What this proof covers" — plain language summary of the manifest.
+      const mf = payload.mf;
+      if(!mf){
+        return `<div class="v-coverage">
+          <div class="v-coverage-label">What this proof covers</div>
+          <div class="v-coverage-pills">
+            <span class="v-coverage-pill">title</span>
+            <span class="v-coverage-pill">written account</span>
+            <span class="v-coverage-pill">timestamp</span>
+          </div>
+          <div class="v-coverage-explainer" style="opacity:.85">Older record (pre-v2) — fingerprint covers text fields only.</div>
+        </div>`;
+      }
+      const pills = [];
+      pills.push('title');
+      if(mf.n) pills.push('written account');
+      if(mf.p) pills.push(mf.p+' photo'+(mf.p>1?'s':''));
+      if(mf.v) pills.push('voice memo');
+      if(mf.g) pills.push('GPS coordinates');
+      pills.push('timestamp');
+      return `<div class="v-coverage">
+        <div class="v-coverage-label">What this proof covers</div>
+        <div class="v-coverage-pills">${pills.map(p=>`<span class="v-coverage-pill">${escHtml(p)}</span>`).join('')}</div>
+        <div class="v-coverage-explainer">If any single one of these were changed by even one character or pixel, the fingerprint below would no longer match.</div>
+      </div>`;
+    })()}
+
     ${fp ? `<div class="v-hash-label">Record fingerprint (SHA-256)</div><div class="v-hash">${fp}</div>` : ''}
 
-    <div class="v-foot">
+    <button class="v-explainer-toggle" onclick="(function(){var b=document.getElementById('vBtcExplain');if(b)b.classList.toggle('open');})()">What does Bitcoin verification actually mean? ▾</button>
+    <div id="vBtcExplain" class="v-explainer-body">
+      <strong>How it works (plain English):</strong><br>
+      When this record was saved, its fingerprint (the long hex string above) was sent to a free service called <a href="https://opentimestamps.org" target="_blank" rel="noopener">OpenTimestamps</a>. They bundled it with thousands of other people's fingerprints and stamped them all into a single transaction on the Bitcoin blockchain.<br><br>
+      <strong>Why this matters:</strong> The Bitcoin blockchain is a public ledger that no single person, company, or government controls. Once something is recorded there, it cannot be quietly altered after the fact — every Bitcoin node in the world would notice.<br><br>
+      <strong>What this proves:</strong> Once a green checkmark appears, you can be confident that this exact record (with these exact photos, this exact text, etc.) <em>existed in this form on or before the block date shown</em>. It does <strong>not</strong> prove the events described actually happened — only that the document itself wasn't fabricated after that date.<br><br>
+      <strong>Verify it yourself:</strong> Anyone can verify independently using the OpenTimestamps client at <a href="https://opentimestamps.org" target="_blank" rel="noopener">opentimestamps.org</a> — no Logged account needed.
+    </div>
+
+    <div class="v-foot" style="margin-top:18px">
       Open and free — verified using <a href="https://opentimestamps.org" target="_blank" rel="noopener">opentimestamps.org</a>.
       No Logged account or server is required to perform this check.
     </div>
@@ -7878,6 +8551,17 @@ setInterval(()=>{
   setTimeout(()=>{
     document.getElementById('splashScreen').classList.remove('active');
     go(_bootTarget);
+    // QA hook: ?qa=cat:home opens the form for that category; ?qa=detail:<id> opens detail.
+    try{
+      const qs = new URLSearchParams(location.search);
+      const qa = qs.get('qa');
+      if(qa){
+        const [k,v] = qa.split(':');
+        if(k==='cat' && v && typeof selectCat==='function'){ setTimeout(()=>selectCat(v), 60); }
+        else if(k==='detail' && v && typeof openDetail==='function'){ setTimeout(()=>openDetail(parseInt(v,10)), 60); }
+        else if(k==='insights'){ setTimeout(()=>go('insightsScreen'), 60); }
+      }
+    }catch(e){}
   }, _bootDelay);
   setTimeout(()=>maybeShowTutorial(), 1000);
   setTimeout(()=>sbRestoreSession(), 700);    // silent — only succeeds if user previously signed in

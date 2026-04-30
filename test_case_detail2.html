@@ -1,0 +1,20 @@
+<!doctype html><html><body><script>
+const cases = [
+  { id:'c_001', name:'Landlord 2026 dispute', cat:'home', createdAt: Date.now()-86400000*30 },
+];
+localStorage.setItem('logged_cases_v1', JSON.stringify(cases));
+const entries = [
+  { id:1001, t:'Repair complaint #1', n:'Heating broke', cat:'home', ts:Date.now()-86400000*20, fp:'a'.repeat(64), os:'pending', oh:null, ob:null, caseId:'c_001', tags:['urgent'] },
+  { id:1002, t:'Repair complaint #2', n:'Mold', cat:'home', ts:Date.now()-86400000*15, fp:'b'.repeat(64), os:'confirmed', oh:'b'.repeat(64), ob:801234, caseId:'c_001', tags:['urgent'] },
+];
+localStorage.setItem('logged_entries', JSON.stringify(entries));
+localStorage.setItem('logged_user_name','Test User');
+localStorage.setItem('logged_onboarded','1');
+location.replace('/?qa=case:c_001#casesScreen');
+// after delay, dump body innerHTML for debugging
+setTimeout(()=>{
+  const w = window.opener || window;
+  const target = (parent || w).document.getElementById('caseDetailBody');
+  if(target) console.log('body length:', target.innerHTML.length, 'first 200:', target.innerHTML.slice(0,200));
+}, 2000);
+</script></body></html>

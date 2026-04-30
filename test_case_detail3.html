@@ -1,0 +1,16 @@
+<!doctype html><html><body><script>
+const cases = [
+  { id:'c_001', name:'Landlord 2026 dispute', cat:'home', createdAt: Date.now()-86400000*30 },
+];
+localStorage.setItem('logged_cases_v1', JSON.stringify(cases));
+const entries = [
+  { id:1001, t:'Repair complaint #1', n:'Heating broke', cat:'home', ts:Date.now()-86400000*20, fp:'a'.repeat(64), os:'pending', oh:null, ob:null, caseId:'c_001', tags:['urgent'] },
+  { id:1002, t:'Repair complaint #2', n:'Mold spreading', cat:'home', ts:Date.now()-86400000*15, fp:'b'.repeat(64), os:'confirmed', oh:'b'.repeat(64), ob:801234, caseId:'c_001', tags:['urgent'] },
+  { id:1003, t:'Repair complaint #3', n:'Window broken', cat:'home', ts:Date.now()-86400000*5, fp:'c'.repeat(64), os:'pending', oh:null, ob:null, caseId:'c_001', tags:[] },
+  { id:1005, t:'Random unrelated entry', n:'Coffee', cat:'people', ts:Date.now()-86400000*2, fp:'e'.repeat(64), os:'pending', oh:null, ob:null, caseId:null, tags:[] },
+];
+localStorage.setItem('logged_entries', JSON.stringify(entries));
+localStorage.setItem('logged_user_name','Test User');
+localStorage.setItem('logged_onboarded','1');
+location.replace('/?qa=case:c_001');
+</script></body></html>

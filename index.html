@@ -2293,6 +2293,45 @@ body[data-theme="light"] .case-filter-chip.active{background:#3d1a22;color:#ECB3
 body[data-theme="light"] .case-modal-row{background:#fff;border-color:#d4c4ae;color:#3d1a22}
 body[data-theme="light"] .case-modal-row.active{background:#fbece1;border-color:#e7c2a8}
 
+/* Cases management screen */
+.case-list{display:flex;flex-direction:column;gap:10px;padding-top:8px}
+.case-list-row{display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;cursor:pointer;color:var(--text-on-dark);font-family:inherit;text-align:left;width:100%}
+.case-list-icon{width:42px;height:42px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.case-list-body{flex:1;min-width:0}
+.case-list-name{font-size:15px;font-weight:700;color:var(--text-on-dark);margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.case-list-meta{font-size:12px;color:var(--sub-on-dark)}
+.case-list-arrow{font-size:22px;color:var(--sub-on-dark);font-weight:300;line-height:1}
+body[data-theme="light"] .case-list-row{background:#fff;border-color:#d4c4ae;color:#3d1a22}
+
+.case-hero{display:flex;align-items:center;gap:14px;padding:18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;margin:8px 0 14px}
+.case-hero-icon{width:52px;height:52px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;color:#3d1a22;flex-shrink:0}
+.case-hero-icon svg{width:26px;height:26px}
+.case-hero-body{flex:1;min-width:0}
+.case-hero-name{font-size:17px;font-weight:700;color:var(--text-on-dark);margin-bottom:3px}
+.case-hero-meta{font-size:12.5px;color:var(--sub-on-dark)}
+body[data-theme="light"] .case-hero{background:#fff;border-color:#d4c4ae}
+
+.case-actions{display:flex;gap:8px;margin-bottom:18px}
+.case-actions button{flex:1;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.14);color:var(--text-on-dark);border-radius:10px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px}
+body[data-theme="light"] .case-actions button{border-color:#d4c4ae;color:#3d1a22}
+
+.case-section-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--sub-on-dark);font-weight:700;margin-bottom:10px}
+.case-entries{display:flex;flex-direction:column;gap:8px;padding-bottom:80px}
+.case-entry-row{position:relative;display:block;padding:13px 38px 13px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;cursor:pointer;color:var(--text-on-dark);font-family:inherit;text-align:left;width:100%}
+.case-entry-title{font-size:14px;font-weight:600;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.case-entry-meta{font-size:11.5px;color:var(--sub-on-dark)}
+.case-entry-unlink{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:26px;height:26px;border:none;background:rgba(255,255,255,0.08);color:var(--sub-on-dark);border-radius:50%;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+body[data-theme="light"] .case-entry-row{background:#fff;border-color:#d4c4ae;color:#3d1a22}
+body[data-theme="light"] .case-entry-unlink{background:#f3eee5;color:#7a4a52}
+
+/* Add-entries-to-case bottom sheet */
+.add-entry-row{display:flex;align-items:center;gap:10px;width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;margin-bottom:6px;cursor:pointer;color:var(--text-on-dark);font-family:inherit;text-align:left}
+.add-entry-body{flex:1;min-width:0}
+.add-entry-title{font-size:13.5px;font-weight:600;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.add-entry-meta{font-size:11px;color:var(--sub-on-dark)}
+.add-entry-plus{width:28px;height:28px;border-radius:50%;background:var(--peach,#ECB398);color:#3d1a22;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
+body[data-theme="light"] .add-entry-row{background:#fff;border-color:#d4c4ae;color:#3d1a22}
+
 /* Verify view: coverage block */
 .v-coverage{background:#f3eee5;border:1px solid #d4c4ae;border-radius:10px;padding:14px;margin-bottom:14px}
 .v-coverage-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#7a4a52;font-weight:700;margin-bottom:8px}
@@ -4123,6 +4162,30 @@ body[data-theme="light"] .new-btn{
   </div>
 </div>
 
+<!-- ══ CASES LIST ══ -->
+<div class="screen" id="casesScreen">
+  <div class="screen-inner">
+    <div class="screen-header">
+      <button class="back-btn" onclick="go('insightsScreen')">←</button>
+      <div><div class="screen-title">Cases</div></div>
+      <button class="sort-btn" onclick="openCreateCaseModal()" style="margin-left:auto;background:var(--peach,#ECB398);color:#3d1a22;font-weight:700"><svg class="ic"><use href="#ic-plus"/></svg> New</button>
+    </div>
+    <div style="padding:0 22px" id="casesBody"></div>
+  </div>
+</div>
+
+<!-- ══ CASE DETAIL ══ -->
+<div class="screen" id="caseDetailScreen">
+  <div class="screen-inner">
+    <div class="screen-header">
+      <button class="back-btn" onclick="go('casesScreen')">←</button>
+      <div><div class="screen-title" id="caseDetailTitle">Case</div></div>
+      <button class="sort-btn" onclick="openAddEntriesToCase()" style="margin-left:auto;background:var(--peach,#ECB398);color:#3d1a22;font-weight:700"><svg class="ic"><use href="#ic-plus"/></svg> Add</button>
+    </div>
+    <div style="padding:0 22px" id="caseDetailBody"></div>
+  </div>
+</div>
+
 <!-- ══ CATEGORY DETAIL ══ -->
 <div class="screen" id="catDetailScreen">
   <div class="screen-inner">
@@ -4741,12 +4804,24 @@ function saveCases(arr){
   try{ localStorage.setItem(CASES_KEY, JSON.stringify(arr||[])); }catch(e){}
 }
 function getCase(id){ if(!id) return null; return loadCases().find(c=>c.id===id) || null; }
-function createCase(name){
+function createCase(name, category){
   const cases = loadCases();
-  const c = { id:'c_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), name:(name||'Untitled case').trim().slice(0,80), createdAt:Date.now() };
+  const c = {
+    id:'c_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+    name:(name||'Untitled case').trim().slice(0,80),
+    cat: category || null,
+    createdAt:Date.now()
+  };
   cases.push(c);
   saveCases(cases);
   return c;
+}
+function updateCase(id, patch){
+  const cases = loadCases();
+  const c = cases.find(x=>x.id===id); if(!c) return;
+  Object.assign(c, patch || {});
+  if(c.name) c.name = String(c.name).trim().slice(0,80);
+  saveCases(cases);
 }
 function renameCase(id, name){
   const cases = loadCases();
@@ -4986,6 +5061,250 @@ function closeCasePicker(){
   window._casePickerCb = null;
 }
 
+// ══ CASES SCREEN (T7+) — dedicated management page ══
+let _activeCaseDetailId = null;
+
+function renderCases(){
+  const body = document.getElementById('casesBody');
+  if(!body) return;
+  const cases = loadCases();
+  if(!cases.length){
+    body.innerHTML = `
+      <div style="text-align:center;padding:40px 20px;color:var(--text-on-dark)">
+        <div style="width:64px;height:64px;background:var(--peach,#ECB398);border-radius:18px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px">
+          <svg width="32" height="32"><use href="#ic-link"/></svg>
+        </div>
+        <h2 style="margin:0 0 8px;font-size:18px;font-weight:700">No cases yet</h2>
+        <div style="font-size:13.5px;line-height:1.5;color:var(--sub-on-dark);max-width:300px;margin:0 auto 22px">Cases group related entries together — like <em>"Landlord 2026 dispute"</em> or <em>"Knee injury follow-ups"</em>. Tap <strong>+ New</strong> above to create one.</div>
+        <button onclick="openCreateCaseModal()" style="background:var(--peach,#ECB398);color:#3d1a22;border:none;padding:12px 22px;border-radius:12px;font-weight:700;cursor:pointer;font-family:inherit;font-size:14px"><svg class="ic" style="vertical-align:middle"><use href="#ic-plus"/></svg> Create your first case</button>
+      </div>`;
+    return;
+  }
+  const rows = cases.map(c => {
+    const n = caseEntryCount(c.id);
+    const cat = c.cat ? (CATS.find(x=>x.id===c.cat) || null) : null;
+    return `<button class="case-list-row" onclick="openCaseDetail('${escAttr(c.id)}')">
+      <div class="case-list-icon" style="background:${cat ? cat.color : 'var(--peach,#ECB398)'};color:#3d1a22">
+        <svg class="ic"><use href="#${cat ? ('ic-'+cat.iconId) : 'ic-link'}"/></svg>
+      </div>
+      <div class="case-list-body">
+        <div class="case-list-name">${escHtml(c.name)}</div>
+        <div class="case-list-meta">${cat ? escHtml(cat.label)+' · ' : ''}${n} ${n===1?'entry':'entries'}</div>
+      </div>
+      <div class="case-list-arrow">›</div>
+    </button>`;
+  }).join('');
+  body.innerHTML = `<div class="case-list">${rows}</div>`;
+}
+
+function openCreateCaseModal(){
+  closeCreateCaseModal();
+  const modal = document.createElement('div');
+  modal.id = 'createCaseModal';
+  modal.className = 'modal-overlay';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  const catChips = CATS.map(c => `
+    <button type="button" class="cc-cat-chip" data-cat="${escAttr(c.id)}" style="background:${c.color};color:#3d1a22;border:2px solid transparent;padding:8px 12px;border-radius:10px;font-weight:600;font-size:12.5px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px">
+      <svg class="ic"><use href="#ic-${c.iconId}"/></svg> ${escHtml(c.label)}
+    </button>`).join('');
+  modal.innerHTML = `
+    <div style="background:var(--surface,#fff);color:var(--text-on-dark,#3d1a22);max-width:440px;width:100%;border-radius:18px;padding:22px;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <h3 style="margin:0;font-size:18px;font-weight:700">New case</h3>
+        <button type="button" onclick="closeCreateCaseModal()" style="background:none;border:none;font-size:26px;cursor:pointer;color:inherit;padding:0;line-height:1">×</button>
+      </div>
+      <label style="display:block;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--sub-on-dark);margin-bottom:6px">Case name</label>
+      <input id="ccName" type="text" placeholder="e.g. Landlord 2026 dispute" maxlength="80" style="width:100%;padding:12px 14px;border:1px solid #d4c4ae;border-radius:10px;font-size:14px;font-family:inherit;background:#fff;color:#3d1a22;box-sizing:border-box">
+      <label style="display:block;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--sub-on-dark);margin:16px 0 8px">Category <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+      <div id="ccCats" style="display:flex;flex-wrap:wrap;gap:8px">${catChips}</div>
+      <div style="display:flex;gap:10px;margin-top:22px">
+        <button type="button" onclick="closeCreateCaseModal()" style="flex:1;padding:12px;background:transparent;color:inherit;border:1px solid #d4c4ae;border-radius:10px;font-weight:600;cursor:pointer;font-family:inherit">Cancel</button>
+        <button type="button" onclick="_submitCreateCase()" style="flex:1;padding:12px;background:var(--peach,#ECB398);color:#3d1a22;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit">Create case</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', (e)=>{ if(e.target===modal) closeCreateCaseModal(); });
+  // Category chip selection (single-select)
+  modal._selectedCat = null;
+  modal.querySelectorAll('.cc-cat-chip').forEach(chip => {
+    chip.addEventListener('click', ()=>{
+      const cat = chip.getAttribute('data-cat');
+      if(modal._selectedCat === cat){
+        modal._selectedCat = null;
+        chip.style.borderColor = 'transparent';
+      } else {
+        modal._selectedCat = cat;
+        modal.querySelectorAll('.cc-cat-chip').forEach(c => c.style.borderColor = 'transparent');
+        chip.style.borderColor = '#3d1a22';
+      }
+    });
+  });
+  setTimeout(()=>{ const i = document.getElementById('ccName'); if(i) i.focus(); }, 50);
+}
+function closeCreateCaseModal(){
+  const m = document.getElementById('createCaseModal');
+  if(m) m.remove();
+}
+function _submitCreateCase(){
+  const modal = document.getElementById('createCaseModal');
+  const inp = document.getElementById('ccName');
+  const name = (inp && inp.value || '').trim();
+  if(!name){ if(inp) inp.focus(); showToast('Please name the case','error',2000); return; }
+  const cat = modal && modal._selectedCat || null;
+  const c = createCase(name, cat);
+  closeCreateCaseModal();
+  showToast('Case created', 'success', 1500);
+  openCaseDetail(c.id);
+}
+
+function openCaseDetail(caseId){
+  _activeCaseDetailId = caseId;
+  const c = getCase(caseId);
+  if(!c){ showToast('Case not found','error',2000); go('casesScreen'); return; }
+  go('caseDetailScreen');
+}
+
+function renderCaseDetail(){
+  const body = document.getElementById('caseDetailBody');
+  const titleEl = document.getElementById('caseDetailTitle');
+  if(!body) return;
+  const c = getCase(_activeCaseDetailId);
+  if(!c){ body.innerHTML = '<div style="padding:30px;text-align:center;color:var(--sub-on-dark)">Case not found.</div>'; return; }
+  if(titleEl) titleEl.textContent = c.name;
+  const cat = c.cat ? CATS.find(x=>x.id===c.cat) : null;
+  const linked = logs.filter(l => l.caseId === c.id).sort((a,b)=>(b.ts||0)-(a.ts||0));
+  const entryRows = linked.length ? linked.map(l => `
+    <button class="case-entry-row" onclick="openDetail(${l.id})">
+      <div class="case-entry-title">${escHtml(l.t || 'Untitled')}</div>
+      <div class="case-entry-meta">${formatDate(l.ts)}${l.cat ? ' · '+escHtml((CATS.find(x=>x.id===l.cat)||{label:l.cat}).label) : ''}</div>
+      <button class="case-entry-unlink" onclick="event.stopPropagation();_unlinkFromCase(${l.id})" title="Remove from case">×</button>
+    </button>`).join('') : `
+    <div style="text-align:center;padding:24px;color:var(--sub-on-dark);font-size:13px">
+      No entries yet. Tap <strong>+ Add</strong> above to link entries to this case.
+    </div>`;
+  body.innerHTML = `
+    <div class="case-hero">
+      <div class="case-hero-icon" style="background:${cat ? cat.color : 'var(--peach,#ECB398)'}">
+        <svg class="ic"><use href="#${cat ? ('ic-'+cat.iconId) : 'ic-link'}"/></svg>
+      </div>
+      <div class="case-hero-body">
+        <div class="case-hero-name">${escHtml(c.name)}</div>
+        <div class="case-hero-meta">${cat ? escHtml(cat.label)+' · ' : ''}${linked.length} ${linked.length===1?'entry':'entries'}</div>
+      </div>
+    </div>
+    <div class="case-actions">
+      <button onclick="_renameCasePrompt('${escAttr(c.id)}')">Rename</button>
+      <button onclick="_deleteCasePrompt('${escAttr(c.id)}')" style="color:#c0392b">Delete</button>
+    </div>
+    <div class="case-section-title">Linked entries</div>
+    <div class="case-entries">${entryRows}</div>`;
+}
+
+function _renameCasePrompt(id){
+  const c = getCase(id); if(!c) return;
+  const name = prompt('Rename case', c.name);
+  if(name == null) return;
+  const trimmed = name.trim();
+  if(!trimmed){ showToast('Name cannot be empty','error',2000); return; }
+  renameCase(id, trimmed);
+  renderCaseDetail();
+  showToast('Case renamed','success',1500);
+}
+function _deleteCasePrompt(id){
+  const c = getCase(id); if(!c) return;
+  const n = caseEntryCount(id);
+  if(!confirm(`Delete case "${c.name}"?\n\n${n} ${n===1?'entry stays':'entries stay'} in your records but will no longer be linked to this case.`)) return;
+  deleteCaseRecord(id);
+  showToast('Case deleted','success',1500);
+  go('casesScreen');
+}
+function _unlinkFromCase(entryId){
+  const e = logs.find(l => l.id === entryId); if(!e) return;
+  e.caseId = null;
+  persistEntries();
+  renderCaseDetail();
+  showToast('Removed from case','success',1500);
+}
+
+function openAddEntriesToCase(){
+  const c = getCase(_activeCaseDetailId);
+  if(!c){ showToast('Open a case first','error',2000); return; }
+  closeAddEntriesModal();
+  const modal = document.createElement('div');
+  modal.id = 'addEntriesModal';
+  modal.className = 'modal-overlay';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:flex-end;justify-content:center;padding:0';
+  modal.innerHTML = `
+    <div style="background:var(--surface,#fff);color:var(--text-on-dark,#3d1a22);max-width:520px;width:100%;border-radius:18px 18px 0 0;padding:18px 18px 24px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 -10px 40px rgba(0,0,0,.4)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <h3 style="margin:0;font-size:17px;font-weight:700">Add entries to "${escHtml(c.name)}"</h3>
+        <button type="button" onclick="closeAddEntriesModal()" style="background:none;border:none;font-size:26px;cursor:pointer;color:inherit;padding:0;line-height:1">×</button>
+      </div>
+      <input id="addEntriesSearch" type="search" placeholder="Search by title, note, tag…" style="width:100%;padding:11px 14px;border:1px solid #d4c4ae;border-radius:10px;font-size:14px;font-family:inherit;background:#fff;color:#3d1a22;box-sizing:border-box;margin-bottom:12px">
+      <div id="addEntriesList" style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch"></div>
+      <div style="display:flex;gap:10px;margin-top:14px">
+        <button type="button" onclick="closeAddEntriesModal()" style="flex:1;padding:12px;background:transparent;color:inherit;border:1px solid #d4c4ae;border-radius:10px;font-weight:600;cursor:pointer;font-family:inherit">Done</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', (e)=>{ if(e.target===modal) closeAddEntriesModal(); });
+  _renderAddEntriesList('');
+  const inp = document.getElementById('addEntriesSearch');
+  if(inp){
+    inp.addEventListener('input', ()=> _renderAddEntriesList(inp.value));
+    setTimeout(()=>inp.focus(), 50);
+  }
+}
+function closeAddEntriesModal(){
+  const m = document.getElementById('addEntriesModal');
+  if(m) m.remove();
+}
+function _renderAddEntriesList(query){
+  const list = document.getElementById('addEntriesList');
+  if(!list) return;
+  const c = getCase(_activeCaseDetailId);
+  if(!c){ list.innerHTML = ''; return; }
+  const q = (query||'').trim().toLowerCase();
+  const matches = logs
+    .filter(l => {
+      if(l.caseId === c.id) return false; // already linked
+      if(!q) return true;
+      const tags = (l.tags||[]).join(' ').toLowerCase();
+      return (l.t||'').toLowerCase().includes(q)
+          || (l.n||'').toLowerCase().includes(q)
+          || tags.includes(q.replace(/^#/,''))
+          || (l.cat||'').toLowerCase().includes(q);
+    })
+    .sort((a,b)=>(b.ts||0)-(a.ts||0))
+    .slice(0, 80);
+  if(!matches.length){
+    list.innerHTML = `<div style="padding:24px;text-align:center;color:var(--sub-on-dark);font-size:13px">${q ? 'No matching entries.' : 'No more entries to add — every entry is already in this case.'}</div>`;
+    return;
+  }
+  list.innerHTML = matches.map(l => {
+    const otherCase = l.caseId ? getCase(l.caseId) : null;
+    return `<button class="add-entry-row" onclick="_linkEntryToActiveCase(${l.id})">
+      <div class="add-entry-body">
+        <div class="add-entry-title">${escHtml(l.t || 'Untitled')}</div>
+        <div class="add-entry-meta">${formatDate(l.ts)}${l.cat ? ' · '+escHtml((CATS.find(x=>x.id===l.cat)||{label:l.cat}).label) : ''}${otherCase ? ' · in: '+escHtml(otherCase.name) : ''}</div>
+      </div>
+      <div class="add-entry-plus">+</div>
+    </button>`;
+  }).join('');
+}
+function _linkEntryToActiveCase(entryId){
+  const c = getCase(_activeCaseDetailId);
+  if(!c) return;
+  const e = logs.find(l => l.id === entryId); if(!e) return;
+  e.caseId = c.id;
+  persistEntries();
+  // Re-render search list to remove the just-linked entry, and refresh detail in background.
+  const inp = document.getElementById('addEntriesSearch');
+  _renderAddEntriesList(inp ? inp.value : '');
+  renderCaseDetail();
+  showToast('Added to case','success',1200);
+}
+
 // ══ FILTER FROM DETAIL (T7/T9) ══
 function filterByTagFromDetail(tag){
   window.activeTagFilter = _normalizeTag(tag);
@@ -5110,6 +5429,8 @@ function go(id) {
   if(id === 'insightsScreen') renderInsights();
   if(id === 'settingsScreen') renderSettings();
   if(id === 'catDetailScreen') renderCatDetail();
+  if(id === 'casesScreen')    renderCases();
+  if(id === 'caseDetailScreen') renderCaseDetail();
   // Stop any playing detail voice when navigating away
   if(id !== 'detailScreen' && detailVoiceEl){ try{detailVoiceEl.pause();}catch(e){} }
 }
@@ -6213,14 +6534,15 @@ function renderInsights() {
       const cases = (typeof loadCases === 'function') ? loadCases() : [];
       if(!cases.length){
         return `<div class="ins-section">
-          <div class="ins-sec-title">Cases <button onclick="openCasePickerForForm()" style="float:right;background:transparent;border:1px solid var(--cream3);color:var(--text-on-dark);font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;cursor:pointer;font-family:inherit">+ New</button></div>
+          <div class="ins-sec-title">Cases <button onclick="go('casesScreen')" style="float:right;background:transparent;border:1px solid var(--cream3);color:var(--text-on-dark);font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;cursor:pointer;font-family:inherit">+ New</button></div>
           <div style="font-size:12.5px;color:var(--sub-on-dark);line-height:1.5;padding:6px 0">Group related entries into a case (e.g. <em>"Landlord dispute"</em> or <em>"Knee injury follow-ups"</em>) to filter and review them together.</div>
         </div>`;
       }
       const rows = cases.map(c => {
         const n = caseEntryCount(c.id);
-        return `<button class="cat-bar-row cat-bar-row--tap" onclick="filterByCaseFromDetail('${escAttr(c.id)}')">
-          <div class="cat-bar-icon" style="background:var(--peach,#ECB398);color:#3d1a22"><svg class="ic"><use href="#ic-link"/></svg></div>
+        const cat = c.cat ? (CATS.find(x=>x.id===c.cat) || null) : null;
+        return `<button class="cat-bar-row cat-bar-row--tap" onclick="openCaseDetail('${escAttr(c.id)}')">
+          <div class="cat-bar-icon" style="background:${cat ? cat.color : 'var(--peach,#ECB398)'};color:#3d1a22"><svg class="ic"><use href="#${cat ? ('ic-'+cat.iconId) : 'ic-link'}"/></svg></div>
           <div class="cat-bar-body">
             <div class="cat-bar-head">
               <span class="cat-bar-name">${escHtml(c.name)}</span>
@@ -6230,7 +6552,7 @@ function renderInsights() {
         </button>`;
       }).join('');
       return `<div class="ins-section">
-        <div class="ins-sec-title">Cases <span class="ins-sec-meta">${cases.length} active</span></div>
+        <div class="ins-sec-title">Cases <button onclick="go('casesScreen')" style="float:right;background:transparent;border:1px solid var(--cream3);color:var(--text-on-dark);font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;cursor:pointer;font-family:inherit">Manage ›</button></div>
         ${rows}
       </div>`;
     })()}
@@ -8065,15 +8387,15 @@ function sbLog(where, err, extra) {
   try { showToast('Supabase: '+where+' — '+msg, 'error', 6000); } catch(_){}
 }
 
-function sbClient() {
+function sbClient(opts) {
+  // opts.userInitiated = true → surface a toast if SDK missing (sign-in / sync).
+  // Otherwise stay silent (boot-time session restore should never spam the user).
   if(!_sb) {
     if(!window.supabase){
-      // Surface a real error instead of returning null silently — otherwise
-      // the OTP screen just shows a generic "Could not send code" with no
-      // hint that the SDK itself never executed (most common cause: the page
-      // was opened from file:// in a browser that blocks https CDN scripts).
-      console.error('[Supabase] SDK not loaded yet');
-      try { showToast('Supabase SDK failed to load — open this app via the share link, not the downloaded file.','error',6000); } catch(_){}
+      console.warn('[Supabase] SDK not available (cloud sync disabled)');
+      if(opts && opts.userInitiated){
+        try { showToast('Cloud sync unavailable — open this app via its hosted link.','error',5000); } catch(_){}
+      }
       return null;
     }
     _sb = window.supabase.createClient(SB_URL, SB_KEY);
@@ -8093,7 +8415,7 @@ async function sbRestoreSession() {
 
 // ── Auth ──
 async function sbSendOTP(email) {
-  const sb = sbClient();
+  const sb = sbClient({userInitiated:true});
   if(!sb) return { ok:false, msg:'Cloud sync unavailable — Supabase SDK failed to load.' };
   try {
     const { error } = await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:true } });
@@ -8170,7 +8492,7 @@ async function sbVerifyOnboard() {
 // Providers. Until configured, the SDK returns a clear error which we
 // surface as a friendly toast.
 async function sbOAuthSignIn(provider){
-  const sb = sbClient();
+  const sb = sbClient({userInitiated:true});
   if(!sb){ showToast('Cloud sync unavailable — Supabase SDK failed to load.','error',4000); return; }
   // Redirect back to the same URL we're on so the session lands here
   const redirectTo = location.origin + location.pathname + (location.search||'');
@@ -8560,6 +8882,8 @@ setInterval(()=>{
         if(k==='cat' && v && typeof selectCat==='function'){ setTimeout(()=>selectCat(v), 60); }
         else if(k==='detail' && v && typeof openDetail==='function'){ setTimeout(()=>openDetail(parseInt(v,10)), 60); }
         else if(k==='insights'){ setTimeout(()=>go('insightsScreen'), 60); }
+        else if(k==='cases'){ setTimeout(()=>go('casesScreen'), 60); }
+        else if(k==='case' && v && typeof openCaseDetail==='function'){ setTimeout(()=>openCaseDetail(v), 60); }
       }
     }catch(e){}
   }, _bootDelay);

@@ -121,7 +121,7 @@
   // We can re-introduce a real PWA service worker once the app has stabilized.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js?v=cleanup6').then(reg => {
+      navigator.serviceWorker.register('sw.js?v=cleanup8').then(reg => {
         if(!reg) return;
 
         function showUpdatePill(worker){
@@ -2247,6 +2247,60 @@ body[data-theme="light"] .ab-pill--pending{background:#fbece1;color:#9a4a30;bord
 body[data-theme="light"] .ab-pill--queued{background:#fbf2dc;color:#7a5a18;border-color:#e7d291}
 body[data-theme="light"] .ab-retry{color:#9a4a30;border-color:#e7c2a8}
 body[data-theme="light"] .anchor-bar-warn{color:#9a5a18}
+
+/* ── Redesigned home screen ── */
+.greeting-slim{padding:0 22px 20px;display:flex;align-items:baseline;gap:8px}
+.greeting-slim-name{font-family:var(--font-serif);font-size:24px;font-weight:700;color:var(--text-on-dark)}
+body[data-theme="light"] .greeting-slim-name{color:var(--wine-1)}
+
+/* Anchor alert — minimal actionable line */
+.anchor-alert{display:flex;align-items:center;gap:10px;margin:0 22px 16px;padding:11px 14px;background:rgba(255,200,100,0.08);border:1px solid rgba(255,200,100,0.22);border-radius:12px;color:var(--text-on-dark);font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;text-align:left;width:calc(100% - 44px)}
+.anchor-alert svg{width:16px;height:16px;color:#d4a017}
+body[data-theme="light"] .anchor-alert{background:#fffbeb;border-color:#f0d585;color:#7a5a18}
+
+/* Search + filter row */
+.search-filter-row{display:flex;align-items:center;gap:10px;padding:0 22px 10px}
+.search-wrap-inline{flex:1;position:relative;display:flex;align-items:center;background:var(--surface-raised);border:1px solid rgba(255,255,255,0.1);border-radius:14px;overflow:hidden}
+.search-wrap-inline .search-icon{position:absolute;left:12px;pointer-events:none;opacity:.5;display:flex}
+.search-wrap-inline .search-input{flex:1;padding:11px 38px 11px 38px;background:transparent;border:none;color:var(--text-on-dark);font-family:inherit;font-size:14px;outline:none;min-width:0}
+.search-wrap-inline .search-input::placeholder{color:var(--sub-on-dark)}
+.search-wrap-inline .search-clear{position:absolute;right:8px;width:28px;height:28px;border:none;background:none;color:var(--sub-on-dark);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%}
+body[data-theme="light"] .search-wrap-inline{background:#fff;border-color:#d4c4ae}
+body[data-theme="light"] .search-wrap-inline .search-input{color:#3d1a22}
+
+.filter-sheet-btn{flex-shrink:0;padding:10px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:var(--text-on-dark);font-family:inherit;font-size:13px;font-weight:700;border-radius:12px;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px}
+body[data-theme="light"] .filter-sheet-btn{background:#fff;border-color:#d4c4ae;color:#3d1a22}
+.filter-badge{background:var(--peach,#ECB398);color:#3d1a22;font-size:10px;font-weight:800;padding:1px 5px;border-radius:99px;line-height:1.5}
+
+/* Active filter chips */
+.af-row{display:flex;flex-wrap:wrap;gap:6px;padding:0 22px 10px}
+.af-chip{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;background:rgba(236,179,152,0.16);border:1px solid rgba(236,179,152,0.35);color:var(--peach,#ECB398);font-family:inherit;font-size:12px;font-weight:700;border-radius:999px;cursor:pointer;white-space:nowrap}
+.af-chip:active{opacity:.7}
+body[data-theme="light"] .af-chip{background:#fbece1;border-color:#e7c2a8;color:#9a4a30}
+
+/* Filter bottom sheet */
+#filterSheet{position:fixed;inset:0;z-index:9998;pointer-events:none}
+#filterSheet.ready{pointer-events:all}
+.fs-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity 0.28s}
+.fs-panel{position:absolute;bottom:0;left:0;right:0;max-width:520px;margin:0 auto;background:var(--surface,#2a1620);border-radius:22px 22px 0 0;padding:0 20px 40px;max-height:82vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform 0.28s cubic-bezier(0.32,0.72,0,1)}
+.fs-panel--open{transform:translateY(0)}
+.fs-panel--open ~ .fs-backdrop, #filterSheet.ready .fs-backdrop{opacity:1;pointer-events:all}
+#filterSheet{pointer-events:all}
+.fs-handle{width:36px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;margin:14px auto 18px}
+.fs-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.fs-title{font-size:18px;font-weight:700;color:var(--text-on-dark)}
+.fs-reset{background:none;border:none;color:var(--sub-on-dark);font-family:inherit;font-size:13px;cursor:pointer;font-weight:600;padding:0}
+.fs-section{margin-bottom:20px}
+.fs-section-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--sub-on-dark);font-weight:700;margin-bottom:10px}
+.fs-chip-row{display:flex;flex-wrap:wrap;gap:7px}
+.fs-chip{padding:8px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,0.12);background:transparent;color:var(--sub-on-dark);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .14s}
+.fs-chip--on{background:var(--peach,#ECB398);color:var(--wine-1,#3d1a22);border-color:var(--peach,#ECB398)}
+.fs-chip-count{font-size:10px;opacity:.65;margin-left:2px}
+.fs-done{width:100%;margin-top:14px;padding:15px;background:var(--peach,#ECB398);color:var(--wine-1,#3d1a22);border:none;border-radius:14px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer}
+body[data-theme="light"] .fs-panel{background:#faf6f0}
+body[data-theme="light"] .fs-title{color:#3d1a22}
+body[data-theme="light"] .fs-chip{border-color:#d4c4ae;color:#7a4a52}
+body[data-theme="light"] .fs-chip--on{background:#3d1a22;color:#ECB398;border-color:#3d1a22}
 
 .anchor-retry-row{padding:12px 14px;border-radius:12px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px}
 .anchor-retry-row--queued{background:rgba(212,167,42,0.10);border:1px solid rgba(212,167,42,0.25)}
@@ -5176,7 +5230,7 @@ function renderCaseDetail(){
   const entryRows = linked.length ? linked.map(l => `
     <button class="case-entry-row" onclick="openDetail(${l.id})">
       <div class="case-entry-title">${escHtml(l.t || 'Untitled')}</div>
-      <div class="case-entry-meta">${formatDate(l.ts)}${l.cat ? ' · '+escHtml((CATS.find(x=>x.id===l.cat)||{label:l.cat}).label) : ''}</div>
+      <div class="case-entry-meta">${fmtDate(l.ts)}${l.cat ? ' · '+escHtml((CATS.find(x=>x.id===l.cat)||{label:l.cat}).label) : ''}</div>
       <button class="case-entry-unlink" onclick="event.stopPropagation();_unlinkFromCase(${l.id})" title="Remove from case">×</button>
     </button>`).join('') : `
     <div style="text-align:center;padding:24px;color:var(--sub-on-dark);font-size:13px">
@@ -5286,7 +5340,7 @@ function _renderAddEntriesList(query){
     return `<button class="add-entry-row" onclick="_linkEntryToActiveCase(${l.id})">
       <div class="add-entry-body">
         <div class="add-entry-title">${escHtml(l.t || 'Untitled')}</div>
-        <div class="add-entry-meta">${formatDate(l.ts)}${l.cat ? ' · '+escHtml((CATS.find(x=>x.id===l.cat)||{label:l.cat}).label) : ''}${otherCase ? ' · in: '+escHtml(otherCase.name) : ''}</div>
+        <div class="add-entry-meta">${fmtDate(l.ts)}${l.cat ? ' · '+escHtml((CATS.find(x=>x.id===l.cat)||{label:l.cat}).label) : ''}${otherCase ? ' · in: '+escHtml(otherCase.name) : ''}</div>
       </div>
       <div class="add-entry-plus">+</div>
     </button>`;
@@ -5798,16 +5852,21 @@ function lastLoggedLabel() {
   return Math.floor(days / 30) + 'mo ago';
 }
 
+function _activeFilterCount() {
+  let n = 0;
+  if(filterCat !== 'all') n++;
+  if(dateFilter !== 'all') n++;
+  if(sortMode !== 'newest') n++;
+  if(filterTrust !== 'all') n++;
+  if(window.activeTagFilter) n++;
+  if(window.activeCaseFilter) n++;
+  return n;
+}
+
 function renderHome() {
   const d = new Date();
   const userName = localStorage.getItem('logged_user_name') || '';
   const firstName = userName ? userName.split(' ')[0] : '';
-  const last = lastLoggedLabel();
-
-  // Trust-focused aggregates
-  const verifiedCount = logs.filter(l => !!l.fp).length;
-  const anchoredCount = logs.filter(l => l.otsStatus === 'confirmed').length;
-  const pendingCount  = logs.filter(l => l.otsStatus === 'pending' || l.otsStatus === 'queued').length;
 
   document.getElementById('homeDate').textContent = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
   const titleEl = document.getElementById('homeTitle');
@@ -5815,64 +5874,32 @@ function renderHome() {
 
   const wrap = document.getElementById('recordsList');
 
-  const greet = `
-    <div class="greeting">
-      <div class="greet-hello">${firstName ? 'Hello, '+escHtml(firstName)+'.' : 'Your records.'}</div>
-      <div class="greet-sub">${logs.length === 0 ? 'Capture what happened — privately, with proof.' : 'Every entry has a tamper-proof fingerprint.'}</div>
-    </div>`;
+  // Greeting — compact, one line
+  const greetText = firstName ? 'Hello, '+escHtml(firstName)+'.' : 'Your records.';
+  const greet = `<div class="greeting-slim"><span class="greeting-slim-name">${greetText}</span></div>`;
 
-  // 4-tile trust stats
-  const stats = `
-    <div class="stats-strip stats-trust">
-      <button class="stat-chip ${filterTrust==='all'&&logs.length>0?'stat-chip--active':''}" onclick="setTrustFilter('all')" title="Show all entries">
-        <div class="stat-chip-val">${logs.length}</div>
-        <div class="stat-chip-lbl">Total</div>
-      </button>
-      <button class="stat-chip ${filterTrust==='verified'?'stat-chip--active':''}" onclick="setTrustFilter('verified')" title="Entries with SHA-256 fingerprint">
-        <div class="stat-chip-val" style="color:var(--sage,#7fb685)">${verifiedCount}</div>
-        <div class="stat-chip-lbl">Verified</div>
-      </button>
-      <button class="stat-chip ${filterTrust==='anchored'?'stat-chip--active':''}" onclick="setTrustFilter('anchored')" title="Anchored to the Bitcoin blockchain">
-        <div class="stat-chip-val" style="color:var(--amber,#ECB398)">${anchoredCount}</div>
-        <div class="stat-chip-lbl">Anchored</div>
-      </button>
-      <div class="stat-chip">
-        <div class="stat-chip-val" style="font-size:${last.length>6?'14px':'20px'};line-height:1.3">${last}</div>
-        <div class="stat-chip-lbl">Last log</div>
-      </div>
-    </div>`;
-
-  // Pending-anchor inline status (only when relevant)
-  const trustLine = pendingCount > 0
-    ? `<div class="trust-line"><svg class="ic"><use href="#ic-clock"/></svg> ${pendingCount} ${pendingCount===1?'entry':'entries'} awaiting Bitcoin confirmation</div>`
-    : '';
-
-  // Detailed proof status row — surfaces queued + stale items honestly (T3)
-  const ac = anchorCounts();
-  const anchorBar = (logs.length > 0 && (ac.confirmed + ac.pending + ac.queued + ac.stale > 0)) ? `
-    <div class="anchor-bar">
-      <div class="anchor-bar-row">
-        <span class="ab-pill ab-pill--ok"><svg class="ic"><use href="#ic-anchor"/></svg> ${ac.confirmed} confirmed</span>
-        ${ac.pending > 0 ? `<span class="ab-pill ab-pill--pending"><svg class="ic"><use href="#ic-clock"/></svg> ${ac.pending} pending</span>` : ''}
-        ${ac.queued > 0 ? `<span class="ab-pill ab-pill--queued"><svg class="ic"><use href="#ic-refresh"/></svg> ${ac.queued} queued</span>` : ''}
-        ${(ac.queued > 0 || ac.stale > 0) ? `<button class="ab-retry" onclick="retryAllQueued()">Retry now</button>` : ''}
-      </div>
-      ${ac.stale > 0 ? `<div class="anchor-bar-warn"><svg class="ic"><use href="#ic-alert"/></svg> ${ac.stale} ${ac.stale===1?'entry has':'entries have'} been pending for over 48h — open the entry to re-stamp.</div>` : ''}
-    </div>` : '';
-
-  // Resume-draft card
+  // Draft card
   const draft = getDraft();
   const draftCard = (draft && (draft.title || draft.note))
     ? `<div class="draft-card" role="button" onclick="resumeDraft()">
         <div class="draft-card-icon"><svg class="ic"><use href="#ic-pencil"/></svg></div>
         <div class="draft-card-body">
           <div class="draft-card-title">Continue draft</div>
-          <div class="draft-card-sub">${escHtml((draft.title || draft.note || '').slice(0,60))}${(draft.title || draft.note || '').length>60?'…':''}</div>
+          <div class="draft-card-sub">${escHtml((draft.title || draft.note || '').slice(0,60))}${(draft.title||draft.note||'').length>60?'…':''}</div>
         </div>
         <button class="draft-card-x" onclick="event.stopPropagation();dismissDraft()" aria-label="Dismiss draft">×</button>
       </div>` : '';
 
-  // Hero: New Entry + Quick Voice
+  // Anchor alert — only show if something is ACTIONABLE (stale or queued)
+  const ac = anchorCounts();
+  const anchorAlert = (logs.length > 0 && (ac.stale > 0 || ac.queued > 0))
+    ? `<button class="anchor-alert" onclick="go('insightsScreen')">
+        <svg class="ic" style="flex-shrink:0"><use href="#ic-alert"/></svg>
+        <span>${ac.stale > 0 ? ac.stale+' entries need re-stamping' : ac.queued+' entries queued for anchoring'} — tap to retry</span>
+        <svg class="ic" style="flex-shrink:0;opacity:.5"><use href="#ic-chevron-right"/></svg>
+      </button>` : '';
+
+  // CTA strip
   const hero = `
     <div class="home-new-strip">
       <button class="new-btn" id="newEntryBtn" onclick="go('catScreen')" oncontextmenu="event.preventDefault();openQuickCapture();return false;">
@@ -5895,7 +5922,7 @@ function renderHome() {
         </button>`).join('')}
       </div>` : '';
 
-    wrap.innerHTML = greet + stats + anchorBar + draftCard + hero +
+    wrap.innerHTML = greet + draftCard + hero +
       `<div class="empty-state">
         <span class="empty-icon"><svg class="ic" style="width:42px;height:42px"><use href="#ic-lock"/></svg></span>
         <div class="empty-title">Ready when you are</div>
@@ -5928,7 +5955,6 @@ function renderHome() {
     const matchCat = filterCat === 'all' || l.cat === filterCat;
     const matchDate = !dateCut || l.ts >= dateCut;
     const matchTrust = filterTrust === 'all' || (filterTrust === 'verified' && !!l.fp) || (filterTrust === 'anchored' && l.otsStatus === 'confirmed');
-    // T7/T9: active tag/case filters
     const tagF = window.activeTagFilter;
     const matchTag = !tagF || (Array.isArray(l.tags) && l.tags.map(t=>String(t).toLowerCase()).includes(tagF));
     const caseF = window.activeCaseFilter;
@@ -5937,9 +5963,9 @@ function renderHome() {
   });
 
   const sortLabels = {newest:'Newest',oldest:'Oldest',category:'Category',importance:'Importance'};
-  if(sortMode === 'oldest')     filtered = [...filtered].sort((a,b)=>a.ts-b.ts);
-  else if(sortMode === 'newest') filtered = [...filtered].sort((a,b)=>b.ts-a.ts);
-  else if(sortMode === 'category') filtered = [...filtered].sort((a,b)=>a.cat.localeCompare(b.cat));
+  if(sortMode === 'oldest')         filtered = [...filtered].sort((a,b)=>a.ts-b.ts);
+  else if(sortMode === 'newest')     filtered = [...filtered].sort((a,b)=>b.ts-a.ts);
+  else if(sortMode === 'category')   filtered = [...filtered].sort((a,b)=>a.cat.localeCompare(b.cat));
   else if(sortMode === 'importance') filtered = [...filtered].sort((a,b)=>(b.imp||0)-(a.imp||0));
 
   const ml  = monthLogs();
@@ -5954,46 +5980,31 @@ function renderHome() {
       <div style="height:4px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${pct>=80?'var(--red)':'var(--grad-hero)'};border-radius:3px;transition:width 0.5s"></div></div>
     </div>` : '';
 
-  // ── Filter chips ──
-  const allChip = `<button class="filter-chip ${filterCat==='all'?'active':''}" onclick="setFilter('all')">All</button>`;
-  const catChips = CATS.map(c=>`<button class="filter-chip ${filterCat===c.id?'active':''}" onclick="setFilter('${c.id}')">${catIcon(c)} ${c.label}</button>`).join('');
+  // Active filter summary — single dismissible row (replaces all the chip strips)
+  const fc = _activeFilterCount();
+  const activeFilterChips = [];
+  if(filterCat !== 'all'){ const c=getCat(filterCat); activeFilterChips.push(`<button class="af-chip" onclick="setFilter('all')">${catIcon(c)} ${c.label} ×</button>`); }
+  if(dateFilter !== 'all') activeFilterChips.push(`<button class="af-chip" onclick="setDateFilter('all')">${dateFilter.charAt(0).toUpperCase()+dateFilter.slice(1)} ×</button>`);
+  if(filterTrust !== 'all') activeFilterChips.push(`<button class="af-chip" onclick="setTrustFilter('all')">${filterTrust.charAt(0).toUpperCase()+filterTrust.slice(1)} ×</button>`);
+  if(window.activeTagFilter) activeFilterChips.push(`<button class="af-chip" onclick="clearActiveFilters()">#${escHtml(window.activeTagFilter)} ×</button>`);
+  if(window.activeCaseFilter){ const cc=getCase(window.activeCaseFilter); activeFilterChips.push(`<button class="af-chip" onclick="clearActiveFilters()">${cc?escHtml(cc.name):'case'} ×</button>`); }
+  if(sortMode !== 'newest') activeFilterChips.push(`<button class="af-chip" onclick="setSortMode('newest')">Sort: ${sortLabels[sortMode]} ×</button>`);
+  const activeFiltersRow = activeFilterChips.length ? `<div class="af-row">${activeFilterChips.join('')}</div>` : '';
 
-  // ── Date filter chips ──
-  const dateChips = [
-    {id:'all',  label:'All'},
-    {id:'today',label:'Today'},
-    {id:'week', label:'Week'},
-    {id:'month',label:'Month'},
-    {id:'year', label:'Year'}
-  ].map(o => `<button class="date-chip ${dateFilter===o.id?'active':''}" onclick="setDateFilter('${o.id}')">${o.label}</button>`).join('');
-
-  // ── Search bar ──
-  // T7/T9: case + tag filter strips
-  const _cases = (typeof loadCases === 'function') ? loadCases() : [];
-  const _topTags = (typeof topTags === 'function') ? topTags(6) : [];
-  const activeTag = window.activeTagFilter || null;
-  const activeCase = window.activeCaseFilter || null;
-  let activeFilterStrip = '';
-  if(activeTag || activeCase){
-    const label = activeTag ? `#${escHtml(activeTag)}` : (getCase(activeCase) ? escHtml(getCase(activeCase).name) : 'case');
-    activeFilterStrip = `<div style="padding:0 22px 10px"><div style="display:inline-flex;align-items:center;gap:8px;background:rgba(236,179,152,0.16);border:1px solid rgba(236,179,152,0.35);color:var(--peach,#ECB398);padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600">Filtering: ${label}<button onclick="clearActiveFilters()" style="background:none;border:none;color:inherit;font-weight:700;cursor:pointer;font-size:14px;padding:0;line-height:1">×</button></div></div>`;
-  }
-  const caseStrip = (_cases.length && !activeCase) ? `<div class="case-filter-strip">${_cases.slice(0,8).map(c=>`<button class="case-filter-chip" onclick="filterByCaseFromDetail('${escAttr(c.id)}')"><svg class="ic" style="width:11px;height:11px"><use href="#ic-link"/></svg> ${escHtml(c.name)} <span style="opacity:.6">${caseEntryCount(c.id)}</span></button>`).join('')}</div>` : '';
-  const tagStrip = (_topTags.length && !activeTag) ? `<div class="case-filter-strip">${_topTags.map(t=>`<button class="case-filter-chip" onclick="filterByTagFromDetail('${escAttr(t.tag)}')">#${escHtml(t.tag)} <span style="opacity:.6">${t.count}</span></button>`).join('')}</div>` : '';
+  // Search + filter button
+  const filterBtnLabel = fc > 0 ? `Filter <span class="filter-badge">${fc}</span>` : 'Filter';
   const searchBar = `
-    <div class="search-wrap">
-      <span class="search-icon"><svg class="ic"><use href="#ic-search"/></svg></span>
-      <input class="search-input" id="searchInput" type="search" placeholder="Search entries or #tag…" value="${escHtml(searchQuery)}" oninput="onSearch(this.value)">
-      <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:${searchQuery?'flex':'none'}"><svg class="ic"><use href="#ic-x"/></svg></button>
+    <div class="search-filter-row">
+      <div class="search-wrap-inline">
+        <span class="search-icon"><svg class="ic"><use href="#ic-search"/></svg></span>
+        <input class="search-input" id="searchInput" type="search" placeholder="Search entries…" value="${escHtml(searchQuery)}" oninput="onSearch(this.value)">
+        <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:${searchQuery?'flex':'none'}"><svg class="ic"><use href="#ic-x"/></svg></button>
+      </div>
+      <button class="filter-sheet-btn" onclick="openFilterSheet()">${filterBtnLabel}</button>
     </div>
-    <div class="date-chips">${dateChips}</div>
-    <div class="filter-chips">${allChip}${catChips}</div>
-    ${activeFilterStrip}
-    ${caseStrip}
-    ${tagStrip}`;
+    ${activeFiltersRow}`;
 
-  // ── Cards with swipe-to-delete ──
-  const sortLabel = sortLabels[sortMode] || 'Newest';
+  // ── Cards ──
   const noResults = filtered.length === 0 && (searchQuery || filterCat !== 'all' || dateFilter !== 'all' || filterTrust !== 'all');
 
   // Build a map of records grouped by month-year for the timeline
@@ -6054,23 +6065,14 @@ function renderHome() {
     cardsHtml = filtered.map(renderCard).join('');
   }
 
-  const digest = renderWeeklyDigest();
-
-  // Export-report CTA (only when there's data)
-  const exportCta = `
-    <div class="home-actions">
-      <button class="home-action-btn" onclick="exportAllPDF()"><svg class="ic"><use href="#ic-download"/></svg> Export report</button>
-    </div>`;
-
-  wrap.innerHTML = greet + stats + anchorBar + trustLine + draftCard + digest + hero + searchBar + `
+  wrap.innerHTML = greet + anchorAlert + draftCard + hero + searchBar + `
     <div class="section-head">
-      <span class="section-label">${filtered.length} ${filtered.length===1?'entry':'entries'}${dateFilter!=='all'?' · '+dateFilter:''}${filterTrust!=='all'?' · '+filterTrust:''}</span>
-      <button class="sort-btn" onclick="openSortSheet()"><svg class="ic sort-ic"><use href="#ic-sort"/></svg> ${sortLabel}</button>
+      <span class="section-label">${filtered.length} ${filtered.length===1?'entry':'entries'}</span>
+      <button class="sort-btn" onclick="openSortSheet()"><svg class="ic sort-ic"><use href="#ic-sort"/></svg> <span id="homeSortLabel">${sortLabels[sortMode]||'Newest'}</span></button>
     </div>
     ${usageBar}
-    ${exportCta}
     <div class="records-list" id="cardsList">${noResults
-      ? `<div class="empty-state" style="padding:30px 0"><span class="empty-icon" style="font-size:32px"><svg class="ic"><use href="#ic-search"/></svg></span><div class="empty-title" style="font-size:18px">No results</div><div class="empty-sub">Try a different search, category, or date range</div></div>`
+      ? `<div class="empty-state" style="padding:30px 0"><span class="empty-icon" style="font-size:32px"><svg class="ic"><use href="#ic-search"/></svg></span><div class="empty-title" style="font-size:18px">No results</div><div class="empty-sub">Try a different search or adjust your filters</div><button onclick="resetAllFilters()" style="margin-top:14px;background:none;border:1px solid rgba(255,255,255,0.2);color:var(--sub-on-dark);padding:8px 18px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px">Clear all filters</button></div>`
       : cardsHtml
     }</div>`;
 
@@ -6094,10 +6096,111 @@ function setFilter(cat) {
 function setTrustFilter(mode) {
   filterTrust = mode;
   renderHome();
-  requestAnimationFrame(() => {
-    const list = document.getElementById('cardsList');
-    if(list) list.scrollIntoView({behavior:'smooth', block:'start'});
-  });
+}
+function setSortMode(mode) {
+  sortMode = mode;
+  renderHome();
+}
+function resetAllFilters(){
+  filterCat = 'all';
+  dateFilter = 'all';
+  filterTrust = 'all';
+  sortMode = 'newest';
+  searchQuery = '';
+  window.activeTagFilter = null;
+  window.activeCaseFilter = null;
+  renderHome();
+}
+// ── Filter bottom sheet ──
+function openFilterSheet(){
+  closeFilterSheet();
+  const _cases = (typeof loadCases === 'function') ? loadCases() : [];
+  const _topTags = (typeof topTags === 'function') ? topTags(8) : [];
+
+  const dateOpts = [
+    {id:'all',label:'All time'},
+    {id:'today',label:'Today'},
+    {id:'week',label:'This week'},
+    {id:'month',label:'This month'},
+    {id:'year',label:'This year'}
+  ];
+  const sortOpts = [
+    {id:'newest',label:'Newest first'},
+    {id:'oldest',label:'Oldest first'},
+    {id:'importance',label:'By importance'},
+    {id:'category',label:'By category'}
+  ];
+
+  const sheet = document.createElement('div');
+  sheet.id = 'filterSheet';
+  sheet.innerHTML = `
+    <div class="fs-backdrop" onclick="closeFilterSheet()"></div>
+    <div class="fs-panel">
+      <div class="fs-handle"></div>
+      <div class="fs-header">
+        <span class="fs-title">Filter &amp; Sort</span>
+        <button class="fs-reset" onclick="resetAllFilters();closeFilterSheet()">Reset all</button>
+      </div>
+
+      <div class="fs-section">
+        <div class="fs-section-label">Sort by</div>
+        <div class="fs-chip-row">
+          ${sortOpts.map(o=>`<button class="fs-chip ${sortMode===o.id?'fs-chip--on':''}" onclick="setSortMode('${o.id}');renderFilterSheet()">${o.label}</button>`).join('')}
+        </div>
+      </div>
+
+      <div class="fs-section">
+        <div class="fs-section-label">Date range</div>
+        <div class="fs-chip-row">
+          ${dateOpts.map(o=>`<button class="fs-chip ${dateFilter===o.id?'fs-chip--on':''}" onclick="setDateFilter('${o.id}');renderFilterSheet()">${o.label}</button>`).join('')}
+        </div>
+      </div>
+
+      <div class="fs-section">
+        <div class="fs-section-label">Category</div>
+        <div class="fs-chip-row">
+          <button class="fs-chip ${filterCat==='all'?'fs-chip--on':''}" onclick="setFilter('all');renderFilterSheet()">All</button>
+          ${CATS.map(c=>`<button class="fs-chip ${filterCat===c.id?'fs-chip--on':''}" onclick="setFilter('${c.id}');renderFilterSheet()">${catIcon(c)} ${c.label}</button>`).join('')}
+        </div>
+      </div>
+
+      ${_topTags.length ? `
+      <div class="fs-section">
+        <div class="fs-section-label">Tag</div>
+        <div class="fs-chip-row">
+          <button class="fs-chip ${!window.activeTagFilter?'fs-chip--on':''}" onclick="window.activeTagFilter=null;renderFilterSheet();renderHome()">All</button>
+          ${_topTags.map(t=>`<button class="fs-chip ${window.activeTagFilter===t.tag?'fs-chip--on':''}" onclick="window.activeTagFilter='${escAttr(t.tag)}';window.activeCaseFilter=null;renderFilterSheet();renderHome()">#${escHtml(t.tag)}<span class="fs-chip-count">${t.count}</span></button>`).join('')}
+        </div>
+      </div>` : ''}
+
+      ${_cases.length ? `
+      <div class="fs-section">
+        <div class="fs-section-label">Case</div>
+        <div class="fs-chip-row">
+          <button class="fs-chip ${!window.activeCaseFilter?'fs-chip--on':''}" onclick="window.activeCaseFilter=null;renderFilterSheet();renderHome()">All</button>
+          ${_cases.map(c=>`<button class="fs-chip ${window.activeCaseFilter===c.id?'fs-chip--on':''}" onclick="window.activeCaseFilter='${escAttr(c.id)}';window.activeTagFilter=null;renderFilterSheet();renderHome()">${escHtml(c.name)}<span class="fs-chip-count">${caseEntryCount(c.id)}</span></button>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <button class="fs-done" onclick="closeFilterSheet()">Done</button>
+    </div>`;
+  document.body.appendChild(sheet);
+  requestAnimationFrame(()=>{ sheet.querySelector('.fs-panel').classList.add('fs-panel--open'); });
+}
+
+function renderFilterSheet(){
+  // Re-open the sheet in-place to reflect updated filter state
+  const sheet = document.getElementById('filterSheet');
+  if(!sheet) return;
+  closeFilterSheet();
+  openFilterSheet();
+}
+
+function closeFilterSheet(){
+  const sheet = document.getElementById('filterSheet');
+  if(!sheet) return;
+  sheet.querySelector('.fs-panel').classList.remove('fs-panel--open');
+  setTimeout(()=>sheet.remove(), 280);
 }
 
 // ── Category Detail ──

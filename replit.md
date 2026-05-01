@@ -79,6 +79,18 @@ These need careful migration UX (passphrase setup, recovery warnings, schema mig
 - **#2 part 2 — Full data encryption at rest**. Plan: opt-in passphrase flow → derive key with PBKDF2 (200k+ iterations, per-device salt) → re-encrypt entries on enable → display recovery warning that losing the passphrase = losing data → background re-encrypt with progress bar. Fallback: keep current plaintext storage for users who decline.
 - **#4 — End-to-end sync encryption**. Plan: add `encrypted_payload` column to Supabase `entries` table → encrypt with the same passphrase-derived key before sync → server only ever sees ciphertext + opaque metadata (id, ts, fp). Requires schema migration, salt persistence per account, and a passphrase-recovery story.
 
+## Recent Updates (May 2026 — Cases UI + Home Redesign)
+
+### Shipped
+
+- **Cases management screens**: `casesScreen` (list) and `caseDetailScreen` (detail) HTML elements. `renderCases()` / `renderCaseDetail()` fully wired. `openCreateCaseModal()`, `openAddEntriesToCase()`, `_submitCreateCase()`, `_linkEntryToActiveCase()`, `_unlinkFromCase()` implemented. Case list row, hero, entry row, add-entry row CSS.
+- **`formatDate` bug fixed** in `renderCaseDetail` — was calling undefined `formatDate`; now correctly calls `fmtDate`.
+- **Home screen decluttered (ADHD-sensitive redesign)**: removed stat tiles, anchor bar, trust line, weekly digest, category chip strip, date filter chips, case filter strip, tag filter strip. New structure: slim greeting → anchor alert (only if stale/queued) → New Entry + Voice buttons → search inline + Filter button → active filter chips → entries.
+- **Filter bottom sheet** (`openFilterSheet` / `closeFilterSheet` / `renderFilterSheet`): full sort + date + category + tag + case filtering in a smooth slide-up panel instead of inline chip clutter.
+- **`resetAllFilters()`** and **`setSortMode()`** functions added.
+- **Supabase boot toast silenced**: `sbClient()` uses `opts.userInitiated` — boot-time calls are silent (console-only); only user-triggered auth actions show error toasts.
+- **Service worker bumped to v8** (`logged-v8`) to force cache eviction of older builds.
+
 ### QA / dev hooks
 
 The boot block accepts a `?qa=cat:<id>` / `?qa=detail:<id>` / `?qa=insights` query param (no-op in normal use) used during development to deep-link into specific screens with seeded localStorage. Safe to leave in — has no effect without explicit query string.
